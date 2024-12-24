@@ -1,0 +1,29 @@
+.programme-container {
+    background-color: #f5f5dc; /* Warna latar belakang */
+    border-radius: 8px;
+}
+
+.programme-list {
+    background-color: #fff; /* Warna latar belakang item */
+    border-radius: 8px;
+    padding: 16px;
+}
+
+.programme-item:hover {
+    background-color: #f9f9f9; /* Warna hover */
+}
+
+.programme-icon {
+    flex-shrink: 0;
+}
+
+.programme-actions button {
+    font-size: 0.9rem;
+    border-radius: 16px;
+    padding: 0.25rem 0.75rem;
+}
+
+.programme-time {
+    font-size: 0.8rem;
+    text-align: right;
+}
