@@ -1,66 +1,150 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
 
-## About Laravel
+# Dokumentasi Proyek Laravel 11. || Dashboard_HI
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Spesifikasi
+- **Laravel Version**: 11.x
+- **PHP Version**: 8.4.1
+- **Database**: MySQL (mengganti SQLite)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 1. Instalasi dan Pengaturan Awal
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Persyaratan Sistem
+- PHP 8.4.1 atau lebih baru
+- Composer (untuk mengelola dependensi Laravel)
+- MySQL 5.7 atau lebih baru
+- MySQL Workbench atau phpMyAdmin untuk mengelola database
 
-## Learning Laravel
+### Langkah 1: Menginstal Laravel 11
+1. Pastikan Anda sudah menginstal Composer. Jika belum, silakan instal dari [sini](https://getcomposer.org/).
+2. Setelah itu, jalankan perintah berikut untuk membuat proyek Laravel baru:
+   ```bash
+   composer create-project --prefer-dist laravel/laravel nama-proyek
+   ```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+3. Setelah proyek Laravel berhasil diinstal, masuk ke direktori proyek:
+   ```bash
+   cd nama-proyek
+   ```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### Langkah 2: Konfigurasi `.env` untuk Database MySQL
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Secara default, Laravel menggunakan SQLite di file `.env`. Anda perlu mengubahnya untuk menggunakan MySQL.
 
-## Laravel Sponsors
+1. Buka file `.env` yang ada di direktori root proyek Laravel Anda.
+2. Temukan bagian konfigurasi database dan sesuaikan seperti berikut:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=nama_database
+   DB_USERNAME=nama_pengguna
+   DB_PASSWORD=password_anda
+   ```
 
-### Premium Partners
+   Sesuaikan `DB_DATABASE`, `DB_USERNAME`, dan `DB_PASSWORD` sesuai dengan pengaturan MySQL Anda.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Langkah 3: Membuat Database di MySQL
 
-## Contributing
+1. **Masuk ke MySQL** menggunakan terminal atau phpMyAdmin:
+   - Jika menggunakan MySQL Workbench atau phpMyAdmin, buatlah database baru dengan nama yang sesuai dengan `DB_DATABASE` yang Anda masukkan di file `.env`.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+2. **Jika menggunakan terminal**, jalankan perintah berikut untuk membuat database baru:
+   ```bash
+   mysql -u root -p
+   CREATE DATABASE nama_database;
+   ```
 
-## Code of Conduct
+   Pastikan `nama_database` sesuai dengan yang Anda masukkan di file `.env`.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Langkah 4: Migrasi Database
 
-## Security Vulnerabilities
+Setelah mengonfigurasi database, jalankan migrasi untuk membuat tabel-tabel default Laravel:
+```bash
+php artisan migrate
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Jika Anda mendapatkan pesan kesalahan terkait koneksi database, pastikan pengaturan di file `.env` sudah benar.
 
-## License
+---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## 2. Menjalankan `php artisan serve` dan Menangani Error
+
+### Error Umum: "Unable to locate a class or view for" atau Koneksi Database Gagal
+
+Jika Anda menjalankan `php artisan serve` dan mendapatkan kesalahan terkait koneksi database atau file yang hilang, Anda dapat mencoba beberapa solusi berikut:
+
+### 2.1. Periksa Koneksi Database
+
+Jika Anda menggunakan MySQL dan tidak dapat terkoneksi, periksa file `.env` dan pastikan pengaturan database Anda sudah benar. Pastikan:
+- `DB_HOST=127.0.0.1` (atau host MySQL lainnya).
+- `DB_PORT=3306` (port default untuk MySQL).
+- Nama database, username, dan password yang benar.
+
+Jika Anda masih mengalami masalah, coba restart MySQL dan pastikan layanan MySQL berjalan dengan baik.
+
+### 2.2. Mengatasi Error Saat Menjalankan `php artisan serve`
+
+Jika Anda mendapatkan error yang berkaitan dengan `php artisan serve`, coba langkah-langkah berikut:
+
+1. **Pastikan PHP 8.4.1 terinstal dengan benar**. Cek dengan perintah:
+   ```bash
+   php -v
+   ```
+
+2. **Periksa ekstensi PHP yang diperlukan**. Laravel membutuhkan beberapa ekstensi PHP, seperti `pdo_mysql`. Pastikan ekstensi ini terpasang dan diaktifkan dalam konfigurasi PHP Anda. Jika Anda menggunakan `php.ini`, pastikan baris berikut tidak dikomentari (tanpa tanda `;`):
+   ```ini
+   extension=pdo_mysql
+   ```
+
+3. **Hapus cache konfigurasi dan autoloader**. Jika masalah tetap ada, coba bersihkan cache dan autoloader dengan perintah berikut:
+   ```bash
+   php artisan config:clear
+   php artisan cache:clear
+   composer dump-autoload
+   ```
+
+4. **Restart layanan PHP** jika Anda menggunakan server lokal seperti XAMPP atau Laragon.
+
+### 2.3. Error Koneksi Database di `php artisan serve`
+
+Jika Anda masih mendapatkan error terkait database saat menjalankan `php artisan serve`, pastikan file `.env` sudah terkonfigurasi dengan benar dan MySQL berjalan dengan lancar. Berikut adalah langkah-langkah tambahan yang bisa dicoba:
+
+- **Cek Status MySQL**:
+  Jika Anda menggunakan XAMPP atau Laragon, pastikan MySQL telah berjalan. Anda bisa memulai ulang MySQL dari dashboard XAMPP/Laragon.
+  
+- **Periksa File `.env`**: Pastikan Anda sudah mengubah database driver dari `sqlite` ke `mysql` di file `.env`:
+   ```env
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=nama_database
+   DB_USERNAME=nama_pengguna
+   DB_PASSWORD=password_anda
+   ```
+
+### 2.4. Menjalankan `php artisan serve`
+
+Setelah Anda menyelesaikan langkah-langkah di atas, jalankan perintah ini untuk menjalankan aplikasi Laravel Anda:
+```bash
+php artisan serve
+```
+
+Ini akan memulai server development di alamat `http://127.0.0.1:8000`.
+
+---
+
+## 3. Apakah PHP 8.4.1 Mendukung MySQL atau PHPMyAdmin 6.0 ke atas?
+
+Ya, **PHP 8.4.1** mendukung MySQL, dan Anda dapat menggunakan **phpMyAdmin 6.0 ke atas** untuk mengelola database MySQL.
+
+### Pastikan:
+- Anda menggunakan MySQL 5.7 atau lebih baru (dapat menggunakan phpMyAdmin 6.x atau lebih baru untuk memanage database).
+- PHP 8.4.1 sudah terinstal dengan benar dan mendukung ekstensi `pdo_mysql` untuk koneksi ke MySQL.
+
+---
+
+## 4. Kesimpulan
+
+Dengan mengikuti langkah-langkah di atas, Anda dapat berhasil mengonfigurasi Laravel 11 dengan MySQL, mengatasi masalah yang sering terjadi saat menjalankan `php artisan serve`, serta memastikan kompatibilitas dengan PHP 8.4.1 dan phpMyAdmin 6.0 ke atas. Jangan lupa untuk selalu memeriksa file `.env` dan konfigurasi server lokal Anda.
