@@ -25,7 +25,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                    <a class="nav-link" href="#programme">
+                    <a class="nav-link" href="/programme">
                               <i class="fas fa-book me-2"></i>
                               <span class="sidebar-text">Programme</span>
                     </a>
