@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const overviewLink = document.querySelector('.nav-link[href="#overview"]');
     const careerLink = document.querySelector('.nav-link[href="#career"]');
     // jika ada penambahan atau mengaktifkan menu maka tambahkan disini.
-    const mainContent = document.querySelector(".container");
+     const mainContent = document.querySelector(".overview-menu");
 
     // Event listener untuk klik tombol Programme
     programmeLink?.addEventListener("click", function (e) {
@@ -81,3 +81,15 @@ document.addEventListener("DOMContentLoaded", function () {
             );
     });
 });
+
+
+//show modal form
+   function showInputSection() {
+       document.getElementById("programmeSection").classList.add("d-none"); 
+       document.getElementById("inputSection").classList.remove("d-none"); 
+   }
+
+   function showProgrammeSection() {
+       document.getElementById("inputSection").classList.add("d-none"); 
+       document.getElementById("programmeSection").classList.remove("d-none");
+   }

@@ -18,6 +18,8 @@
     <link href="{{ asset('css/overview.css') }}" rel="stylesheet">
     <!-- CSS Lokal -->
     <link href="{{ asset('css/global.css') }}" rel="stylesheet">
+       <!-- CSS Lokal -->
+    <link href="{{ asset('css/programme/programme.css') }}" rel="stylesheet">
 </head>
 <body>
     <section class="overview container-xxl d-flex p-0">
