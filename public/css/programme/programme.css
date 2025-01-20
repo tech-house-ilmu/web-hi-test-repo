@@ -39,8 +39,7 @@
     flex-grow: 1;
 }
 
-/* Mengatur margin antar tombol pada layar kecil */
-/* @media (max-width: 768px) {
+ @media (max-width: 768px) {
     .programme-item .d-flex {
         flex-wrap: wrap;
     }
@@ -64,8 +63,8 @@
     }
 }
 
-/* Mengatur heading dan paragraf agar tetap rapi di layar kecil */
-/* @media (max-width: 576px) {
+
+@media (max-width: 576px) {
     h4, h5 {
         font-size: 16px;
     }
@@ -79,7 +78,7 @@
         -webkit-overflow-scrolling: touch;
     }
 
-} */ 
+} 
 
 #inputSection {
     position: relative;
