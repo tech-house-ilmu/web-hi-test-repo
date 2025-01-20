@@ -1,96 +1,155 @@
-<div class="programme-container p-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <!-- Create Button -->
-        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createProgrammeModal">
-            <i class="fas fa-plus-circle me-2"></i>Create
+<div class="container my-5">
+    <!-- Bagian Programme -->
+    <div id="programmeSection">
+        <div class="card p-2 shadow" style="border-radius: 15px;"> 
+            <h4 class="mb-2">Programme</h4>
+            <hr>
+            <!-- Bagian 1 -->
+            <div class="programme-item mb-2">
+                <div class="d-flex align-items-center">
+                    <div class="icon-container me-3">
+                        <img src="{{ asset('img/p2.jpg') }}" alt="p2" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;" />
+                    </div>
+                    <div class="w-100">
+                        <h5>Judul</h5>
+                        <p class="text-muted mb-2">Deskripsi</p>
+                        <div class="d-flex justify-content-between gap-5">
+                            <button class="btn btn-outline-primary btn-sm rounded-pill flex-grow-1 me-4 d-flex align-items-center">
+                                <i class="fas fa-info-circle me-6"></i>
+                                <span class="flex-grow-1 text-center">Detail</span>
+                            </button>
+                            <button class="btn btn-outline-secondary btn-sm rounded-pill flex-grow-1 me-4 d-flex align-items-center">
+                                <i class="fas fa-edit me-6"></i>
+                                <span class="flex-grow-1 text-center">Edit</span>
+                            </button>
+                            <button class="btn btn-outline-danger btn-sm rounded-pill flex-grow-1 d-flex align-items-center">
+                                <i class="fas fa-trash-alt me-6"></i>
+                                <span class="flex-grow-1 text-center">Delete</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="ms-auto text-muted small align-self-start me-4">09:54am</div>
+                </div>
+                <hr>
+            </div>
+            <!-- Bagian 2-->
+            <div class="programme-item mb-2">
+            <div class="d-flex align-items-center">
+                <div class="icon-container me-3">
+                <img src="{{ asset('img/p2.jpg') }}" alt="p2" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;" />
+                </div>
+                <div class="w-100">
+                <h5>Judul</h5>
+                <p class="text-muted mb-2">Deskripsi</p>
+                <div class="d-flex justify-content-between gap-5">
+                    <button class="btn btn-outline-primary btn-sm rounded-pill flex-grow-1 me-4 d-flex align-items-center">
+                    <i class="fas fa-info-circle me-6"></i>
+                    <span class="flex-grow-1 text-center">Detail</span> <!-- Teks di tengah -->
+                    </button>
+                    <button class="btn btn-outline-secondary btn-sm rounded-pill flex-grow-1 me-4 d-flex align-items-center">
+                    <i class="fas fa-edit me-6"></i>
+                    <span class="flex-grow-1 text-center">Edit</span> <!-- Teks di tengah -->
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm rounded-pill flex-grow-1 d-flex align-items-center">
+                    <i class="fas fa-trash-alt me-6"></i>
+                    <span class="flex-grow-1 text-center">Delete</span> <!-- Teks di tengah -->
+                    </button>
+                </div>
+                </div>
+                <div class="ms-auto text-muted small align-self-start me-4">09:54am</div>
+            </div>
+            <hr>
+            </div>
+
+            <!-- Bagian 3 -->
+            <div class="programme-item mb-2">
+            <div class="d-flex align-items-center">
+                <div class="icon-container me-3">
+                <img src="{{ asset('img/p2.jpg') }}" alt="p2" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;" />
+                </div>
+                <div class="w-100">
+                <h5>Judul</h5>
+                <p class="text-muted mb-2">Deskripsi</p>
+                <div class="d-flex justify-content-between gap-5">
+                    <button class="btn btn-outline-primary btn-sm rounded-pill flex-grow-1 me-4 d-flex align-items-center">
+                    <i class="fas fa-info-circle me-6"></i>
+                    <span class="flex-grow-1 text-center">Detail</span> <!-- Teks di tengah -->
+                    </button>
+                    <button class="btn btn-outline-secondary btn-sm rounded-pill flex-grow-1 me-4 d-flex align-items-center">
+                    <i class="fas fa-edit me-6"></i>
+                    <span class="flex-grow-1 text-center">Edit</span> <!-- Teks di tengah -->
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm rounded-pill flex-grow-1 d-flex align-items-center">
+                    <i class="fas fa-trash-alt me-6"></i>
+                    <span class="flex-grow-1 text-center">Delete</span> <!-- Teks di tengah -->
+                    </button>
+                </div>
+                </div>
+                <div class="ms-auto text-muted small align-self-start me-4">09:54am</div>
+            </div>
+            <hr>
+            </div>
+        </div>
+
+
+  <!-- Tombol Create -->
+    <div class="text-end mt-4">
+        <button class="btn btn-warning btn-lg" onclick="showInputSection()">
+            <i class="fas fa-plus-circle me-1"></i> Create
         </button>
-        <a href="#" class="text-primary text-decoration-none">View All</a>
-    </div>
-
-    <div class="programme-list">
-        <!-- Item 1 -->
-        <div class="programme-item d-flex align-items-center py-3 border-bottom">
-            <div class="programme-icon">
-                <div class="rounded-circle bg-warning d-flex justify-content-center align-items-center" style="width: 60px; height: 60px;">
-                    <i class="fas fa-user-alt fa-2x text-light"></i>
-                </div>
-            </div>
-            <div class="programme-details ms-3 flex-grow-1">
-                <h6 class="mb-1">Judul</h6>
-                <p class="text-muted mb-0">Deskripsi</p>
-            </div>
-            <div class="programme-actions d-flex align-items-center gap-2">
-                <button class="btn btn-outline-primary">Detail</button>
-                <button class="btn btn-outline-primary">Edit</button>
-                <button class="btn btn-outline-danger">Delete</button>
-            </div>
-            <div class="programme-time ms-3 text-muted">
-                <small>09:54 am</small>
-            </div>
-        </div>
-
-        <!-- Repeat Item -->
-        <div class="programme-item d-flex align-items-center py-3 border-bottom">
-            <div class="programme-icon">
-                <div class="rounded-circle bg-warning d-flex justify-content-center align-items-center" style="width: 60px; height: 60px;">
-                    <i class="fas fa-user-alt fa-2x text-light"></i>
-                </div>
-            </div>
-            <div class="programme-details ms-3 flex-grow-1">
-                <h6 class="mb-1">Judul</h6>
-                <p class="text-muted mb-0">Deskripsi</p>
-            </div>
-            <div class="programme-actions d-flex align-items-center gap-2">
-                <button class="btn btn-outline-primary">Detail</button>
-                <button class="btn btn-outline-primary">Edit</button>
-                <button class="btn btn-outline-danger">Delete</button>
-            </div>
-            <div class="programme-time ms-3 text-muted">
-                <small>12:30 pm</small>
-            </div>
-        </div>
     </div>
 </div>
+</div>
 
-<!-- Modal Structure -->
-<div class="modal fade" id="createProgrammeModal" tabindex="-1" aria-labelledby="createProgrammeModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="createProgrammeModalLabel">Buat Programme Baru</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-            <div class="mb-3">
-                <label for="judul" class="form-label">Judul</label>
-                <input type="text" class="form-control" id="judul" placeholder="Masukkan judul programme">
+<!-- Bagian Inputan (Awalnya disembunyikan) -->
+<div id="inputSection" class="d-none align-self-start">
+    <div class="row mb-1 text-center align-self-start mt-0"> 
+        <div class="col-12">
+            <h1 class="form-title">Buat Programme Baru</h1>
+        </div>
+    </div>
+    <div class="mb-1"> 
+        <button class="btn btn-light back-button" onclick="showProgrammeSection()">
+            <i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Back
+        </button>
+    </div>
+    <div class="container formprogramme-container"> 
+        <form id="programmeForm" method="POST" action="/submit-programme">
+            <div class="row mb-1"> 
+                <div class="col-12">
+                    <h7 class="card-title">Judul</h7>
+                    <input type="text" name="title" class="form-control" placeholder="Contoh: Review CV" required>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="deskripsi" class="form-label">Deskripsi</label>
-                <textarea class="form-control" id="deskripsi" rows="3" placeholder="Masukkan deskripsi"></textarea>
+            <div class="row mb-1">
+                <div class="col-12">
+                    <h7 class="card-title">Deskripsi</h7>
+                    <textarea name="description" class="form-control" rows="2" placeholder="Hybrid event yang membahas tentang career preparation secara menyeluruh dari tiap tahapan recruitment." required></textarea>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="goals" class="form-label">Goals</label>
-                <textarea class="form-control" id="goals" rows="3" placeholder="Masukkan goals"></textarea>
+            <div class="row mb-1">
+                <div class="col-12">
+                    <h7 class="card-title">Goals</h7>
+                    <textarea name="goals" class="form-control" rows="2" placeholder=" . Customer CV Review dapat membuat CV yang sesuai dengan latar belakang pendidikan dan didukung oleh pengalamannya.&#10; . Customer CV Review mendapatkan feedback tentang CV-nya" required></textarea>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="why" class="form-label">Why</label>
-                <textarea class="form-control" id="why" rows="3" placeholder="Masukkan alasan"></textarea>
+            <div class="row mb-1"> 
+                <div class="col-12">
+                    <h7 class="card-title">Why</h7>
+                    <textarea name="why" class="form-control" rows="2" placeholder="Kebutuhan generasi muda akan platform review CV yang mudah dijangkau terutama dari segi harga." required></textarea>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="images" class="form-label">Images</label>
-                <div class="custom-file">
-                    <input type="file" class="form-control" id="images">
-                    <label class="custom-file-label" for="images">Upload Images</label>
+            <div class="row mb-1"> 
+                <div class="col-12">
+                    <h7 class="card-title">Gambar</h7>
+                    <input type="file" name="image" class="form-control" placeholder="Upload gambar" required>
                 </div>
             </div>
         </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Confirm</button>
-      </div>
     </div>
-  </div>
+    <div class="row justify-content-center mb-2">
+        <div class="col-12 text-center">
+            <button type="submit" class="btn submit-button btn-lg">Create</button>
+        </div>
+    </div>
 </div>
