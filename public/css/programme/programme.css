@@ -90,7 +90,6 @@
 }
 
 .back-button {
-    background-color: transparent;
     border: none;
     text-align: left;
     transform: translateY(-43px); 
@@ -98,7 +97,6 @@
 
 .back-button:hover {
     color: #F18805;
-    background: none;
 }
 
 .formprogramme-container {
@@ -134,7 +132,7 @@ input[name="title"].form-control {
     font-size: 20px;
     font-family: 'Open Sans', sans-serif;
     font-weight: 700;
-    color: #402AB0;
+    color: #000000;
 }
 
 .form-card {
@@ -166,6 +164,7 @@ input[name="title"].form-control {
     outline: none;  
 }
 
+
 /* Tombol Submit */
 .submit-button {
     background-color: #F18805;
@@ -175,13 +174,15 @@ input[name="title"].form-control {
     width: 15%;
     font-size: 1rem;
     border-radius: 20px;
+    transition: all 0.2s ease;
     transition: background-color 0.3s ease, transform 0.2s ease;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
 
 .submit-button:hover {
-     background-color: #ffa12d;
-    transform: translateY(-3px); 
+    background-color: #ffa12d;
+    /* transform: translateY(1);  */
+    color: #000000;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); 
 }
 
@@ -190,3 +191,4 @@ input[name="title"].form-control {
     transform: translateY(0); 
     box-shadow: none;
 }
+

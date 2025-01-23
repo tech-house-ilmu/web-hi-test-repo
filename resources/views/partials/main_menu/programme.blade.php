@@ -109,8 +109,8 @@
         </div>
     </div>
     <div class="mb-1"> 
-        <button class="btn btn-light back-button" onclick="showProgrammeSection()">
-            <i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Back
+        <button class="btn back-button" onclick="showProgrammeSection()">
+            <i class="fas fa-chevron-left" style="margin-left: -9px;"></i> Back
         </button>
     </div>
     <div class="container formprogramme-container"> 

@@ -20,6 +20,8 @@
     <link href="{{ asset('css/global.css') }}" rel="stylesheet">
        <!-- CSS Lokal -->
     <link href="{{ asset('css/programme/programme.css') }}" rel="stylesheet">
+      <!-- CSS Lokal -->
+    <link href="{{ asset('css/programme/testimoni_alumni.css') }}" rel="stylesheet">
 </head>
 <body>
     <section class="overview container-xxl d-flex p-0">
@@ -132,6 +134,7 @@
 
     <!-- JS Lokal -->
     <script src="{{ asset('js/partials.js') }}"></script>
+    
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
