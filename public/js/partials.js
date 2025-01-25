@@ -1,11 +1,14 @@
-// button clospad untuk sidebar silahkan costumise
+// button close pad untuk sidebar silahkan costumise
 const toggleSidebarButton = document.getElementById("toggleSidebar");
 const sidebar = document.getElementById("sidebar");
 
-toggleSidebarButton.addEventListener("click", () => {
-    sidebar.classList.toggle("collapsed");
-});
+if (toggleSidebarButton && sidebar) {
+    toggleSidebarButton.addEventListener("click", () => {
+        sidebar.classList.toggle("collapsed");
+    });
+}
 
+// Mengontrol ikon toggle untuk menu
 document.querySelectorAll(".toggleIcon").forEach(function (icon) {
     icon.addEventListener("click", function () {
         const menu = this.closest(".menu");
@@ -13,83 +16,72 @@ document.querySelectorAll(".toggleIcon").forEach(function (icon) {
         const icon = this;
 
         // Toggle visibility of the hidden text with animation
-        if (!text.classList.contains("show")) {
-            text.classList.add("show");
-            icon.classList.remove("fa-chevron-down");
-            icon.classList.add("fa-chevron-up");
-        } else {
-            text.classList.remove("show");
-            icon.classList.remove("fa-chevron-up");
-            icon.classList.add("fa-chevron-down");
-        }
+        text.classList.toggle("show");
+        icon.classList.toggle("fa-chevron-down");
+        icon.classList.toggle("fa-chevron-up");
     });
 });
 
-//main menu controlling page
+// main menu controlling page
 document.addEventListener("DOMContentLoaded", function () {
-    // elemen sidebar dan area konten
     const programmeLink = document.querySelector(
         '.nav-link[href="#programme"]'
     );
     const overviewLink = document.querySelector('.nav-link[href="#overview"]');
     const careerLink = document.querySelector('.nav-link[href="#career"]');
-    // jika ada penambahan atau mengaktifkan menu maka tambahkan disini.
-     const mainContent = document.querySelector(".overview-menu");
+    const mainContent = document.querySelector(".overview-menu");
 
-    // Event listener untuk klik tombol Programme
-    programmeLink?.addEventListener("click", function (e) {
-        e.preventDefault();
-
-        // Lakukan permintaan fetch ke server untuk mendapatkan konten programme
-        fetch("/programme")
+    // Fungsi untuk menangani permintaan fetch
+    function handleFetchRequest(url) {
+        fetch(url)
             .then((response) => response.text())
             .then((html) => {
                 mainContent.innerHTML = html;
             })
             .catch((error) =>
-                console.error("Error fetching programme content:", error)
+                console.error(`Error fetching ${url} content:`, error)
             );
+    }
+
+    // Event listener untuk klik tombol Programme
+    programmeLink?.addEventListener("click", function (e) {
+        e.preventDefault();
+        handleFetchRequest("/programme");
     });
 
     // Event listener untuk klik tombol Overview
     overviewLink?.addEventListener("click", function (e) {
         e.preventDefault();
-
-        // Lakukan permintaan fetch ke server untuk mendapatkan konten overview untuk sisi backend nanti
-        fetch("/overview")
-            .then((response) => response.text())
-            .then((html) => {
-                mainContent.innerHTML = html;
-            })
-            .catch((error) =>
-                console.error("Error fetching overview content:", error)
-            );
+        handleFetchRequest("/overview");
     });
 
     // Event listener untuk klik tombol Career
     careerLink?.addEventListener("click", function (e) {
         e.preventDefault();
-
-        // Lakukan permintaan fetch ke server untuk mendapatkan konten career untuk sisi backend nanti
-        fetch("/career")
-            .then((response) => response.text())
-            .then((html) => {
-                mainContent.innerHTML = html;
-            })
-            .catch((error) =>
-                console.error("Error fetching career content:", error)
-            );
+        handleFetchRequest("/career");
     });
 });
 
+// Menampilkan dan menyembunyikan bagian input
+function showInputSection() {
+    document.getElementById("programmeSection").classList.add("d-none");
+    document.getElementById("inputSection").classList.remove("d-none");
+}
 
-//show modal form
-   function showInputSection() {
-       document.getElementById("programmeSection").classList.add("d-none"); 
-       document.getElementById("inputSection").classList.remove("d-none"); 
-   }
+function showProgrammeSection() {
+    document.getElementById("inputSection").classList.add("d-none");
+    document.getElementById("programmeSection").classList.remove("d-none");
+}
 
-   function showProgrammeSection() {
-       document.getElementById("inputSection").classList.add("d-none"); 
-       document.getElementById("programmeSection").classList.remove("d-none");
-   }
+// Menampilkan form input testimoni
+function showTestimoniInputSection() {
+    document.getElementById("testimoniSection").classList.add("d-none"); // Sembunyikan daftar testimoni
+    document.getElementById("create-testimoni-form").classList.remove("d-none"); // Tampilkan form input
+}
+
+// Menampilkan kembali daftar testimoni
+function showTestimoniSection() {
+    document.getElementById("create-testimoni-form").classList.add("d-none"); // Sembunyikan form input
+    document.getElementById("testimoniSection").classList.remove("d-none"); // Tampilkan daftar testimoni
+}
+
