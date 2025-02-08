@@ -14,10 +14,10 @@
                         <h5>Judul</h5>
                         <p class="text-muted mb-2">Deskripsi</p>
                         <div class="d-flex justify-content-between gap-5">
-                            <button class="btn btn-outline-primary btn-sm rounded-pill flex-grow-1 me-4 d-flex align-items-center">
-                                <i class="fas fa-info-circle me-6"></i>
-                                <span class="flex-grow-1 text-center">Detail</span>
-                            </button>
+                            <button id="detailButton1" class="btn btn-outline-primary btn-sm rounded-pill flex-grow-1 me-4 d-flex align-items-center" onclick="showDetailSection('1')">
+                            <i class="fas fa-info-circle me-6"></i>
+                            <span class="flex-grow-1 text-center">Detail</span>
+                        </button>
                             <button class="btn btn-outline-secondary btn-sm rounded-pill flex-grow-1 me-4 d-flex align-items-center">
                                 <i class="fas fa-edit me-6"></i>
                                 <span class="flex-grow-1 text-center">Edit</span>
@@ -42,9 +42,9 @@
                 <h5>Judul</h5>
                 <p class="text-muted mb-2">Deskripsi</p>
                 <div class="d-flex justify-content-between gap-5">
-                    <button class="btn btn-outline-primary btn-sm rounded-pill flex-grow-1 me-4 d-flex align-items-center">
-                    <i class="fas fa-info-circle me-6"></i>
-                    <span class="flex-grow-1 text-center">Detail</span> <!-- Teks di tengah -->
+                    <button id="detailButton2" class="btn btn-outline-primary btn-sm rounded-pill flex-grow-1 me-4 d-flex align-items-center" onclick="showDetailSection('2')">
+                        <i class="fas fa-info-circle me-6"></i>
+                        <span class="flex-grow-1 text-center">Detail</span>
                     </button>
                     <button class="btn btn-outline-secondary btn-sm rounded-pill flex-grow-1 me-4 d-flex align-items-center">
                     <i class="fas fa-edit me-6"></i>
@@ -71,9 +71,9 @@
                 <h5>Judul</h5>
                 <p class="text-muted mb-2">Deskripsi</p>
                 <div class="d-flex justify-content-between gap-5">
-                    <button class="btn btn-outline-primary btn-sm rounded-pill flex-grow-1 me-4 d-flex align-items-center">
-                    <i class="fas fa-info-circle me-6"></i>
-                    <span class="flex-grow-1 text-center">Detail</span> <!-- Teks di tengah -->
+                    <button id="detailButton3" class="btn btn-outline-primary btn-sm rounded-pill flex-grow-1 me-4 d-flex align-items-center" onclick="showDetailSection('3')">
+                        <i class="fas fa-info-circle me-6"></i>
+                        <span class="flex-grow-1 text-center">Detail</span>
                     </button>
                     <button class="btn btn-outline-secondary btn-sm rounded-pill flex-grow-1 me-4 d-flex align-items-center">
                     <i class="fas fa-edit me-6"></i>
@@ -90,7 +90,6 @@
             <hr>
             </div>
         </div>
-
 
   <!-- Tombol Create -->
     <div class="text-end mt-4">
@@ -150,6 +149,41 @@
     <div class="row justify-content-center mb-2">
         <div class="col-12 text-center">
             <button type="submit" class="btn submit-button btn-lg">Create</button>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bagian Detail (Awalnya disembunyikan) -->
+<div id="detailSection" class="d-none">
+    <div class="container mt-4">
+        <button id="backButton1" class="back-button1" onclick="showProgrammeSection1()">
+            <i class="fas fa-chevron-left"></i> Back
+        </button>
+        <div class="card p-2 shadow-sm mt-2 detail-card">
+            <div class="row">
+                <div class="col-md-3 text-center">
+                    <img id="detailImage" src="{{ asset('img/p2.jpg') }}" alt="p2" style="width: 200px; height: 270px; object-fit: cover;" />
+                </div>
+                <div class="col-md-9">
+                    <h3 id="detailTitle" class="text-center">Judul</h3>
+                    <div class="content-box">
+                        <div class="content-title">Deskripsi</div>
+                    </div>
+                    <p id="detailDescription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam modi dignissimos excepturi placeat officia quas doloremque quidem maiores officiis, sequi accusamus aliquid similique id voluptate alias voluptatibus dolorum corporis facilis?</p>
+                    <hr>
+                    <div class="content-box">
+                        <div class="content-title">Why</div>
+                    </div>
+                      <p>Deskripsi tentang kenapa itu penting.</p>
+                    <hr>
+                    <div class="content-box">
+                        <div class="content-title">Goals</div>
+                    </div>
+                      <p>Deskripsi tentang kenapa itu penting.</p>
+                       <hr>
+                </div>
+            </div>
         </div>
     </div>
 </div>
