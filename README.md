@@ -6,6 +6,77 @@ Ini adalah repositori test untuk pengujian penambahan fitur sebelum di merge ke 
 Repositori ini di manage oleh Head of sub divisi web development, divisi Technology, House Ilmu Indonesia
 Repositori ini terbuka untuk staff web development
 
+
+# 📌 Panduan Menjalankan Admin Panel Filament (v3.2) di Lokal  
+
+info: admin panel yang awal tetap bisa di akses saat aplikasi pertama kali di jalankan. jika ingin menjalankan aplikasi dashboard defolt
+filamentnya, maka akses url http://127.0.0.1:8000 dan tambahkan /admin dibelanagnya exct: http://127.0.0.1:8000/admin
+
+lakukan penyesuain di tampilan fronendnya di bagian masing-masing seperti yang tela diberikan sebelumnya.  
+
+## 🛠️ **Persyaratan**  
+Sebelum menjalankan Filament Admin Panel, pastikan Anda memiliki:  
+- PHP 8.1 atau lebih baru  
+- Composer  
+- Laravel 10 atau lebih baru   
+- Database yang sudah dikonfigurasi  
+
+## 🚀 **Langkah-Langkah Menjalankan Admin Panel Filament**  
+
+### 1️⃣ **Clone atau Update Repository local dan Install Dependency**  
+```bash
+git clone https://github.com/NAMA_REPO.git
+cd NAMA_REPO
+composer install
+npm install && npm run build
+```
+
+### 2️⃣ **Konfigurasi `.env`**
+Salin file `.env.example` menjadi `.env` jika belum ada:  
+```bash
+cp .env.example .env
+```
+Kemudian edit file `.env` untuk menyesuaikan konfigurasi database.
+
+### 3️⃣ **Generate Application Key**
+```bash
+php artisan key:generate
+```
+
+### 4️⃣ **Migrasi Database dan Seeder (Opsional)**
+```bash
+php artisan migrate --seed
+```
+
+### 5️⃣ **Buat Akun Admin**
+Filament menggunakan sistem authentication Laravel. Anda bisa membuat admin dengan command:  
+```bash
+php artisan make:filament-user
+```
+Masukkan detail admin seperti email, password, dan nama.
+
+### 6️⃣ **Menjalankan Server**
+Jalankan Laravel:
+```bash
+php artisan serve
+```
+Admin panel Filament dapat diakses melalui:  
+```
+http://127.0.0.1:8000/admin
+```
+Login dengan akun admin yang sudah dibuat sebelumnya.
+
+---
+
+## 📚 **Referensi**
+- Dokumentasi Filament: [https://filamentphp.com/docs](https://filamentphp.com/docs)  
+- Dokumentasi Laravel: [https://laravel.com/docs](https://laravel.com/docs)  
+
+
+---
+
+
+
 ## Spesifikasi
 
 -   **Laravel Version**: 11.x
