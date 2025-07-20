@@ -1,0 +1,43 @@
+/* === Navbar global style === */
+nav {
+    border-bottom: 3px solid #1746a2;
+}
+
+nav button {
+    min-height: 60px;
+    min-width: 70px;
+}
+
+nav .nav-img img {
+    width: 120px;
+}
+
+@media only screen and (max-width: 767px) {
+    nav .nav-img {
+        width: 100%;
+    }
+}
+
+/* === Active link style (nav-link & dropdown-item) === */
+.nav-link.active,
+.dropdown-item.active {
+    color: #ff9900 !important;
+    font-weight: bold !important;
+}
+
+/* === Footer style (jika kamu masih pakai di bawah) === */
+footer .footer-info .footer-nav a,
+footer .footer-info .footer-sosmed a {
+    color: #1746a2;
+}
+
+footer .footer-info .footer-nav a:hover,
+footer .footer-info .footer-sosmed a:hover {
+    color: #ff9900;
+}
+
+@media only screen and (max-width: 425px) {
+    footer .footer-copyright p {
+        font-size: 2.2vw;
+    }
+}
