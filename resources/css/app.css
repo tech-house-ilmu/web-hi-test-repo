@@ -1,3 +1,41 @@
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "./navbar-footer.css";
+@import "./about-us.css";
+@import "./article.css";
+@import "./career.css";
+@import "./opp-cards.css";
+@import "./opp-products.css";
+@import "./partnership.css";
+@import "./style.css";
+@import "./global.css";
+@import "./splide.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/********************************* Navbar ********************************/
+.group:hover ul {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.nav-collapse {
+    transform-origin: top;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+}
+
+.nav-collapse.closed {
+    transform: scaleY(0);
+    opacity: 0;
+    height: 0;
+    pointer-events: none;
+}
+
+.nav-collapse.open {
+    transform: scaleY(1);
+    opacity: 1;
+    height: auto;
+    pointer-events: auto;
+}

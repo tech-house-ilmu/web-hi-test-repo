@@ -15,6 +15,10 @@
         "vite": "^6.0"
     },
     "dependencies": {
+        "@alpinejs/collapse": "^3.14.9",
+        "@tailwindcss/line-clamp": "^0.4.4",
+        "alpinejs": "^3.14.9",
+        "bootstrap": "^5.3.7",
         "laravel-mix": "^6.0.49"
     }
 }
