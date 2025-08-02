@@ -9,6 +9,6 @@ class ExpertController extends Controller
     public function index()
     {
         $experts = Expert::where('is_active', true)->get();
-        return view('experts-list', ['experts' => $experts]);
+        // return view('experts-list', ['experts' => $experts]);
     }
 }

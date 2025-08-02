@@ -13,6 +13,6 @@ class EventController extends Controller
         $events = Event::where('is_active', true)->latest()->get();
 
         
-        return view('events-list', ['events' => $events]);
+        // return view('pages.index', ['events' => $events]);
     }
 }

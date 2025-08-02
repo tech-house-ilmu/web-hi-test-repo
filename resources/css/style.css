@@ -4,6 +4,9 @@
 }
 
 /* start styling upcoming home section */
+.upevent {
+    background-color: #ffdd95;
+}
 
 /* start styling banner responsive mobile */
 @media only screen and (max-width: 767px) {
