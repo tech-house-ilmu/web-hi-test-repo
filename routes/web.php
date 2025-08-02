@@ -2,12 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CareerController;
+use App\Http\Controllers\HomeController;
 
 /******************************** HOME *********************************************/ 
 
-Route::get('/', function () {
-    return view('pages.index');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 /******************************** ABOUT *********************************************/ 
 

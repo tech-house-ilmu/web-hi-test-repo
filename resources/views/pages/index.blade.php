@@ -72,18 +72,74 @@
     </section>
     <!-- Banner section -->
 
-    <!--Upcoming event section -->
-    <section class="upcoming container-fluid" style="background-color: #ffdd95">
-      <!-- Gunakan sintaks ini jika upcoming events hanya 1 dan hanya 1 gambar poster -->
-      <div id="singleEvent"></div>
-      <!-- Gunakan sintaks ini jika upcoming events hanya 1 dan dengan lebih dari 1 poster gambar -->
-      <!-- <div id="singleEventSwiper"></div> -->
-      <!-- Gunakan sintaks ini jika upcoming events lebih dari 1 dan tiap event gambar poster hanya 1 -->
-      <!-- <div id="multiEvents"></div> -->
-      <!-- Gunakan sintaks ini jika upcoming events lebih dari 1 dan tiap event gambar poster lebih dari 1 -->
-      <!-- <div id="multiEventsSwiper"></div> -->
+    <!-- Start Upcoming Events Section -->
+    <section class="upevent">
+        <div class="container mb-4">
+            <h1 class="text-center mb-4">Upcoming Events</h1>
+
+            @if($events->isEmpty())
+                <p class="text-center">Belum ada event yang akan datang. Cek kembali nanti!</p>
+            @else
+                <div id="upcomingEventsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+
+                    @if($events->count() > 1)
+                    <div class="carousel-indicators">
+                        @foreach ($events as $index => $event)
+                            <button type="button" data-bs-target="#upcomingEventsCarousel" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}" aria-current="{{ $index == 0 ? 'true' : 'false' }}" aria-label="Event {{ $index + 1 }}"></button>
+                        @endforeach
+                    </div>
+                    @endif
+
+                    <div class="carousel-inner">
+                        @foreach ($events as $index => $event)
+                            <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                <div class="row g-0 align-items-center event-container mb-5 justify-content-center">
+                                    <div class="col-md-5">
+                                        @if(count($event->images) > 1)
+                                            <div id="carousel-{{ $event->id }}" class="carousel slide" data-bs-ride="carousel">
+                                                <div class="carousel-inner">
+                                                    @foreach ($event->images as $imgIndex => $image)
+                                                        <div class="carousel-item {{ $imgIndex == 0 ? 'active' : '' }}">
+                                                            <img src="{{ Storage::url($image) }}" class="d-block w-100" alt="Event Image">
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ $event->id }}" data-bs-slide="prev">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Previous</span>
+                                                </button>
+                                                <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ $event->id }}" data-bs-slide="next">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Next</span>
+                                                </button>
+                                            </div>
+                                        @else
+                                            <img src="{{ Storage::url($event->images[0]) }}" class="img-fluid" alt="Event Image">
+                                        @endif
+                                    </div>
+                                    <div class="col-md-7 p-4 p-md-5">
+                                        <div class="text-center">
+                                            <h2 class="fw-bolder">{{ $event->title }}</h2>
+                                            <p class="text-muted fs-5 fw-bold">{{ $event->tagline }}</p>
+                                        </div>
+                                        <div class="mt-3 description-content">
+                                            {!! $event->description !!}
+                                        </div>
+                                        <div class="d-flex justify-content-center">
+                                            <a href="{{ $event->registration_link }}" style="background-color: #174ea6" target="_blank" class="btn btn-primary fs-4 mt-4 btn-daftar">
+                                                Daftar Sekarang
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+        </div>
     </section>
-    <!-- Upcoming event section -->
+    <!-- End Upcoming Events Section -->
 
     <!--Start oppt section-->
     <section class="opportunities mt-4" data-aos="fade">
@@ -478,44 +534,32 @@
         <h1 class="col-12 text-center fw-bold py-3 mt-2" style="color: #083d77">
           Learn From The Experts
         </h1>
-        <div class="mentors-img d-flex flex-wrap flex-md-row justify-content-around align-items-center py-3 mb-3" data-aos="fade-up">
-          <!-- Start mentors box -->
-          <div class="d-flex flex-column justify-content-center align-items-center m-2">
-            <div class="mentors-info d-flex flex-column justify-content-center align-items-center position-relative" style="max-width: 250px;">
-              <img style="width: 100%" class="rounded-top-3 img-fluid" src="{{ asset('img/homepage/Lutfia Rahmannisa_CEO.png') }}" alt="" />
-              <div class="mentors-exp d-flex justify-content-evenly align-items-center gap-2 rounded-top-3">
-                <ul>
-                  <li>Leadership</li>
-                  <li>Innovation Management</li>
-                  <li>Project Management</li>
-                </ul>
+
+        @if($experts->isEmpty())
+          <p class="text-center">Belum ada data expert yang tersedia.</p>
+        @else
+          <div class="mentors-img d-flex flex-wrap flex-md-row justify-content-around align-items-center py-3 mb-3" data-aos="fade-up">
+            @foreach ($experts as $expert)
+              <div class="d-flex flex-column justify-content-center align-items-center m-2">
+                <div class="mentors-info d-flex flex-column justify-content-center align-items-center position-relative" style="max-width: 250px;">
+                  <img style="width: 100%" class="rounded-top-3 img-fluid" src="{{ Storage::url($expert->image) }}" alt="{{ $expert->name }}" />
+                  
+                  <div class="mentors-exp d-flex justify-content-evenly align-items-center gap-2 rounded-top-3">
+                    <ul>
+                      @foreach ($expert->skills as $skill)
+                        <li>{{ $skill }}</li>
+                      @endforeach
+                    </ul>
+                  </div>
+                </div>
+                <div class="text-center px-2 p-4 rounded-bottom" style="background-color: #1746a2; width: 100%">
+                  <h4 class="fw-bold">{{ $expert->name }}</h4>
+                  <h6 class="text-light fw-semibold mb-4">{{ $expert->position }}</h6>
+                </div>
               </div>
-            </div>
-            <div class="text-center px-2 p-4 rounded-bottom" style="background-color: #1746a2; width: 100%">
-              <h4 class="fw-bold">Lutfia Rahmannisa</h4>
-              <h6 class="text-light fw-semibold mb-4">CEO of House Ilmu</h6>
-            </div>
+            @endforeach
           </div>
-          <!-- End mentors box -->
-          <!-- Start mentors box -->
-          <!-- <div class="d-flex flex-column justify-content-center align-items-center m-2">
-                    <div class="mentors-info d-flex flex-column align-items-center position-relative">
-                        <img class="rounded-3" src="assets/img/Cindy Ayustin Afina_COO.jpg" alt="">
-                        <div class="mentors-exp d-flex justify-content-evenly align-items-center gap-2 rounded-3">
-                            <ul>
-                                <li>Leadership</li>
-                                <li>Innovation Management</li>
-                                <li>Project Management</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="text-center px-4 p-3 rounded-bottom" style="background-color: #1746A2;">
-                        <h4 class="fw-bold">Cindy Ayustin Afina</h4>
-                        <h6 class="text-light fw-semibold mb-4">COO of House Ilmu</h6>
-                    </div>
-                </div>  -->
-          <!-- End mentors box -->
-        </div>
+        @endif
       </div>
     </section>
     <!-- End mentors section -->
