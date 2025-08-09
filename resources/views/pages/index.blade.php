@@ -538,12 +538,15 @@
         @if($experts->isEmpty())
           <p class="text-center">Belum ada data expert yang tersedia.</p>
         @else
-          <div class="mentors-img d-flex flex-wrap flex-md-row justify-content-around align-items-center py-3 mb-3" data-aos="fade-up">
+          {{-- Perbaikan 1: Hapus align-items-center --}}
+          <div class="mentors-img d-flex flex-wrap flex-md-row justify-content-around py-3 mb-3" data-aos="fade-up">
             @foreach ($experts as $expert)
-              <div class="d-flex flex-column justify-content-center align-items-center m-2">
-                <div class="mentors-info d-flex flex-column justify-content-center align-items-center position-relative" style="max-width: 250px;">
+              {{-- Pastikan pembungkus per kartu memiliki lebar maks dan margin --}}
+              <div class="d-flex flex-column me-5 m-2 " style="width: 250px;">
+                
+                {{-- Area Gambar (tidak ada perubahan) --}}
+                <div class="mentors-info d-flex flex-column justify-content-center align-items-center position-relative">
                   <img style="width: 100%" class="rounded-top-3 img-fluid" src="{{ Storage::url($expert->image) }}" alt="{{ $expert->name }}" />
-                  
                   <div class="mentors-exp d-flex justify-content-evenly align-items-center gap-2 rounded-top-3">
                     <ul>
                       @foreach ($expert->skills as $skill)
@@ -552,9 +555,11 @@
                     </ul>
                   </div>
                 </div>
-                <div class="text-center px-2 p-4 rounded-bottom" style="background-color: #1746a2; width: 100%">
+
+                {{-- Perbaikan 2: Tambahkan kelas flexbox di sini --}}
+                <div class="text-center px-2 p-4 rounded-bottom mentors-text d-flex flex-column justify-content-center" style="background-color: #1746a2; width: 100%">
                   <h4 class="fw-bold">{{ $expert->name }}</h4>
-                  <h6 class="text-light fw-semibold mb-4">{{ $expert->position }}</h6>
+                  <h6 class="text-light fw-semibold">{{ $expert->position }}</h6>
                 </div>
               </div>
             @endforeach

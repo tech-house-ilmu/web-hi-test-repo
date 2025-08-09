@@ -220,12 +220,16 @@
 /* end styling testimonial home section */
 
 /* start styling mentor home section */
-.mentors .mentors-container .mentors-img img {
-    /* max-width: 250px; */
-}
-
 .mentors .mentors-container .mentors-img h4 {
     color: #ff9900;
+}
+
+/* Penyesuaian untuk gambar */
+.mentors-info img {
+    width: 100%;
+    height: 250px; /* Menyamakan tinggi gambar */
+    object-fit: cover; /* Mencegah distorsi */
+    display: block; /* Menghilangkan spasi aneh di bawah gambar */
 }
 
 .mentors-info .mentors-exp {
@@ -236,7 +240,12 @@
     position: absolute;
     background-color: #ff9900;
     opacity: 0.8;
-    transition: all ease-in-out 0.5s;
+    transition: height 0.4s ease-in-out; /* Transisi untuk tinggi saja */
+    overflow: hidden;
+}
+
+.mentors-text {
+    min-height: 130px; /* Atur tinggi minimum yang sama untuk semua blok biru. Angka ini bisa Anda sesuaikan. */
 }
 
 .mentors-info:hover .mentors-exp {
@@ -248,10 +257,13 @@
     font-size: 1rem;
     font-weight: 600;
     color: #fff;
-    transition: all ease-in-out 0.5s;
+    visibility: hidden; /* PENTING: Sembunyikan elemen sepenuhnya dari layout */
+    transition: opacity 0.3s ease-in-out; /* Transisi hanya untuk opacity */
+    transition-delay: 0.2s;
 }
 
 .mentors-info:hover .mentors-exp ul {
     opacity: 1;
+    visibility: visible;
 }
 /* end styling mentor home section */
