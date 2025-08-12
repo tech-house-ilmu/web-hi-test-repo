@@ -45,6 +45,42 @@ return [
             'throw' => false,
         ],
 
+        // Disk khusus untuk testimoni alumni
+        'testimoni' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/testimoni-alumni'),
+            'url' => env('APP_URL').'/storage/testimoni-alumni',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        // Disk untuk uploads umum
+        'uploads' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/uploads'),
+            'url' => env('APP_URL').'/storage/uploads',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        // Disk untuk media/gambar
+        'media' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/media'),
+            'url' => env('APP_URL').'/storage/media',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
+        // Disk untuk dokumen
+        'documents' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/documents'),
+            'url' => env('APP_URL').'/storage/documents',
+            'visibility' => 'public',
+            'throw' => false,
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
@@ -54,6 +90,22 @@ return [
             'url' => env('AWS_URL'),
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
+            'throw' => false,
+        ],
+
+        // Disk untuk temporary files
+        'temp' => [
+            'driver' => 'local',
+            'root' => storage_path('app/temp'),
+            'visibility' => 'private',
+            'throw' => false,
+        ],
+
+        // Disk untuk backup files
+        'backup' => [
+            'driver' => 'local',
+            'root' => storage_path('app/backup'),
+            'visibility' => 'private',
             'throw' => false,
         ],
 
@@ -72,6 +124,9 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('media') => storage_path('app/public/media'),
+        public_path('uploads') => storage_path('app/public/uploads'),
+        public_path('documents') => storage_path('app/public/documents'),
     ],
 
 ];

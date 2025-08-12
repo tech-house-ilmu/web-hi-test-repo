@@ -65,96 +65,50 @@
     <!-- Start career alumni section -->
     <section class="alumni container-xl mt-5">
         <div class="alumni-container container-xl d-flex flex-column justify-content-center align-items-center">
-            <h1 class="col-12 text-center fw-bold py-4 my-2" style="color: #083D77;"  data-aos="fade-down">
+            <h1 class="col-12 text-center fw-bold py-4 my-2" style="color: #083D77;" data-aos="fade-down">
                 From the Alumni to You
             </h1>
             <!-- Start Splide alumni -->
             <div id="alumniSplide" class="splide my-4 w-100" data-aos="fade-up">
                 <div class="splide__track">
                     <ul class="splide__list">
-                        <!-- ... slide pertama tetap -->
-                        <li class="splide__slide p-4 rounded-lg flex flex-col justify-start items-start">
-                        <div class="alumni-img flex flex-row w-full justify-evenly items-center">
-                            <img style="width: 60px;" src="{{ asset('img/logo.png') }}" alt="logo house ilmu">
-                            <div class="alumni-profile ml-3 mb-2 flex flex-col items-start">
-                            <p class="mt-2 m-0" id="testi-name">Putri Amelda</p>
-                            <p id="testi-role">Batch 2 Divisi Operation</p>
-                            </div>
-                        </div>
-                        <p class="w-full font-semibold">
-                            “HI membantu aku mencoba banyak hal dan menemukan skill baru dalam diriku. HI juga memperluas relasi pertemanan yang aku punya”
-                        </p>
-                        </li>
-
-                        <!-- Slide 2 -->
-                        <li class="splide__slide p-4 rounded-lg flex flex-col justify-start items-start">
-                        <div class="alumni-img flex flex-row w-full justify-evenly items-center">
-                            <img style="width: 60px;" src="{{ asset('img/logo.png') }}" alt="logo house ilmu">
-                            <div class="alumni-profile ml-3 mb-2 flex flex-col items-start">
-                            <p class="mt-2 m-0" id="testi-name">Annisa Fakhirah</p>
-                            <p id="testi-role">Batch 2 Divisi Operation</p>
-                            </div>
-                        </div>
-                        <p class="w-full font-semibold">
-                            “Selama bergabung dengan HI, aku banyak menerima pengalaman baru yang bisa menjadi bahan evaluasi diri dan aku sangat bersyukur ketemu dengan teman-teman hebat yang bisa saling kerja sama untuk menciptakan kegiatan yang berkualitas, thank you HI.”
-                        </p>
-                        </li>
-
-                        <!-- Slide 3 -->
-                        <li class="splide__slide p-4 rounded-lg flex flex-col justify-start items-start">
-                        <div class="alumni-img flex flex-row w-full justify-evenly items-center">
-                            <img style="width: 60px;" src="{{ asset('img/logo.png') }}" alt="logo house ilmu">
-                            <div class="alumni-profile ml-3 mb-2 flex flex-col items-start">
-                            <p class="mt-2 m-0" id="testi-name">Alma Yunita</p>
-                            <p id="testi-role">Batch 2.5 Divisi Operation</p>
-                            </div>
-                        </div>
-                        <p class="w-full font-semibold">
-                            “Di House Ilmu saya mendapatkan banyak pengalaman berharga seperti kedisiplinan, bisa saling menghargai sesama dan pastinya bisa membuat saja memimpin suatu projek. Terima kasih HI.”
-                        </p>
-                        </li>
-
-                        <!-- Slide 4 -->
-                        <li class="splide__slide p-4 rounded-lg flex flex-col justify-start items-start">
-                        <div class="alumni-img flex flex-row w-full justify-evenly items-center">
-                            <img style="width: 60px;" src="{{ asset('img/logo.png') }}" alt="logo house ilmu">
-                            <div class="alumni-profile ml-3 mb-2 flex flex-col items-start">
-                            <p class="mt-2 m-0" id="testi-name">Permata Amanda</p>
-                            <p id="testi-role">Batch 2 Divisi Technology</p>
-                            </div>
-                        </div>
-                        <p class="w-full font-semibold">
-                            “House Ilmu Indonesia membuka wawasan saya di era sekarang ini kita dapat menambah wawasan dari mana saja. Kegiatan online dengan waktu fleksible memberi pengetahuan baru dalam bersosialisasi maupun komunikasi. Perkembangan Technology harus selalu kita ikuti, suatu kebanggan pernah menjadi bagian dari House Ilmu Indonesia.”
-                        </p>
-                        </li>
-
-                        <!-- Slide 5 -->
-                        <li class="splide__slide p-4 rounded-lg flex flex-col justify-start items-start">
-                        <div class="alumni-img flex flex-row w-full justify-evenly items-center">
-                            <img style="width: 60px;" src="{{ asset('img/logo.png') }}" alt="logo house ilmu">
-                            <div class="alumni-profile ml-3 mb-2 flex flex-col items-start">
-                            <p class="mt-2 m-0" id="testi-name">Wina Wijayanti</p>
-                            <p id="testi-role">Batch 2 Divisi Operation</p>
-                            </div>
-                        </div>
-                        <p class="w-full font-semibold">
-                            “House ilmu indonesia jadi tempat yang tepat bagi aku untuk mengembangkan diri. Ada banyak event yang menarik dan pastinya bermanfaat untuk diikuti. Di house ilmu juga ketemu teman-teman dari berbagai macam daerah dan pastinya seru banget!”
-                        </p>
-                        </li>
-
-                        <!-- Slide 6 -->
-                        <li class="splide__slide p-4 rounded-lg flex flex-col justify-start items-start">
-                        <div class="alumni-img flex flex-row w-full justify-evenly items-center">
-                            <img style="width: 60px;" src="{{ asset('img/logo.png') }}" alt="logo house ilmu">
-                            <div class="alumni-profile ml-3 mb-2 flex flex-col items-start">
-                            <p class="mt-2 m-0" id="testi-name">Winda Noprika</p>
-                            <p id="testi-role">Batch 2 Divisi Winda Noprika</p>
-                            </div>
-                        </div>
-                        <p class="w-full font-semibold">
-                            “Jadi bagian dari House Ilmu itu senang banget, ketemu temen temen baru dan belajar banyak hal. Experience yang aku dapet can’t explain word by word. House ilmu forever ever the best!”
-                        </p>
-                        </li>
+                        @forelse($testimoniAlumni as $alumni)
+                            <li class="splide__slide p-4 rounded-lg flex flex-col justify-start items-start">
+                                <div class="alumni-img flex flex-row w-full justify-evenly items-center">
+                                    @if($alumni->testimoni_alumni_img)
+                                        <img style="width: 60px; height: 60px; object-fit: cover;" 
+                                            src="{{ Storage::url($alumni->testimoni_alumni_img) }}" 
+                                            alt="{{ $alumni->testimoni_alumni_name }}"
+                                            class="rounded-circle">
+                                    @else
+                                        <img style="width: 60px;" 
+                                            src="{{ asset('img/logo.png') }}" 
+                                            alt="logo house ilmu">
+                                    @endif
+                                    <div class="alumni-profile ml-3 mb-2 flex flex-col items-start">
+                                        <p class="mt-2 m-0" id="testi-name">{{ $alumni->testimoni_alumni_name }}</p>
+                                        <p id="testi-role">{{ $alumni->testimoni_alumni_position }}</p>
+                                    </div>
+                                </div>
+                                <p class="w-full font-semibold">
+                                    "{{ $alumni->testimoni_alumni_description }}"
+                                </p>
+                            </li>
+                        @empty
+                            <!-- Fallback jika tidak ada data -->
+                            <li class="splide__slide p-4 rounded-lg flex flex-col justify-start items-start">
+                                <div class="alumni-img flex flex-row w-full justify-evenly items-center">
+                                    <img style="width: 60px;" src="{{ asset('img/logo.png') }}" alt="logo house ilmu">
+                                    <div class="alumni-profile ml-3 mb-2 flex flex-col items-start">
+                                        <p class="mt-2 m-0" id="testi-name">Testimoni akan segera tersedia</p>
+                                        <p id="testi-role">House Ilmu Team</p>
+                                    </div>
+                                </div>
+                                <p class="w-full font-semibold">
+                                    "Testimoni alumni akan ditampilkan di sini setelah data dimasukkan melalui admin panel."
+                                </p>
+                            </li>
+                        @endforelse
                     </ul>
                 </div>
             </div>
@@ -162,7 +116,6 @@
         </div>
     </section>
     <!-- End career alumni section -->
-
     <!-- Start career info section -->
     <section id="career-info" class="career-info container-xl mt-5">
         <div class="career-info-container container-xl d-flex flex-column justify-content-center align-items-center">
