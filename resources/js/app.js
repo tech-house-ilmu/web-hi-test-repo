@@ -13,7 +13,8 @@ import collapse from "@alpinejs/collapse";
 
 // Impor baru untuk Swiper
 import Swiper from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules';
+// DIUBAH: Tambahkan modul Autoplay
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -21,7 +22,6 @@ import 'swiper/css/pagination';
 console.log("✅ imported initNavbarToggle", initNavbarToggle);
 
 document.addEventListener("DOMContentLoaded", function () {
-    
     
     // Cek apakah di halaman ini ada elemen slider Swiper baru kita?
     if (document.querySelector('.main-swiper')) {
@@ -42,14 +42,23 @@ document.addEventListener("DOMContentLoaded", function () {
             },
         });
 
+        // DIUBAH: Konfigurasi nested-swiper disesuaikan
         document.querySelectorAll('.nested-swiper').forEach(function(nestedSwiperEl) {
             new Swiper(nestedSwiperEl, {
-                modules: [Navigation],
+                // Aktifkan modul Autoplay dan Pagination
+                modules: [Autoplay, Pagination],
                 loop: true,
-                navigation: {
-                    nextEl: nestedSwiperEl.querySelector('.swiper-button-next'),
-                    prevEl: nestedSwiperEl.querySelector('.swiper-button-prev'),
+                // DITAMBAHKAN: Konfigurasi Autoplay
+                autoplay: {
+                    delay: 3000, // 3 detik
+                    disableOnInteraction: false,
                 },
+                // DITAMBAHKAN: Konfigurasi Pagination untuk slider gambar
+                pagination: {
+                    el: '.nested-swiper-pagination', // Target kelas unik
+                    clickable: true,
+                },
+                // DIHAPUS: Konfigurasi navigasi (panah) dihapus dari sini
             });
         });
 

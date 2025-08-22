@@ -85,25 +85,25 @@
 
                     @foreach ($events as $event)
                         <div class="swiper-slide px-5">
-                            <div class="row g-0 align-items-center event-container mb-5 justify-content-center">
+                            <div class="row g-0 align-items-stretch event-container mb-5 justify-content-center">
                                 <div class="col-md-5 event-image-container">
-                                    
                                     @if(count($event->images) > 1)
-                                        <div class="swiper nested-swiper">
+                                        <div class="swiper nested-swiper h-100">
                                             <div class="swiper-wrapper">
                                                 @foreach ($event->images as $image)
-                                                    <div class="swiper-slide">
-                                                        <img src="{{ Storage::url($image) }}" class="d-block w-100" alt="Event Image">
+                                                    <div class="swiper-slide nested-swiper-slide" style="background-image: url('{{ Storage::url($image) }}');">
                                                     </div>
                                                 @endforeach
                                             </div>
-                                            </div>
+                                            <div class="swiper-pagination nested-swiper-pagination"></div>
+                                        </div>
                                     @else
-                                        <img src="{{ Storage::url($event->images[0]) }}" class="img-fluid" alt="Event Image">
+                                        <div class="single-image-poster" style="background-image: url('{{ count($event->images) > 0 ? Storage::url($event->images[0]) : '' }}');">
+                                        </div>
                                     @endif
-
                                 </div>
-                                <div class="col-md-7 p-4 p-md-5">
+                                
+                                <div class="col-md-7 p-4 p-md-5 event-text-container">
                                     <div class="text-center">
                                         <h2 class="fw-bolder">{{ $event->title }}</h2>
                                         <p class="text-muted fs-5 fw-bold">{{ $event->tagline }}</p>
@@ -112,7 +112,7 @@
                                         {!! $event->description !!}
                                     </div>
                                     <div class="d-flex justify-content-center">
-                                        <a href="{{ $event->registration_link }}" style="background-color: #174ea6" target="_blank" class="btn btn-primary fs-4 mt-4 btn-daftar">
+                                        <a href="{{ $event->registration_link }}" style="background-color: #174ea6" target="_blank" class="btn btn-primary fs-5 mt-4 btn-daftar">
                                             Daftar Sekarang
                                         </a>
                                     </div>
@@ -130,8 +130,8 @@
             </div>
         @endif
     </div>
-</section>
-  <!-- End Upcoming Events Section -->
+    </section>
+    <!-- End Upcoming Events Section -->
 
     <!--Start oppt section-->
     <section class="opportunities mt-4" data-aos="fade">
