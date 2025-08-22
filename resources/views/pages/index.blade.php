@@ -72,9 +72,10 @@
     </section>
     <!-- Banner section -->
 
+    <!-- start upcoming event section-->
     <section class="upevent">
     <div class="container">
-        <h1 class="text-center mb-4 fw-bold">Upcoming Events</h1>
+        <h1 class="text-center mb-5 fw-bold text-shadow-lg" style="color: #083d77">Upcoming Events</h1>
 
         @if($events->isEmpty())
             <p class="text-center">Belum ada event yang akan datang. Cek kembali nanti!</p>
@@ -83,7 +84,7 @@
                 <div class="swiper-wrapper">
 
                     @foreach ($events as $event)
-                        <div class="swiper-slide">
+                        <div class="swiper-slide px-5">
                             <div class="row g-0 align-items-center event-container mb-5 justify-content-center">
                                 <div class="col-md-5 event-image-container">
                                     
@@ -122,9 +123,9 @@
 
                 </div>
                 @if($events->count() > 1)
-                    <div class="swiper-pagination"></div>
-                    <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination "></div>
+                    <div class="swiper-button-next "></div>
+                    <div class="swiper-button-prev "></div>
                 @endif
             </div>
         @endif
@@ -656,4 +657,3 @@
     </section>
     <!-- End faq section -->
 @endsection
-

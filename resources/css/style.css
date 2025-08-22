@@ -25,9 +25,7 @@
         width: 100%;
     }
 }
-/* end styling banner responsive mobile */
 
-/* start styling banner responsive desktop */
 @media only screen and (min-width: 768px) {
     .upcoming .upcoming-desc img {
         width: 70%;
@@ -47,7 +45,6 @@
         width: 50%;
     }
 }
-/* end styling banner responsive desktop */
 
 .upcoming
     .upcoming-container
@@ -63,9 +60,41 @@
     background-color: #174ea6;
     transition: all ease-in-out 0.2s;
 }
+.text-shadow-lg {
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
 
 .upcoming .upcoming-desc .upcoming-event-desc a:hover {
     background-color: #2469d6;
+}
+
+.upevent .btn-daftar {
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out;
+    border: none;
+    padding: 0.75rem 1.75rem;
+}
+
+.swiper-pagination-bullet {
+  background: #000 !important;
+  opacity: 0.6;
+}
+
+.swiper-pagination-bullet-active {
+  background: #000 !important;
+  opacity: 1;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #000 !important; 
+}
+
+.upevent .btn-daftar:hover {
+    background-color: #2469d6 !important;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* end styling upcoming home section */
