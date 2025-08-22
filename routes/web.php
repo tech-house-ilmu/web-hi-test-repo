@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\HomeController;
+// use App\Http\Controllers\Frontend\ArticleController;
+use App\Http\Controllers\ArticlePageController;
 
 use App\Http\Controllers\TestimoniController;
 
@@ -47,23 +49,12 @@ Route::get('/programme/HI-opportunities/', function () {
 
 /****************************************** ARTICLE *********************************/ 
 
-Route::get('/article', function () {
-    return view('pages.article.index');
-});
 
-Route::get('article/category/skill-development/{slug}', function ($slug) {
-    $view = "pages.article.category.skill-development.$slug.index";
+Route::get('/article', [ArticlePageController::class, 'index'])->name('article.index');
+Route::get('/articles/{slug}', [ArticlePageController::class, 'show'])->name('article.show');
 
-    if (!view()->exists($view)) {
-        abort(404);
-    }
 
-    return view($view);
-});
-
-Route::get('/', function () {
-    return view('welcome');});
 
 Route::get('/testimoni', [TestimoniController::class, 'testimoni']);
 
-Route::get('/VpDetailsAbout', [VpDetailsController::class, 'VpDetails']);
+Route::get('/VpDetailsAbout', [VpDetailsController::class, 'VpDetails'])->name('VpDetails.VpDetails');
