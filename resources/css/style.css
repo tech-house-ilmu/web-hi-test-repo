@@ -6,68 +6,84 @@
 /* start styling upcoming home section */
 .upevent {
     background-color: #ffdd95;
+    padding: 1rem 0;
 }
 
-/* start styling banner responsive mobile */
-@media only screen and (max-width: 767px) {
-    .upcoming .upcoming-desc img {
-        width: 100%;
+.upevent .event-container {
+    align-items: stretch !important; 
+}
+
+.upevent .event-image-container {
+    height: 450px;
+    border-radius: 8px;
+    overflow: hidden; 
+}
+
+.upevent .event-text-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.upevent .single-image-poster {
+    width: 100%;
+    height: 100%;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.upevent .nested-swiper-slide {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.upevent .nested-swiper-pagination .swiper-pagination-bullet {
+    background-color: #fff !important;
+    opacity: 0.7;
+    border: 1px solid rgba(0,0,0,0.5);
+}
+
+.upevent .nested-swiper-pagination .swiper-pagination-bullet-active {
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+.text-shadow-lg {
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+.upevent .btn-daftar {
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease-in-out;
+    border: none;
+    padding: 0.75rem 1.75rem;
+}
+.upevent .btn-daftar:hover {
+    background-color: #2469d6 !important;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+.swiper-pagination-bullet {
+  background: #000 !important;
+  opacity: 0.6;
+}
+.swiper-pagination-bullet-active {
+  background: #000 !important;
+  opacity: 1;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: #000 !important; 
+}
+
+/* Penyesuaian untuk Mobile */
+@media (max-width: 767px) {
+    .upevent .event-image-container {
+        height: 250px;
     }
-
-    .upcoming .upcoming-container .swiperUpcomingContainer,
-    .upcoming
-        .upcoming-container
-        .swiper
-        .swiper-wrapper
-        .swiper-slide
-        .upcoming-desc
-        .swiperUpcoming {
-        width: 100%;
-    }
 }
-/* end styling banner responsive mobile */
-
-/* start styling banner responsive desktop */
-@media only screen and (min-width: 768px) {
-    .upcoming .upcoming-desc img {
-        width: 70%;
-    }
-
-    .upcoming .upcoming-container .swiperUpcomingContainer {
-        width: 100%;
-    }
-
-    .upcoming
-        .upcoming-container
-        .swiper
-        .swiper-wrapper
-        .swiper-slide
-        .upcoming-desc
-        .swiperUpcoming {
-        width: 50%;
-    }
-}
-/* end styling banner responsive desktop */
-
-.upcoming
-    .upcoming-container
-    .swiper
-    .swiper-wrapper
-    .swiper-slide
-    .upcoming-desc {
-    background-color: #ff9900;
-    border-radius: 10px;
-}
-
-.upcoming .upcoming-desc .upcoming-event-desc a {
-    background-color: #174ea6;
-    transition: all ease-in-out 0.2s;
-}
-
-.upcoming .upcoming-desc .upcoming-event-desc a:hover {
-    background-color: #2469d6;
-}
-
 /* end styling upcoming home section */
 
 /* start styling opportunities home section */
