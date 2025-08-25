@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TestimoniAlumniCareer;
 use App\Models\Division;
 use App\Models\Position;
 
@@ -9,9 +10,11 @@ class CareerController extends Controller
 {
     public function index()
     {
-        // Menampilkan halaman career utama (pilihan kotak divisi)
-        $divisions = Division::all();
-        return view('pages.career.career', compact('divisions'));
+     // Ambil semua data testimoni alumni, urutkan berdasarkan yang terbaru
+        $testimoniAlumni = TestimoniAlumniCareer::orderBy('created_at', 'desc')->get();
+        
+        // Sesuaikan path dengan struktur folder: resources/views/pages/career/career.blade.php
+        return view('pages.career.career', compact('testimoniAlumni'));
     }
 
     public function listByDivision($division)
