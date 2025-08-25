@@ -69,51 +69,71 @@
                 From the Alumni to You
             </h1>
             
-    <!-- Start Splide alumni -->
-    <div id="alumniSplide" class="splide my-4 w-100" data-aos="fade-up">
-        <div class="splide__track">
-            <ul class="splide__list">
-                @forelse($testimoniAlumni as $alumni)
-                    <li class="splide__slide p-4 rounded-lg flex flex-col justify-start items-start">
-                        <div class="alumni-img flex flex-row w-full justify-evenly items-center">
-                            @if($alumni->testimoni_alumni_img)
-                                <img style="width: 60px; height: 60px; object-fit: cover;" 
-                                    src="{{ Storage::url($alumni->testimoni_alumni_img) }}" 
-                                    alt="{{ $alumni->testimoni_alumni_name }}"
-                                    class="rounded-circle">
-                            @else
-                                <img style="width: 60px;" 
-                                    src="{{ asset('img/logo.png') }}" 
-                                    alt="logo house ilmu">
-                            @endif
-                            <div class="alumni-profile ml-3 mb-2 flex flex-col items-start">
-                                <p class="mt-2 m-0" id="testi-name">{{ $alumni->testimoni_alumni_name }}</p>
-                                <p id="testi-role">{{ $alumni->testimoni_alumni_position }}</p>
-                            </div>
-                        </div>
-                        <p style="white-space: normal; word-break: break-word; overflow-wrap: break-word; width: 100%; font-weight: 600;">
-                            "{{ $alumni->testimoni_alumni_description }}"
-                        </p>
-                    </li>
-                @empty
-                    <!-- Fallback jika tidak ada data -->
-                    <li class="splide__slide p-4 rounded-lg flex flex-col justify-start items-start">
-                        <div class="alumni-img flex flex-row w-full justify-evenly items-center">
-                            <img style="width: 60px;" src="{{ asset('img/logo.png') }}" alt="logo house ilmu">
-                            <div class="alumni-profile ml-3 mb-2 flex flex-col items-start">
-                                <p class="mt-2 m-0" id="testi-name">Testimoni akan segera tersedia</p>
-                                <p id="testi-role">House Ilmu Team</p>
-                            </div>
-                        </div>
-                        <p style="white-space: normal; word-break: break-word; overflow-wrap: break-word; width: 100%; font-weight: 600;">
-                            "Testimoni alumni akan ditampilkan di sini setelah data dimasukkan melalui admin panel."
-                        </p>
-                    </li>
-                @endforelse
-            </ul>
+            <!-- Start Splide alumni -->
+            <div id="alumniSplide" class="splide my-4 w-100" data-aos="fade-up">
+                <div class="splide__track">
+                    <ul class="splide__list">
+                        @forelse($testimoniAlumni as $alumni)
+                            <li class="splide__slide p-4 rounded-lg" style="background: white; box-shadow: 0 8px 25px rgba(8, 61, 119, 0.15); border: 1px solid rgba(8, 61, 119, 0.1); min-height: 250px; display: flex; flex-direction: column;">
+                                <!-- Profile section - Left aligned -->
+                                <div class="alumni-profile-section d-flex align-items-start mb-3 pb-3" style="border-bottom: 2px solid #f8f9fa;">
+                                    <div class="alumni-img me-3" style="flex-shrink: 0;">
+                                        @if($alumni->testimoni_alumni_img)
+                                            <img style="width: 65px; height: 65px; object-fit: cover; border: 3px solid #083D77; box-shadow: 0 4px 12px rgba(8, 61, 119, 0.3);" 
+                                                src="{{ Storage::url($alumni->testimoni_alumni_img) }}" 
+                                                alt="{{ $alumni->testimoni_alumni_name }}"
+                                                class="rounded-circle">
+                                        @else
+                                            <img style="width: 65px; height: 65px; object-fit: cover; border: 3px solid #083D77; box-shadow: 0 4px 12px rgba(8, 61, 119, 0.3);" 
+                                                src="{{ asset('img/logo.png') }}" 
+                                                alt="logo house ilmu"
+                                                class="rounded-circle">
+                                        @endif
+                                    </div>
+                                    <div class="alumni-details text-start" style="flex-grow: 1;">
+                                        <p class="alumni-name mb-1" style="font-size: 1.1rem; font-weight: 700; color: #083D77; margin: 0;">{{ $alumni->testimoni_alumni_name }}</p>
+                                        <p class="alumni-position" style="font-size: 0.9rem; color: #6c757d; margin: 0; font-weight: 500; font-style: italic;">{{ $alumni->testimoni_alumni_position }}</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Testimonial text - Centered -->
+                                <div class="testimonial-content d-flex align-items-center justify-content-center text-center" style="flex-grow: 1; position: relative;">
+                                    <p style="font-size: 1rem; line-height: 1.6; color: #495057; font-weight: 600; font-style: italic; white-space: normal; word-break: break-word; overflow-wrap: break-word; width: 100%; margin: 0;">
+                                        "{{ $alumni->testimoni_alumni_description }}"
+                                    </p>
+                                </div>
+                            </li>
+                        @empty
+                            <!-- Fallback jika tidak ada data -->
+                            <li class="splide__slide p-4 rounded-lg" style="background: white; box-shadow: 0 8px 25px rgba(8, 61, 119, 0.15); border: 1px solid rgba(8, 61, 119, 0.1); min-height: 250px; display: flex; flex-direction: column;">
+                                <!-- Profile section - Left aligned -->
+                                <div class="alumni-profile-section d-flex align-items-start mb-3 pb-3" style="border-bottom: 2px solid #f8f9fa;">
+                                    <div class="alumni-img me-3" style="flex-shrink: 0;">
+                                        <img style="width: 65px; height: 65px; object-fit: cover; border: 3px solid #083D77; box-shadow: 0 4px 12px rgba(8, 61, 119, 0.3);" 
+                                            src="{{ asset('img/logo.png') }}" 
+                                            alt="logo house ilmu"
+                                            class="rounded-circle">
+                                    </div>
+                                    <div class="alumni-details text-start" style="flex-grow: 1;">
+                                        <p class="alumni-name mb-1" style="font-size: 1.1rem; font-weight: 700; color: #083D77; margin: 0;">Testimoni akan segera tersedia</p>
+                                        <p class="alumni-position" style="font-size: 0.9rem; color: #6c757d; margin: 0; font-weight: 500; font-style: italic;">House Ilmu Team</p>
+                                    </div>
+                                </div>
+                                
+                                <!-- Testimonial text - Centered -->
+                                <div class="testimonial-content d-flex align-items-center justify-content-center text-center" style="flex-grow: 1;">
+                                    <p style="font-size: 1rem; line-height: 1.6; color: #495057; font-weight: 600; font-style: italic; white-space: normal; word-break: break-word; overflow-wrap: break-word; width: 100%; margin: 0;">
+                                        "Testimoni alumni akan ditampilkan di sini setelah data dimasukkan melalui admin panel."
+                                    </p>
+                                </div>
+                            </li>
+                        @endforelse
+                    </ul>
+                </div>
+            </div>
+            <!-- End Splide alumni -->
         </div>
-    </div>
-    <!-- End Splide alumni -->
+    </section>
 
     <!-- Start career info section -->
     <section id="career-info" class="career-info container-xl mt-5">
