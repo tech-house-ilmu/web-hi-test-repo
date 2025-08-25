@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\HomeController;
 
+use App\Http\Controllers\TestimoniController;
+
+use App\Http\Controllers\VpDetailsController;
+
 /******************************** HOME *********************************************/ 
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -56,3 +60,10 @@ Route::get('article/category/skill-development/{slug}', function ($slug) {
 
     return view($view);
 });
+
+Route::get('/', function () {
+    return view('welcome');});
+
+Route::get('/testimoni', [TestimoniController::class, 'testimoni']);
+
+Route::get('/VpDetailsAbout', [VpDetailsController::class, 'VpDetails']);

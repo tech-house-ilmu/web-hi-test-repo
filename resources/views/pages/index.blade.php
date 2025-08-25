@@ -72,72 +72,64 @@
     </section>
     <!-- Banner section -->
 
-    <!-- Start Upcoming Events Section -->
+    <!-- start upcoming event section-->
     <section class="upevent">
-        <div class="container mb-4">
-            <h1 class="text-center mb-4">Upcoming Events</h1>
+    <div class="container">
+        <h1 class="text-center mb-5 fw-bold text-shadow-lg" style="color: #083d77">Upcoming Events</h1>
 
-            @if($events->isEmpty())
-                <p class="text-center">Belum ada event yang akan datang. Cek kembali nanti!</p>
-            @else
-                <div id="upcomingEventsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        @if($events->isEmpty())
+            <p class="text-center">Belum ada event yang akan datang. Cek kembali nanti!</p>
+        @else
+            <div class="swiper main-swiper">
+                <div class="swiper-wrapper">
 
-                    @if($events->count() > 1)
-                    <div class="carousel-indicators">
-                        @foreach ($events as $index => $event)
-                            <button type="button" data-bs-target="#upcomingEventsCarousel" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}" aria-current="{{ $index == 0 ? 'true' : 'false' }}" aria-label="Event {{ $index + 1 }}"></button>
-                        @endforeach
-                    </div>
-                    @endif
-
-                    <div class="carousel-inner">
-                        @foreach ($events as $index => $event)
-                            <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                <div class="row g-0 align-items-center event-container mb-5 justify-content-center">
-                                    <div class="col-md-5">
-                                        @if(count($event->images) > 1)
-                                            <div id="carousel-{{ $event->id }}" class="carousel slide" data-bs-ride="carousel">
-                                                <div class="carousel-inner">
-                                                    @foreach ($event->images as $imgIndex => $image)
-                                                        <div class="carousel-item {{ $imgIndex == 0 ? 'active' : '' }}">
-                                                            <img src="{{ Storage::url($image) }}" class="d-block w-100" alt="Event Image">
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                                <button class="carousel-control-prev" type="button" data-bs-target="#carousel-{{ $event->id }}" data-bs-slide="prev">
-                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Previous</span>
-                                                </button>
-                                                <button class="carousel-control-next" type="button" data-bs-target="#carousel-{{ $event->id }}" data-bs-slide="next">
-                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                    <span class="visually-hidden">Next</span>
-                                                </button>
+                    @foreach ($events as $event)
+                        <div class="swiper-slide px-5">
+                            <div class="row g-0 align-items-stretch event-container mb-5 justify-content-center">
+                                <div class="col-md-5 event-image-container">
+                                    @if(count($event->images) > 1)
+                                        <div class="swiper nested-swiper h-100">
+                                            <div class="swiper-wrapper">
+                                                @foreach ($event->images as $image)
+                                                    <div class="swiper-slide nested-swiper-slide" style="background-image: url('{{ Storage::url($image) }}');">
+                                                    </div>
+                                                @endforeach
                                             </div>
-                                        @else
-                                            <img src="{{ Storage::url($event->images[0]) }}" class="img-fluid" alt="Event Image">
-                                        @endif
+                                            <div class="swiper-pagination nested-swiper-pagination"></div>
+                                        </div>
+                                    @else
+                                        <div class="single-image-poster" style="background-image: url('{{ count($event->images) > 0 ? Storage::url($event->images[0]) : '' }}');">
+                                        </div>
+                                    @endif
+                                </div>
+                                
+                                <div class="col-md-7 p-4 p-md-5 event-text-container">
+                                    <div class="text-center">
+                                        <h2 class="fw-bolder">{{ $event->title }}</h2>
+                                        <p class="text-muted fs-5 fw-bold">{{ $event->tagline }}</p>
                                     </div>
-                                    <div class="col-md-7 p-4 p-md-5">
-                                        <div class="text-center">
-                                            <h2 class="fw-bolder">{{ $event->title }}</h2>
-                                            <p class="text-muted fs-5 fw-bold">{{ $event->tagline }}</p>
-                                        </div>
-                                        <div class="mt-3 description-content">
-                                            {!! $event->description !!}
-                                        </div>
-                                        <div class="d-flex justify-content-center">
-                                            <a href="{{ $event->registration_link }}" style="background-color: #174ea6" target="_blank" class="btn btn-primary fs-4 mt-4 btn-daftar">
-                                                Daftar Sekarang
-                                            </a>
-                                        </div>
+                                    <div class="mt-3 description-content">
+                                        {!! $event->description !!}
+                                    </div>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="{{ $event->registration_link }}" style="background-color: #174ea6" target="_blank" class="btn btn-primary fs-5 mt-4 btn-daftar">
+                                            Daftar Sekarang
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                        @endforeach
-                    </div>
+                        </div>
+                    @endforeach
+
                 </div>
-            @endif
-        </div>
+                @if($events->count() > 1)
+                <div class="swiper-pagination "></div>
+                    <div class="swiper-button-next "></div>
+                    <div class="swiper-button-prev "></div>
+                @endif
+            </div>
+        @endif
+    </div>
     </section>
     <!-- End Upcoming Events Section -->
 
@@ -538,12 +530,15 @@
         @if($experts->isEmpty())
           <p class="text-center">Belum ada data expert yang tersedia.</p>
         @else
-          <div class="mentors-img d-flex flex-wrap flex-md-row justify-content-around align-items-center py-3 mb-3" data-aos="fade-up">
+          {{-- Perbaikan 1: Hapus align-items-center --}}
+          <div class="mentors-img d-flex flex-wrap flex-md-row justify-content-around py-3 mb-3" data-aos="fade-up">
             @foreach ($experts as $expert)
-              <div class="d-flex flex-column justify-content-center align-items-center m-2">
-                <div class="mentors-info d-flex flex-column justify-content-center align-items-center position-relative" style="max-width: 250px;">
+              {{-- Pastikan pembungkus per kartu memiliki lebar maks dan margin --}}
+              <div class="d-flex flex-column me-5 m-2 " style="width: 250px;">
+                
+                {{-- Area Gambar (tidak ada perubahan) --}}
+                <div class="mentors-info d-flex flex-column justify-content-center align-items-center position-relative">
                   <img style="width: 100%" class="rounded-top-3 img-fluid" src="{{ Storage::url($expert->image) }}" alt="{{ $expert->name }}" />
-                  
                   <div class="mentors-exp d-flex justify-content-evenly align-items-center gap-2 rounded-top-3">
                     <ul>
                       @foreach ($expert->skills as $skill)
@@ -552,9 +547,11 @@
                     </ul>
                   </div>
                 </div>
-                <div class="text-center px-2 p-4 rounded-bottom" style="background-color: #1746a2; width: 100%">
+
+                {{-- Perbaikan 2: Tambahkan kelas flexbox di sini --}}
+                <div class="text-center px-2 p-4 rounded-bottom mentors-text d-flex flex-column justify-content-center" style="background-color: #1746a2; width: 100%">
                   <h4 class="fw-bold">{{ $expert->name }}</h4>
-                  <h6 class="text-light fw-semibold mb-4">{{ $expert->position }}</h6>
+                  <h6 class="text-light fw-semibold">{{ $expert->position }}</h6>
                 </div>
               </div>
             @endforeach
@@ -660,4 +657,3 @@
     </section>
     <!-- End faq section -->
 @endsection
-
