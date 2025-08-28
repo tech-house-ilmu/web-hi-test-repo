@@ -2,105 +2,122 @@
 
 @section('title', 'HI Opportunities | House Ilmu Indonesia')
 
-@section('head')
-
 @section('content')
-      <!-- Main -->
-    <section class="container-xxl my-4">
-      <!-- Search Bar -->
-      <div class="search-container container text-white">
-        <div class="input-group">
-          <input type="text" id="searchInput" class="form-control" placeholder="Search by Internship, competition, volunteer, & exchange"/>
-          <button class="btn search-btn-custom btn-lg"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
-        </div>
-        <!-- button filtered -->
-        <!-- filter masih d-none karna belum fix isinya -->
-        <div class="filter-component d-none align-items-center mt-3 gap-2">
-          <span class="text-white">Urutkan:</span>
-          <button class="btn filter-btn-custom text-white">Terbaru <i class="fa-solid fa-chevron-down ms-1"></i></button>
-          <button class="btn filter-btn-custom text-white">Jenis <i class="fa-solid fa-chevron-down ms-1"></i></button>
-          <button class="btn filter-btn-custom text-white">Tipe<i class="fa-solid fa-chevron-down ms-1"></i></button>
-          <button class="btn filter-btn-custom text-white">Lokasi<i class="fa-solid fa-chevron-down ms-1"></i></button>
-        </div>
-      </div>
+<section class="container-xxl my-4">
+    <!-- Search Bar -->
+    <div class="search-container container text-white">
+        <form id="search-form" method="GET" action="{{ route('programme.hi.index') }}" class="input-group">
+            <input type="text" name="search" value="{{ request('search') }}" 
+                  class="form-control" placeholder="Search by Internship, Competition, Volunteer, & Exchange"/>
+            <button class="btn search-btn-custom btn-lg" type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i> Search
+            </button>
+        </form>
+    </div>
 
-      <!-- Category Cards -->
-      <div class="category-card container justify-content-between mt-4 gap-1">
-        <div class="category-item text-center border-custom p-0">
-          <img src="{{ asset('img/homepage/img-opp/semua.jpg') }}" alt="Logo House Ilmu Indonesia"/>
-          <div class="d-flex justify-content-center card-img">
-            <span class="category-label">Semua</span>
-          </div>
-        </div>
-        <div class="category-item text-center border-custom p-0">
-          <img src="{{ asset('img/homepage/img-opp/internship.jpg') }}" alt="Logo House Ilmu Indonesia"/>
-          <div class="card-img d-flex justify-content-center">
-            <span class="category-label">Internship</span>
-          </div>
-        </div>
-        <div class="category-item text-center border-custom p-0">
-          <img src="{{ asset('img/homepage/img-opp/competition.jpg') }}" alt="Logo House Ilmu Indonesia"/>
-          <div class="card-img d-flex justify-content-center">
-            <span class="category-label">Competition</span>
-          </div>
-        </div>
-        <div class="category-item text-center border-custom p-0">
-          <img src="{{ asset('img/homepage/img-opp/volunteer.jpg') }}" alt="Logo House Ilmu Indonesia"/>
-          <div class="card-img d-flex justify-content-center">
-            <span class="category-label">Volunteer</span>
-          </div>
-        </div>
-        <div class="category-item text-center border-custom p-0">
-          <img src="{{ asset('img/homepage/img-opp/exchange.jpg') }}" alt="Logo House Ilmu Indonesia"/>
-          <div class="card-img d-flex justify-content-center">
-            <span class="category-label">Exchange</span>
-          </div>
-        </div>
-        <div class="category-item text-center border-custom p-0">
-            <img src="{{ asset('img/homepage/img-opp/beasiswa.jpeg') }}" alt="Logo House Ilmu Indonesia">
-            <div class="card-img d-flex justify-content-center">
-                <span class="category-label">Beasiswa</span>
+    <!-- Category Cards -->
+    @php
+        $categoryImages = [
+            'internship' => 'img/homepage/img-opp/internship.jpg',
+            'volunteer' => 'img/homepage/img-opp/volunteer.jpg',
+            'exchange' => 'img/homepage/img-opp/exchange.jpg',
+            'scholarship' => 'img/homepage/img-opp/beasiswa.jpeg',
+            'competition' => 'img/homepage/img-opp/competition.jpg',
+        ];
+    @endphp
+
+    <div class="category-card container justify-content-between mt-4 gap-1">
+        <!-- Semua -->
+        <a href="#" data-category="all" 
+          class="category-item text-center border-custom p-0 {{ request('category') == 'all' || !request('category') ? 'active' : '' }}">
+            <img src="{{ asset('img/homepage/img-opp/semua.jpg') }}" alt="Semua"/>
+            <div class="d-flex justify-content-center card-img">
+                <span class="category-label">Semua</span>
             </div>
-        </div>
-      </div>
+        </a>
 
-      <div class="cards-container container-xxl d-flex flex-wrap my-4 gap-3 justify-content-center align-items-start">
-        <div class="beasiswa card-box px-4 px-md-0">
-            <a href="/programme/beasiswa/beasiswa-iyi-international.html"
-                class="card-custom d-flex align-items-center">
-                <img src="/assets/img-opp/beasiswa/IVaYF.png" class="card-img-top"
-                    alt="Card Image">
-                <div class="card-overlay"></div>
-                <div style="top: 0%;" class="card-body small-text">
-                    <div class="card-title d-flex align-items-center gap-2">
-                        <img src="/assets/img-opp/beasiswa/logo-IYI.png" class="logo col-3"
-                            alt="Logo House Ilmu Indonesia">
-                        <div class="col-9 d-flex flex-column gap-2">
-                            <h1 style="font-size: clamp(0.8rem, 1vw, 0.9rem);">Beasiswa International Volunteer and Youth Fellowship
-                                IYI Chapter 3 Malaysia - Singapura
-                            </h1>
-                            <h5 style="font-size: clamp(0.8rem, 1vw, 0.8rem);">International Youth Impact</h5>
-                        </div>
-                    </div>
-                    <div class="card-details mt-3 d-flex flex-row align-items-center gap-2">
-                        <div
-                            class="card-icon col-3 d-flex flex-column align-items-center justify-content-start gap-3">
-                            <i class="fa-solid fa-money-bill-wave"></i>
-                            <i class="fa-solid fa-graduation-cap"></i>
-                            <i class="fa-solid fa-clock"></i>
-                        </div>
-                        <div class="card-info col-9 d-flex flex-column align-items-start gap-2">
-                            <p>Fully Funded</p>
-                            <p>Beasiswa</p>
-                            <p>07 Juni 2025</p>
-                        </div>
-                    </div>
-                    <!-- <span class="badge custom-badge mt-5">Kesempatan lebih tinggi</span> -->
+        @foreach($categories as $category)
+            @php
+                $imagePath = $categoryImages[$category->slug] ?? 'img/homepage/img-opp/default.jpg';
+            @endphp
+            <a href="#" data-category="{{ $category->slug }}" 
+              class="category-item text-center border-custom p-0 {{ request('category') == $category->slug ? 'active' : '' }}">
+                <img src="{{ asset($imagePath) }}" alt="{{ $category->name }}"/>
+                <div class="card-img d-flex justify-content-center">
+                    <span class="category-label">{{ $category->name }}</span>
                 </div>
             </a>
-        </div>
-      </div>
+        @endforeach
+    </div>
 
-    </section>
+    <!-- Opportunity Cards -->
+    <div id="hitcc-cards">
+        @include('partials.hitcc-cards', ['opportunities' => $opportunities])
+    </div>
+</section>
+
 @endsection
 
+@section('scripts')
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+      const cardsContainer = document.getElementById('hitcc-cards');
+      const categoryLinks = document.querySelectorAll('.category-item');
+      const searchForm = document.getElementById('search-form');
+
+      let currentCategory = '{{ request("category") ?? "all" }}';
+      let currentSearch = '{{ request("search") ?? "" }}';
+      
+      function fetchOpportunities(page = 1) {
+          const params = new URLSearchParams({
+              category: currentCategory,
+              search: currentSearch,
+              page: page
+          });
+
+          fetch(`{{ route('programme.hi.index') }}?${params.toString()}`, {
+              headers: {
+                  'X-Requested-With': 'XMLHttpRequest'
+              }
+          })
+          .then(res => res.text())
+          .then(html => {
+              cardsContainer.innerHTML = html;
+              attachPaginationLinks();
+          })
+          .catch(err => console.error(err));
+      }
+
+      function attachPaginationLinks() {
+          const links = cardsContainer.querySelectorAll('.pagination a');
+          links.forEach(link => {
+              link.addEventListener('click', function(e) {
+                  e.preventDefault();
+                  const url = new URL(this.href);
+                  const page = url.searchParams.get('page') || 1;
+                  fetchOpportunities(page);
+              });
+          });
+      }
+
+      // Category filter
+      categoryLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+              e.preventDefault();
+              currentCategory = this.dataset.category;
+              // update active class
+              categoryLinks.forEach(l => l.classList.remove('active'));
+              this.classList.add('active');
+              fetchOpportunities();
+          });
+      });
+
+      // Search
+      searchForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          currentSearch = this.querySelector('input[name="search"]').value;
+          fetchOpportunities();
+      });
+  });
+  </script>
+@endsection

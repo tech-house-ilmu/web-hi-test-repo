@@ -3,12 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\HomeController;
-// use App\Http\Controllers\Frontend\ArticleController;
 use App\Http\Controllers\ArticlePageController;
-
 use App\Http\Controllers\TestimoniController;
-
 use App\Http\Controllers\VpDetailsController;
+use App\Http\Controllers\HITCCProgrammeController;
 
 /******************************** HOME *********************************************/ 
 
@@ -43,12 +41,10 @@ Route::get('/programme/HI-programmes/', function () {
     return view('pages.programme.HI-programmes.index');
 });
 
-Route::get('/programme/HI-opportunities/', function () {
-    return view('pages.programme.HI-opportunities.index');
-});
+Route::get('/programme/HI-opportunities', [HITCCProgrammeController::class, 'index'])->name('programme.hi.index');
+Route::get('/programme/HI-opportunities/{category}/{slug}', [HITCCProgrammeController::class, 'show'])->name('programme.hi.show');
 
 /****************************************** ARTICLE *********************************/ 
-
 
 Route::get('/article', [ArticlePageController::class, 'index'])->name('article.index');
 Route::get('/articles/{slug}', [ArticlePageController::class, 'show'])->name('article.show');
@@ -57,4 +53,4 @@ Route::get('/articles/{slug}', [ArticlePageController::class, 'show'])->name('ar
 
 Route::get('/testimoni', [TestimoniController::class, 'testimoni']);
 
-Route::get('/VpDetailsAbout', [VpDetailsController::class, 'VpDetails'])->name('VpDetails.VpDetails');
+Route::get('/VpDetailsAbout', [VpDetailsController::class, 'VpDetails'])->name('VpDetails');

@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('testimonis', function (Blueprint $table) {
+        Schema::create('hitcc_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('testimoni_img')->nullable();
-            $table->string('testimoni_name')->nullable();
-            $table->string('testimoni_position')->nullable();
-            $table->string('testimoni_description')->nullable();
+            $table->string('name'); // Internship, Volunteer, Scholarship, Exchange, Competition
+            $table->string('slug')->unique();
             $table->timestamps();
-            
         });
     }
 
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('testimonis');
+        Schema::dropIfExists('hitcc_categories');
     }
 };
