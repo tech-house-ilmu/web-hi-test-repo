@@ -156,8 +156,10 @@
         <div class="card {{ $index % 2 === 1 ? 'orange' : '' }}">
             <div class="profile">
                 <img src="{{ asset('storage/' . $testimoni->testimoni_img) }}" alt="Foto" class="logo">
+
                 <div class="profile-text">
                     <div class="name">{{ $testimoni->testimoni_name }}</div>
+                    
                     <div class="role">{{ $testimoni->testimoni_position }}</div>
                 </div>
             </div>

@@ -13,6 +13,6 @@ class TestimoniController extends Controller
         $testimonis = Testimoni::latest()->get();
 
         // Kirim ke tampilan blade
-        return view('testimoni', compact('testimonis'));
+        return view('pages.index', compact('testimonis'));
     }
 }

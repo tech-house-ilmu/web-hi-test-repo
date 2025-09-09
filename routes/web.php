@@ -14,9 +14,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 /******************************** ABOUT *********************************************/ 
 
-Route::get('/about-us', function () {
-    return view('pages.about-us.about');
-});
+
+Route::get('/about-us', [VpDetailsController::class, 'VpDetails'])->name('about');
 
 /******************************** CAREER *********************************************/ 
 

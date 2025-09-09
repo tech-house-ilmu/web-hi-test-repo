@@ -82,129 +82,255 @@
         <div class="profiles-container container-xl d-flex flex-column justify-content-center align-items-center">
             <h1 class="py-4" style="color: #1746A2;">Board of Director</h1>
 
-            <div class="chief d-flex flex-column w-full justify-content-center align-items-center">
-                <h1 class="py-4 my-4 bg-[#04284E] w-full text-center rounded-lg" style="color: #FF731D;">Chief Officer</h1>
-                <div class="chief-member d-flex flex-column flex-md-row justify-content-around align-items-start">
-                    <div class="chief-desc col-12 col-md-4 d-flex flex-column justify-content-center align-items-center"
-                        data-aos="fade-up">
-                        <div class="member-sosmed d-flex flex-column align-items-center position-relative">
-                            <img class="rounded-3 w-[50%] md:w-[250px]" src="{{ asset('img/homepage/about/Lutfia Rahmannisa_CEO.png') }}" alt="foto ceo lutfia">
-                            <div
-                                class="member-sosmed-links d-flex justify-content-evenly align-items-center gap-2 rounded-3">
-                                <a href="https://www.linkedin.com/in/lutfia-rahmannisa-3b2679192/" target="_blank"><i
-                                        class="fa-brands fa-linkedin"></i></a>
-                                <a href="mailto:nisalutfia28@gmail.com" target="_blank"><i
-                                        class="fa-solid fa-envelope"></i></a>
+            <!-- Chief Officer Section -->
+            <div class="chief d-flex flex-column justify-content-center align-items-center my-5 w-100">
+                <h1 class="py-4 my-4 w-100 text-center rounded-4 text-white" style="background-color: #04284E; color: #FF731D !important;">Chief Officer</h1>
+
+                <div class="chief-member d-flex flex-wrap justify-content-center align-items-stretch gap-4">
+                    @forelse($VpDetailsAbout->where('vp_details_position', 'CEO') as $ceo)
+                        <div class="member-card" data-aos="fade-up">
+                            <div class="member-image-container">
+                                <img src="{{ asset('storage/' . $ceo->vp_details_img) }}" 
+                                     alt="{{ $ceo->vp_details_name }}"
+                                     loading="lazy"
+                                     onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSI0MCIgZmlsbD0iIzlhOWE5YSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPj88L3RleHQ+PC9zdmc+'">
+                                
+                                <div class="member-overlay">
+                                    <div class="member-social-links">
+                                        @if($ceo->vp_details_linkedin)
+                                            <a href="{{ $ceo->vp_details_linkedin }}" target="_blank" rel="noopener noreferrer" class="social-link">
+                                                <i class="fab fa-linkedin"></i>
+                                            </a>
+                                        @endif
+                                        @if($ceo->vp_details_email)
+                                            <a href="mailto:{{ $ceo->vp_details_email }}" class="social-link">
+                                                <i class="fas fa-envelope"></i>
+                                            </a>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="member-info">
+                                <h3 class="member-position">{{ $ceo->vp_details_position }}</h3>
+                                <h5 class="member-name">{{ $ceo->vp_details_name }}</h5>
                             </div>
                         </div>
-                        <h3 class="fw-bold py-3 md:text-3xl lg:text-4xl">CEO</h3>
-                        <h5 class="text-center md:text-xl lg:text-2xl">Lutfia Rahmannisa</h5>
-                    </div>
-                    <!-- <div class="chief-desc col-12 col-md-4 d-flex flex-column justify-content-center align-items-center" data-aos="fade-up">
-                        <img class="rounded-3 img-fluid" src="../assets/img/Cindy Ayustin Afina_COO.jpg" alt="foto coo cindy">
-                        <h3 class="fw-bold py-3">COO</h3>
-                        <h5>Cindy Ayustin Afina</h5>
-                    </div> -->
+                    @empty
+                        <div class="no-data-message">
+                            <i class="fas fa-users"></i>
+                            <p>CEO information will be available soon.</p>
+                        </div>
+                    @endforelse
                 </div>
             </div>
 
-            <div class="vice d-flex flex-column justify-content-center align-items-center my-5">
-                <h1 class="py-4 my-4 bg-[#04284E] w-full text-center rounded-lg" style="color: #FF731D;">Vice President</h1>
-                <div class="vice-member d-flex flex-wrap justify-content-around align-items-start">
-                    <div class="vice-desc col-12 col-md-4 d-flex flex-column justify-content-center align-items-center my-2 text-center"
-                        data-aos="fade-up">
-                        <div class="member-sosmed d-flex flex-column align-items-center position-relative">
-                            <img class="rounded-3 w-[50%]" src="{{ asset('img/homepage/about/Alfianti Yanuar Mega_VP Prodev.png') }}"
-                                alt="foto vp prodev alfianti">
-                            <div
-                                class="member-sosmed-links d-flex justify-content-evenly align-items-center gap-2 rounded-3">
-                                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                                <a href="#"><i class="fa-solid fa-envelope"></i></a>
+            <!-- Vice President Section -->
+            <div class="vice d-flex flex-column justify-content-center align-items-center my-5 w-100">
+                <h1 class="py-4 my-4 w-100 text-center rounded-4 text-white" style="background-color: #04284E; color: #FF731D !important;">Vice President</h1>
+
+                <div class="vice-member d-flex flex-wrap justify-content-center align-items-stretch gap-4">
+                    @forelse($VpDetailsAbout->where('vp_details_position', '!=', 'CEO') as $vp)
+                        <div class="member-card" data-aos="fade-up">
+                            <div class="member-image-container">
+                                <img src="{{ asset('storage/' . $vp->vp_details_img) }}" 
+                                     alt="{{ $vp->vp_details_name }}"
+                                     loading="lazy"
+                                     onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSI0MCIgZmlsbD0iIzlhOWE5YSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPj88L3RleHQ+PC9zdmc+'">
+                                
+                                <div class="member-overlay">
+                                    <div class="member-social-links">
+                                        @if($vp->vp_details_linkedin)
+                                            <a href="{{ $vp->vp_details_linkedin }}" target="_blank" rel="noopener noreferrer" class="social-link">
+                                                <i class="fab fa-linkedin"></i>
+                                            </a>
+                                        @endif
+                                        @if($vp->vp_details_email)
+                                            <a href="mailto:{{ $vp->vp_details_email }}" class="social-link">
+                                                <i class="fas fa-envelope"></i>
+                                            </a>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="member-info">
+                                <h3 class="member-position">{{ $vp->vp_details_position }}</h3>
+                                <h5 class="member-name">{{ $vp->vp_details_name }}</h5>
                             </div>
                         </div>
-                        <h3 class="fw-bold py-3 text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">Product Development</h3>
-                        <h5 class="text-center lg:text-xl xl:text-2xl">Alfianti Yanuar Mega</h5>
-                    </div>
-                    <div class="vice-desc col-12 col-md-4 d-flex flex-column justify-content-center align-items-center my-2 text-center"
-                        data-aos="fade-up">
-                        <div class="member-sosmed d-flex flex-column align-items-center position-relative">
-                            <img class="rounded-3 w-[50%]" src="{{ asset('img/homepage/about/Dhini.png') }}" alt="foto vp finance dhini">
-                            <div
-                                class="member-sosmed-links d-flex justify-content-evenly align-items-center gap-2 rounded-3">
-                                <a href="https://www.linkedin.com/in/dhinipermatasari" target="_blank"><i
-                                        class="fa-brands fa-linkedin"></i></a>
-                                <a href="mailto:dhinipermatasari84@gmail.com" target="_blank"><i
-                                        class="fa-solid fa-envelope"></i></a>
-                            </div>
+                    @empty
+                        <div class="no-data-message">
+                            <i class="fas fa-users"></i>
+                            <p>Vice President information will be available soon.</p>
                         </div>
-                        <h3 class="fw-bold py-3 text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">Finance</h3>
-                        <h5 class="text-center lg:text-xl xl:text-2xl">Dhini Permatasari</h5>
-                    </div>
-                    <div class="vice-desc col-12 col-md-4 d-flex flex-column justify-content-center align-items-center my-2 text-center"
-                        data-aos="fade-up">
-                        <div class="member-sosmed d-flex flex-column align-items-center position-relative">
-                            <img class="rounded-3 w-[50%]" src="{{ asset('img/homepage/about/DWI_PUJI_LESTARI- VP Marketing.png') }}"
-                                alt="foto vp marketing dwi">
-                            <div
-                                class="member-sosmed-links d-flex justify-content-evenly align-items-center gap-2 rounded-3">
-                                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
-                                <a href="#"><i class="fa-solid fa-envelope"></i></a>
-                            </div>
-                        </div>
-                        <h3 class="fw-bold py-3 text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">Marketing</h3>
-                        <h5 class="text-center lg:text-xl xl:text-2xl">Dwi Puji Lestari</h5>
-                    </div>
-                    <div class="vice-desc col-12 col-md-4 d-flex flex-column justify-content-center align-items-center my-2 text-center"
-                        data-aos="fade-up">
-                        <div class="member-sosmed d-flex flex-column align-items-center position-relative">
-                            <img class="rounded-3 w-[50%]" src="{{ asset('img/homepage/about/Faiza Kurniawati_VP Technology.png') }}"
-                                alt="foto vp technology faiza">
-                            <div
-                                class="member-sosmed-links d-flex justify-content-evenly align-items-center gap-2 rounded-3">
-                                <a href="https://www.linkedin.com/in/faizakurniawati" target="_blank"><i
-                                        class="fa-brands fa-linkedin"></i></a>
-                                <a href="mailto:faizaaa.kurniawati@gmail.com" target="_blank"><i
-                                        class="fa-solid fa-envelope"></i></a>
-                            </div>
-                        </div>
-                        <h3 class="fw-bold py-3 text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">Technology</h3>
-                        <h5 class="text-center lg:text-xl xl:text-2xl">Faiza Kurniawati</h5>
-                    </div>
-                    <div class="vice-desc col-12 col-md-4 d-flex flex-column justify-content-center align-items-center my-2 text-center"
-                        data-aos="fade-up">
-                        <div class="member-sosmed d-flex flex-column align-items-center position-relative">
-                            <img class="rounded-3 w-[50%]" src="{{ asset('img/homepage/about/Jesline_Tania_Indah_Pardosi_VP_Bussiness Development.png') }}"
-                                alt="foto vp bisdev jesline">
-                            <div
-                                class="member-sosmed-links d-flex justify-content-evenly align-items-center gap-2 rounded-3">
-                                <a href="https://www.linkedin.com/in/jesline-tania-indah-pardosi-5257a6279"
-                                    target="_blank"><i class="fa-brands fa-linkedin"></i></a>
-                                <a href="mailto:jeslinepardosi1@gmail.com" target="_blank"><i
-                                        class="fa-solid fa-envelope"></i></a>
-                            </div>
-                        </div>
-                        <h3 class="fw-bold py-3 text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">Business Development</h3>
-                        <h5 class="text-center lg:text-xl xl:text-2xl">Jesline Tania Indah Pardosi</h5>
-                    </div>
-                    <div class="vice-desc col-12 col-md-4 d-flex flex-column justify-content-center align-items-center my-2 text-center"
-                        data-aos="fade-up">
-                        <div class="member-sosmed d-flex flex-column align-items-center position-relative">
-                            <img class="rounded-3 w-[50%]" src="{{ asset('img/homepage/about/Naila_Nariswari_HP_VP Human Capital.png') }}"
-                                alt="foto vp hc naila">
-                            <div
-                                class="member-sosmed-links d-flex justify-content-evenly align-items-center gap-2 rounded-3">
-                                <a href="https://www.linkedin.com/in/naila-nariswari-hp-19a25422b" target="_blank"><i
-                                        class="fa-brands fa-linkedin"></i></a>
-                                <a href="mailto:nailahalisya87@gmail.com" target="_blank"><i
-                                        class="fa-solid fa-envelope"></i></a>
-                            </div>
-                        </div>
-                        <h3 class="fw-bold py-3 text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl">Human Capital</h3>
-                        <h5 class="text-center lg:text-xl xl:text-2xl">Naila Nariswari</h5>
-                    </div>
+                    @endforelse
                 </div>
             </div>
         </div>
     </section>
     <!-- End about profile images section -->
+
+    <style>
+        /* Custom gap for better spacing */
+        .chief-member, .vice-member {
+    gap: 3rem !important; /* 40px */
+    padding: 0 2rem; /* 24px padding kiri-kanan */
+}
+
+        /* Member Card Styles */
+        .member-card {
+            width: 280px;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .member-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .member-image-container {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .member-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.3s ease;
+        }
+
+        .member-card:hover .member-image-container img {
+            transform: scale(1.05);
+        }
+
+        .member-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(23, 70, 162, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .member-card:hover .member-overlay {
+            opacity: 1;
+        }
+
+        .member-social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            color: #1746A2;
+            text-decoration: none;
+            font-size: 20px;
+            transition: all 0.3s ease;
+            transform: translateY(20px);
+        }
+
+        .member-card:hover .social-link {
+            transform: translateY(0);
+        }
+
+        .social-link:hover {
+            background: #FF731D;
+            color: white;
+            transform: translateY(-3px) scale(1.1);
+        }
+
+        .member-info {
+            padding: 24px;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .member-position {
+            font-weight: bold;
+            color: #1746A2;
+            margin: 0 0 12px 0;
+            font-size: 1.25rem;
+        }
+
+        .member-name {
+            color: #374151;
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .no-data-message {
+            text-align: center;
+            color: #6b7280;
+            padding: 40px;
+        }
+
+        .no-data-message i {
+            font-size: 48px;
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .member-card {
+                width: 100%;
+                max-width: 280px;
+            }
+            
+            .member-image-container {
+                height: 250px;
+            }
+            
+            .social-link {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .member-image-container {
+                height: 220px;
+            }
+            
+            .member-info {
+                padding: 20px;
+            }
+            
+            .member-position {
+                font-size: 1.1rem;
+            }
+            
+            .member-name {
+                font-size: 1rem;
+            }
+        }
+    </style>
 @endsection
