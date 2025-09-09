@@ -86,13 +86,39 @@
             margin-top: 40px;
         }
 
+        .grid-container1 {
+            display: grid;
+            flex-wrap: wrap;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            justify-items: center;
+            padding: 20px 0;
+        }
+
+        .ceo-section .grid-container1:has(> .card:nth-child(2):last-child) {
+    justify-content: center;
+}
+
+.ceo-section .grid-container1:has(> .card:nth-child(3):last-child) {
+    justify-content: center;
+}
+
         .grid-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 40px;
             justify-items: center;
             padding: 20px 0;
+            
         }
+
+.ceo-section .grid-container:has(> .card:nth-child(2):last-child) {
+    justify-content: center;
+}
+
+.ceo-section .grid-container:has(> .card:nth-child(3):last-child) {
+    justify-content: center;
+}
 
         .card {
             background: white;
@@ -350,11 +376,9 @@
         <!-- CEO Section -->
         <section class="ceo-section">
             <h2 class="subtitle">Chief Executive Officer</h2>
-            <div class="grid-container">
-                @php
-                    $ceo = $VpDetailsAbout->firstWhere('vp_details_position', 'CEO');
-                @endphp
-                @if($ceo)
+            <div class="grid-container1">
+                
+                    @forelse($VpDetailsAbout->where('vp_details_position', 'CEO') as $ceo)
                     <div class="card">
                         <div class="member-img">
                             <img src="{{ asset('storage/' . $ceo->vp_details_img) }}" 
@@ -374,15 +398,16 @@
                                 @endif
                             </div>
                         </div>
+                        
                         <div class="position-title">{{ $ceo->vp_details_position }}</div>
                         <div class="member-name">{{ $ceo->vp_details_name }}</div>
                     </div>
-                @else
+                @empty
                     <div class="no-data-message">
                         <i class="fas fa-user-tie"></i>
                         <p>CEO information will be available soon.</p>
                     </div>
-                @endif
+                @endforelse
             </div>
         </section>
 
@@ -390,6 +415,7 @@
         <section class="vp-section">
             <h2 class="subtitle">Vice Presidents</h2>
             <div class="grid-container">
+
                 @forelse($VpDetailsAbout->where('vp_details_position', '!=', 'CEO') as $vp)
                     <div class="card">
                         <div class="member-img">

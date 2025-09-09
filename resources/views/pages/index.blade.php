@@ -38,6 +38,29 @@
       text-align: start;
       padding: 0;
     }
+
+    /* CSS untuk foto testimoni */
+.testimonial-box img {
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: 50% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+}
+
+.splide__slide .testimonial-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start !important;
+    align-items: flex-start;
+    gap: 1rem;
+    min-height: 280px; /* sesuaikan sesuai desain */
+    border-radius: 12px;
+    background-color: #f7d58b;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
   </style>
 @endsection
 
@@ -220,76 +243,24 @@
         <div id="testimonialSplide" class="splide my-4 w-100">
             <div class="splide__track">
                 <ul class="splide__list">
-                <li class="splide__slide odd rounded-lg">
-                    <div class="testimonial-box flex flex-col p-8">
-                    <div class="flex justify-start">
-                        <img src="{{ asset('img/homepage/logo.png') }}" style="width: 100px;" alt="" />
-                        <div class="ms-3 mt-2">
-                        <p id="testi-name" class="fw-bold m-0">Oktavia</p>
-                        <p id="testi-role">Peserta Risyik</p>
-                        </div>
-                    </div>
-                    <p class="font-semibold">
-                        “Sesinya di house ilmu keren banget. Aku jadi punya insight dan wawasan baru. Bagian yang aku paling suka adalah mentoring. Jangan lupa daftar acara selanjutnya ya!”
-                    </p>
-                    </div>
-                </li>
-                <li class="splide__slide even rounded-lg">
-                    <div class="testimonial-box flex flex-col p-8">
-                    <div class="flex justify-start">
-                        <img src="{{ asset('img/homepage/logo.png') }}" style="width: 100px;" alt="" />
-                        <div class="ms-3 mt-2">
-                        <p id="testi-name" class="fw-bold m-0">Melinda</p>
-                        <p id="testi-role">Peserta Risyik</p>
-                        </div>
-                    </div>
-                    <p class="font-semibold">
-                        “Merasa impactful banget karena diajarin bagaimana bangun team bulding, management dan mindset kepemimpinan.”
-                    </p>
-                    </div>
-                </li>
-                <li class="splide__slide odd rounded-lg">
-                    <div class="testimonial-box flex flex-col p-8">
-                    <div class="flex justify-start">
-                        <img src="{{ asset('img/homepage/logo.png') }}" style="width: 100px;" alt="" />
-                        <div class="ms-3 mt-2">
-                        <p id="testi-name" class="fw-bold m-0">Oktavia</p>
-                        <p id="testi-role">Peserta Risyik</p>
-                        </div>
-                    </div>
-                    <p class="font-semibold">
-                        “Sesinya di house ilmu keren banget. Aku jadi punya insight dan wawasan baru. Bagian yang aku paling suka adalah mentoring. Jangan lupa daftar acara selanjutnya ya!”
-                    </p>
-                    </div>
-                </li>
-                <li class="splide__slide even rounded-lg">
-                    <div class="testimonial-box flex flex-col p-8">
-                    <div class="flex justify-start">
-                        <img src="{{ asset('img/homepage/logo.png') }}" style="width: 100px;" alt="" />
-                        <div class="ms-3 mt-2">
-                        <p id="testi-name" class="fw-bold m-0">Melinda</p>
-                        <p id="testi-role">Peserta Risyik</p>
-                        </div>
-                    </div>
-                    <p class="font-semibold">
-                        “Merasa impactful banget karena diajarin bagaimana bangun team bulding, management dan mindset kepemimpinan.”
-                    </p>
-                    </div>
-                </li>
-                <li class="splide__slide odd rounded-lg">
-                    <div class="testimonial-box flex flex-col p-8">
-                    <div class="flex justify-start">
-                        <img src="{{ asset('img/homepage/logo.png') }}" style="width: 100px;" alt="" />
-                        <div class="ms-3 mt-2">
-                        <p id="testi-name" class="fw-bold m-0">Melinda</p>
-                        <p id="testi-role">Peserta Risyik</p>
-                        </div>
-                    </div>
-                    <p class="font-semibold">
-                        “Merasa impactful banget karena diajarin bagaimana bangun team bulding, management dan mindset kepemimpinan.”
-                    </p>
-                    </div>
-                </li>
+              @foreach($testimonis as $index => $testimoni)  
+                <li class="splide__slide even rounded-lg bg-transparent flex">
+    <div class="testimonial-box flex flex-col p-8 gap-4 w-full h-full" style="background-color: #f7d58b">
+        <div class="flex justify-start">
+            <img src="{{ asset('storage/' . $testimoni->testimoni_img) }}" style="width: 100px;" alt="" />
+
+            <div class="ms-3 mt-2">
+                <p id="testi-name" class="fw-bold m-0">{{ $testimoni->testimoni_name }}</p>
+                <p id="testi-role">{{ $testimoni->testimoni_position }}</p>
+            </div>
+        </div>
+        <p class="font-semibold">
+            "{{ $testimoni->testimoni_description }}"
+        </p>
+    </div>
+</li>
+
+              @endforeach  
                 </ul>
             </div>
         </div>
