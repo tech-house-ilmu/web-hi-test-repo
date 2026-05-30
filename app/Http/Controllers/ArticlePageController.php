@@ -17,6 +17,7 @@ class ArticlePageController extends Controller
     public function show($slug)
     {
         $article = Article::where('slug', $slug)->firstOrFail();
-        return view('pages.article.detail-article', compact('article'));
+        $comments = $article->comments; 
+        return view('pages.article.detail-article', compact('article', 'comments'));
     }
 }
