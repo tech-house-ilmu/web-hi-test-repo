@@ -7,6 +7,7 @@ use App\Http\Controllers\ArticlePageController;
 use App\Http\Controllers\TestimoniController;
 use App\Http\Controllers\LeadersDetailsController;
 use App\Http\Controllers\HITCCProgrammeController;
+use App\Http\Controllers\CommentController;
 
 /******************************** HOME *********************************************/ 
 
@@ -46,3 +47,4 @@ Route::get('/programme/HI-opportunities/{category}/{slug}', [HITCCProgrammeContr
 
 Route::get('/article', [ArticlePageController::class, 'index'])->name('article.index');
 Route::get('/articles/{slug}', [ArticlePageController::class, 'show'])->name('article.show');
+Route::post('/articles/{slug}/comments', [CommentController::class, 'store'])->name('article.comment.store');

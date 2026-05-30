@@ -4,7 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
+
 
 class Article extends Model
 {
@@ -21,12 +23,18 @@ class Article extends Model
         'category',
     ];
     
+    public function comments(): HasMany
+    {
+    return $this->hasMany(Comment::class)->latest();
+    }
+
     protected static function booted()
     {
         static::deleting(function ($article) {
             if ($article->img) {
                 Storage::delete($article->img);
             }
+             $article->comments()->delete();
         });
     }
 }
