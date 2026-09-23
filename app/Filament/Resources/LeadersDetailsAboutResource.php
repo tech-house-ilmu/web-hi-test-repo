@@ -42,15 +42,15 @@ class LeadersDetailsAboutResource extends Resource
                 'CFO' => 'CFO',
                 'CMO' => 'CMO',
                 'VP' => 'VP',
-                // 'Head Of' => 'Head Of',
+                'Head Of' => 'Head Of',
             ])
             ->reactive()
             ->required(),
             Forms\Components\TextInput::make('leaders_details_position_division')
             ->label('Divisi')
             ->placeholder('Contoh: Technology, Marketing')
-            ->visible(fn ($get) => in_array($get('leaders_details_position'), ['VP']))
-            ->required(fn ($get) => in_array($get('leaders_details_position'), ['VP'])),
+            ->visible(fn ($get) => in_array($get('leaders_details_position'), ['VP', 'Head Of']))
+            ->required(fn ($get) => in_array($get('leaders_details_position'), ['VP', 'Head Of'])),
             Forms\Components\TextInput::make('leaders_details_linkedin')
             ->label('Link LinkedIn Leader')
             ->required(),
