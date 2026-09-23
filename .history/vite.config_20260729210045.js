@@ -27,6 +27,3 @@ export default defineConfig({
         },
     },
 });
-
-
-//di beritahu nanti about cors dan hmr

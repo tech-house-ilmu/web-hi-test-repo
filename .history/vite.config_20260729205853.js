@@ -9,7 +9,7 @@ export default defineConfig({
         }),
     ],
     server: {
-        host: true,
+        host: "127.0.0.1",
         port: 5174,
         strictPort: true,
         cors: true,
@@ -23,10 +23,6 @@ export default defineConfig({
         },
         hmr: {
             host: "127.0.0.1",
-            protocol: "ws",
         },
     },
 });
-
-
-//di beritahu nanti about cors dan hmr

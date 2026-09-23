@@ -47,6 +47,3 @@ Route::get('/programme/HI-opportunities/{category}/{slug}', [HITCCProgrammeContr
 
 Route::get('/article', [ArticlePageController::class, 'index'])->name('article.index');
 Route::get('/articles/{slug}', [ArticlePageController::class, 'show'])->name('article.show');
-
-Route::get('/event-history', [EventHistoryController::class, 'index'])->name('event-history.index');
-Route::get('/event-history/{slug}', [EventHistoryController::class, 'show'])->name('event-history.show');
