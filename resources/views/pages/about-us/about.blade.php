@@ -181,13 +181,63 @@
                 </div>
 
             </div>
+
+            <!-- Head of Section -->
+            <div class="head-of d-flex flex-column justify-content-center align-items-center my-5 w-100">
+                <h1 class="py-4 my-4 w-100 text-center rounded-4 text-white" style="background-color: #04284E; color: #FF731D !important;">Head of</h1>
+
+                <div class="head-of-member d-flex flex-wrap justify-content-center align-items-stretch gap-4">
+                    @forelse($LeadersDetailsAbout->where('leaders_details_position', 'Head Of') as $head)
+                        <div class="member-card" data-aos="fade-up">
+                            <div class="member-image-container">
+                                <img src="{{ asset('storage/' . $head->leaders_details_img) }}" 
+                                    alt="{{ $head->leaders_details_name }}"
+                                    loading="lazy"
+                                    onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjI0MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjNmNGY2Ii8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSI0MCIgZmlsbD0iIzlhOWE5YSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPj88L3RleHQ+PC9zdmc+'">
+
+                                <div class="member-overlay">
+                                    <div class="member-social-links">
+                                        @if($head->leaders_details_linkedin)
+                                            <a href="{{ $head->leaders_details_linkedin }}" target="_blank" rel="noopener noreferrer" class="social-link">
+                                                <i class="fab fa-linkedin"></i>
+                                            </a>
+                                        @endif
+                                        @if($head->leaders_details_email)
+                                            <a href="mailto:{{ $head->leaders_details_email }}" class="social-link">
+                                                <i class="fas fa-envelope"></i>
+                                            </a>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="member-info">
+                                @php
+                                    $position = $head->leaders_details_position;
+
+                                    if ($head->leaders_details_position_division) {
+                                        $position .= ' ' . $head->leaders_details_position_division;
+                                    }
+                                @endphp
+                                <h3 class="member-position">{{ $position }}</h3>
+                                <h5 class="member-name">{{ $head->leaders_details_name }}</h5>
+                            </div>
+                        </div>
+                        @empty
+                        <div class="no-data-message">
+                            <i class="fas fa-users"></i>
+                            <p>Data Head of belum ada.</p>
+                        </div>
+                    @endforelse
+                </div>
+            </div>
         </div>
     </section>
     <!-- End about profile images section -->
 
     <style>
         /* Custom gap for better spacing */
-        .chief-member, .vice-member {
+        .chief-member, .vice-member, .head-of-member {
             gap: 3rem !important; /* 40px */
             padding: 0 2rem; /* 24px padding kiri-kanan */
         }
