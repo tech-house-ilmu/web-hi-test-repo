@@ -12,15 +12,15 @@
             <a href="/career#career-info"><i class="fa-solid fa-chevron-left"></i> Kembali</a>
         </div>
         <div class="available-container container-xl d-flex flex-column justify-content-center align-items-center mb-16">
-            <h1 class="py-4" style="color: #1746A2;">Available Positition</h1>
-            <div class="apply-info container-xl d-flex flex-column justify-content-center align-items-center">
+            <h1 class="py-4 text-center fw-bold" style="color: #1746A2;">Available Position &mdash; {{ $division->name }}</h1>
+            <div class="apply-info container-xl d-flex flex-column justify-content-center align-items-center gap-3">
                 <!-- // odd untuk container biru // even untuk container abu // -->
                 <!-- Start position available box -->
-                @foreach ($positions as $i => $position)
+                @forelse ($positions as $i => $position)
                 <div
-                    class="container-xl flex flex-wrap justify-center items-center text-center p-3 gap-4 md:!flex-nowrap md:justify-start md:!text-start md:gap-0"
+                    class="container-xl flex flex-wrap justify-center items-center text-center p-3 gap-4 rounded-3 md:!flex-nowrap md:justify-start md:!text-start md:gap-0"
                     style="background-color: {{ $i % 2 == 0 ? '#1746A2' : '#D9D9D9' }};">
-                    <h4 class="col-12 col-md-7 text-base md:ps-4 md:text-lg lg:text-xl"
+                    <h4 class="col-12 col-md-7 text-base md:ps-4 md:text-lg lg:text-xl font-semibold"
                         style="color: {{ $i % 2 == 0 ? 'white' : 'black' }};">
                         {{ $position->title }}
                     </h4>
@@ -33,7 +33,11 @@
                         Daftar
                     </a>
                 </div>
-                @endforeach
+                @empty
+                <div class="p-5 text-center bg-white rounded-4 shadow-sm w-100">
+                    <p class="text-muted m-0">Saat ini belum ada posisi yang dibuka untuk divisi {{ $division->name }}.</p>
+                </div>
+                @endforelse
             </div>
         </div>
     </section>

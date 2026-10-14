@@ -19,7 +19,8 @@ Route::get('/about-us', [LeadersDetailsController::class, 'LeadersDetails'])->na
 
 /******************************** CAREER *********************************************/ 
 
-Route::get('/career', [CareerController::class, 'index']);
+Route::get('/career', [CareerController::class, 'index'])->name('career.index');
+Route::get('/career/announcement', [CareerController::class, 'announcement'])->name('career.announcement');
 Route::get('/career/{division}', [CareerController::class, 'listByDivision']);
 Route::get('/career/{division}/{slug}', [CareerController::class, 'show']);
 

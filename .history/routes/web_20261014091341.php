@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CareerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ArticlePageController;
-use App\Http\Controllers\EventHistoryController;
 use App\Http\Controllers\TestimoniController;
 use App\Http\Controllers\LeadersDetailsController;
 use App\Http\Controllers\HITCCProgrammeController;
@@ -19,7 +18,8 @@ Route::get('/about-us', [LeadersDetailsController::class, 'LeadersDetails'])->na
 
 /******************************** CAREER *********************************************/ 
 
-Route::get('/career', [CareerController::class, 'index']);
+Route::get('/career', [CareerController::class, 'index'])->name('career.index');
+Route::get('/career/announcement', [CareerController::class, 'announcement'])->name('career.announcement');
 Route::get('/career/{division}', [CareerController::class, 'listByDivision']);
 Route::get('/career/{division}/{slug}', [CareerController::class, 'show']);
 

@@ -22,8 +22,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-        DivisionSeeder::class,
-        HITCCCategorySeeder::class,
-    ]);
+            DivisionSeeder::class,
+            PositionSeeder::class,
+            HITCCCategorySeeder::class,
+        ]);
     }
 }

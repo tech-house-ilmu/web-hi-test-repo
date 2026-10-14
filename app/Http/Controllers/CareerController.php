@@ -5,16 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\TestimoniAlumniCareer;
 use App\Models\Division;
 use App\Models\Position;
+use App\Models\RecruitmentAnnouncement;
 
 class CareerController extends Controller
 {
     public function index()
     {
-     // Ambil semua data testimoni alumni, urutkan berdasarkan yang terbaru
+        // Ambil semua data testimoni alumni, urutkan berdasarkan yang terbaru
         $testimoniAlumni = TestimoniAlumniCareer::orderBy('created_at', 'desc')->get();
+        $announcement = RecruitmentAnnouncement::current();
         
         // Sesuaikan path dengan struktur folder: resources/views/pages/career/career.blade.php
-        return view('pages.career.career', compact('testimoniAlumni'));
+        return view('pages.career.career', compact('testimoniAlumni', 'announcement'));
+    }
+
+    public function announcement()
+    {
+        $announcement = RecruitmentAnnouncement::current();
+        return view('pages.career.announcement', compact('announcement'));
     }
 
     public function listByDivision($division)
