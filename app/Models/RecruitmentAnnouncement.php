@@ -49,36 +49,52 @@ class RecruitmentAnnouncement extends Model
                 'name' => 'Chief Executive Officer',
                 'position' => 'Posisi: Staf / Relawan',
                 'is_active' => true,
-                'names' => [],
-            ],
-            [
-                'name' => 'Human Capital',
-                'position' => 'Posisi: Staf / Relawan',
-                'is_active' => true,
-                'names' => [],
-            ],
-            [
-                'name' => 'Product Development',
-                'position' => 'Posisi: Staf / Relawan',
-                'is_active' => true,
-                'names' => [],
+                'names' => [
+                    'Eddy Putra Saragih – Staff Finance',
+                ],
             ],
             [
                 'name' => 'Business Development',
                 'position' => 'Posisi: Staf / Relawan',
                 'is_active' => true,
-                'names' => [],
+                'names' => [
+                    'Dewi Susilowati – Staff Partnership',
+                ],
             ],
             [
-                'name' => 'Technology',
+                'name' => 'Human Capital',
                 'position' => 'Posisi: Staf / Relawan',
                 'is_active' => true,
-                'names' => [],
+                'names' => [
+                    'Nasywa Eka Widyaningrum – Staff TA Sosmed',
+                    'Alya Zia Daviana Putri – Staff HCO',
+                ],
             ],
             [
                 'name' => 'Marketing',
                 'position' => 'Posisi: Staf / Relawan',
                 'is_active' => true,
+                'names' => [
+                    'Ester Sihombing – Staff Copywriting',
+                    'Dafin Aflah – Staff Artikel Writer',
+                    'Muhammad Ilyas Ridwan – Staff Sosmed Marketing',
+                ],
+            ],
+            [
+                'name' => 'Product Development',
+                'position' => 'Posisi: Staf / Relawan',
+                'is_active' => true,
+                'names' => [
+                    'Rosa Diga Putri – HO Education Counselor',
+                    'Dien Amalia Ilma – Staff Product Development',
+                    'Daffa\' Dzaky Muttaqiin – Staff Education Counselor',
+                    'Julia Oliviana – Staff Education Counselor',
+                ],
+            ],
+            [
+                'name' => 'Technology',
+                'position' => 'Posisi: Staf / Relawan',
+                'is_active' => false,
                 'names' => [],
             ],
         ];

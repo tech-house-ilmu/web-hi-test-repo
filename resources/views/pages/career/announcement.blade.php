@@ -66,6 +66,9 @@
         border-radius: 14px;
         padding: 1.5rem 1.75rem;
         height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
         box-shadow: 0 4px 14px rgba(8, 61, 119, 0.03);
         transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
@@ -179,13 +182,16 @@
             @php
                 $divisionsList = $announcement->divisions ?? \App\Models\RecruitmentAnnouncement::defaultDivisions();
                 $activeDivisions = collect($divisionsList)->filter(function ($d) {
-                    return !isset($d['is_active']) || $d['is_active'] === true || $d['is_active'] === '1' || $d['is_active'] === 1;
+                    $isActive = !isset($d['is_active']) || $d['is_active'] === true || $d['is_active'] === '1' || $d['is_active'] === 1;
+                    $hasNames = !empty($d['names']);
+                    $isNotTech = strtolower($d['name'] ?? '') !== 'technology';
+                    return $isActive && $hasNames && $isNotTech;
                 });
             @endphp
 
             <!-- Division Cards Grid -->
             @if ($activeDivisions->isNotEmpty())
-                <div class="row g-3 g-md-4" data-aos="fade-up">
+                <div class="row g-3 g-md-4 justify-content-center" data-aos="fade-up">
                     @foreach ($activeDivisions as $division)
                         <div class="col-12 col-md-6">
                             <div class="announcement-division-card">
@@ -202,7 +208,17 @@
                                 @if (!empty($names))
                                     <ol class="announcement-member-list">
                                         @foreach ($names as $name)
-                                            <li>{{ $name }}</li>
+                                            @php
+                                                $parts = preg_split('/\s*[–\-]\s*/u', $name, 2);
+                                            @endphp
+                                            <li class="py-1">
+                                                @if (count($parts) === 2)
+                                                    <span class="fw-semibold text-[#072146]">{{ $parts[0] }}</span>
+                                                    <span class="text-[#f57c00] text-xs font-semibold ms-1">({{ $parts[1] }})</span>
+                                                @else
+                                                    <span class="fw-semibold text-[#072146]">{{ $name }}</span>
+                                                @endif
+                                            </li>
                                         @endforeach
                                     </ol>
                                 @else
