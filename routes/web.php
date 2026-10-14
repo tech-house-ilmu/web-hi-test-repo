@@ -7,8 +7,10 @@ use App\Http\Controllers\ArticlePageController;
 use App\Http\Controllers\TestimoniController;
 use App\Http\Controllers\LeadersDetailsController;
 use App\Http\Controllers\HITCCProgrammeController;
+use App\Http\Controllers\DeployController;
 
-/******************************** HOME *********************************************/ 
+/******************************** DEPLOY / UPDATE ************************************/ 
+Route::match(['get', 'post'], '/deploy-update', [DeployController::class, 'deploy'])->name('server.deploy');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
