@@ -157,9 +157,9 @@
                 <p class="announcement-eyebrow">HOUSE ILMU INDONESIA</p>
                 <h1 class="announcement-hero-title">RECRUITMENT ANNOUNCEMENT</h1>
                 <div class="announcement-hero-meta">
-                    <strong>Batch &mdash; {{ $announcement->batch_label ?? '—' }}</strong>
+                    <strong>Batch &mdash; {{ $announcement->batch_label ?? 'Batch 6 Urgent Hiring – Official Announcement' }}</strong>
                     <span>&middot;</span>
-                    <span>{{ $announcement->announcement_date ?? 'Tanggal pengumuman belum tersedia' }}</span>
+                    <span>{{ (!empty($announcement->announcement_date) && $announcement->announcement_date !== 'Tanggal pengumuman belum tersedia') ? $announcement->announcement_date : '14 Oktober 2026' }}</span>
                 </div>
             </div>
         </div>
@@ -180,7 +180,13 @@
             </div>
 
             @php
-                $divisionsList = $announcement->divisions ?? \App\Models\RecruitmentAnnouncement::defaultDivisions();
+                $divisionsList = $announcement->divisions ?? [];
+                // Jika data di database server masih kosong / belum ada nama kandidat, fallback ke defaultDivisions dari code
+                $hasAnyNamesInDb = collect($divisionsList)->pluck('names')->flatten()->filter()->isNotEmpty();
+                if (!$hasAnyNamesInDb) {
+                    $divisionsList = \App\Models\RecruitmentAnnouncement::defaultDivisions();
+                }
+
                 $activeDivisions = collect($divisionsList)->filter(function ($d) {
                     $isActive = !isset($d['is_active']) || $d['is_active'] === true || $d['is_active'] === '1' || $d['is_active'] === 1;
                     $hasNames = !empty($d['names']);
