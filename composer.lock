@@ -3546,7 +3546,7 @@
                 "json",
                 "nette",
                 "paginator",
-                "password",
+                "",
                 "slugify",
                 "string",
                 "unicode",
