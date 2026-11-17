@@ -117,6 +117,37 @@ class DeployController extends Controller
             $results['asset_sync_error'] = $e->getMessage();
         }
 
+        // 8. Ensure Admin User exists and has correct credentials
+        try {
+            $customEmail = $request->input('email', 'hikamartech@gmail.com');
+            $customPassword = $request->input('password', 'ADMIN111');
+
+            $adminUser = \App\Models\User::firstOrNew(['email' => $customEmail]);
+            $adminUser->name = 'Admin HI';
+            $adminUser->password = $customPassword; // Automatically hashed via model cast
+            $adminUser->is_admin = true;
+            $adminUser->role = \App\Models\User::ROLE_SUPERADMIN;
+            $adminUser->division = 'Tech';
+            $adminUser->is_active = true;
+            $adminUser->save();
+
+            // Also ensure default fallback admin exists
+            $defaultAdmin = \App\Models\User::firstOrNew(['email' => 'admin@mail.com']);
+            if (!$defaultAdmin->exists) {
+                $defaultAdmin->name = 'Superadmin';
+                $defaultAdmin->password = 'tes123';
+                $defaultAdmin->is_admin = true;
+                $defaultAdmin->role = \App\Models\User::ROLE_SUPERADMIN;
+                $defaultAdmin->division = 'Tech';
+                $defaultAdmin->is_active = true;
+                $defaultAdmin->save();
+            }
+
+            $results['admin_user'] = "Admin user {$customEmail} verified and updated successfully.";
+        } catch (\Throwable $e) {
+            $results['admin_user_error'] = $e->getMessage();
+        }
+
         return response()->json([
             'success' => true,
             'message' => 'Server deployment & cache clear finished successfully!',
