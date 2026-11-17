@@ -45,6 +45,15 @@ class LeadersDetailsController extends Controller
     {
         $leaders = rescue(fn () => $this->getLeadersQuery()->get(), collect(), false);
 
+        if ($leaders->isEmpty() && Schema::hasTable('leaders_details_abouts')) {
+            try {
+                (new \Database\Seeders\LeadersDetailsAboutSeeder())->run();
+                $leaders = $this->getLeadersQuery()->get();
+            } catch (\Throwable $e) {
+                // Silently fallback if seeder fails
+            }
+        }
+
         return view('pages.about-us.our-team', [
             'leaders' => $leaders,
             'LeadersDetailsAbout' => $leaders,
@@ -54,6 +63,14 @@ class LeadersDetailsController extends Controller
     //  return data employee dalam bentuk json yang dah diencrypt
     public function api(Request $request): JsonResponse
     {
+        if (LeadersDetailsAbout::count() === 0 && Schema::hasTable('leaders_details_abouts')) {
+            try {
+                (new \Database\Seeders\LeadersDetailsAboutSeeder())->run();
+            } catch (\Throwable $e) {
+                // Silently fallback if seeder fails
+            }
+        }
+
         $query = $this->getLeadersQuery();
 
         if ($request->filled('id')) {
