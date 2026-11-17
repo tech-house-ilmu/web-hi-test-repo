@@ -82,6 +82,14 @@ Pada linux untuk mengaktikan extension intl yaitu dengan mengedit file pada
 cari `;extension=intl` lalu hilangkan `;`
 ---
 
+## Deployment cPanel
+
+Repository ini menyediakan `.cpanel.yml` untuk menyalin source ke `$HOME/web-hi`
+dan menjalankan `composer install` saat deployment. Konfigurasikan document root
+domain ke `$HOME/web-hi/public`, siapkan file `.env` di `$HOME/web-hi`, dan
+pastikan PHP CLI memenuhi versi pada `composer.json` serta `composer` dan
+`/usr/bin/rsync` tersedia di hosting.
+
 
 
 ## 📚 **Referensi**

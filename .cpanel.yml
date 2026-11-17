@@ -1,0 +1,7 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH="$HOME/web-hi"
+    - /bin/mkdir -p "$DEPLOYPATH"
+    - /usr/bin/rsync -a --exclude='.git/' --exclude='.history/' --exclude='node_modules/' --exclude='vendor/' --exclude='.env*' ./ "$DEPLOYPATH"/
+    - cd "$DEPLOYPATH" && composer install --no-dev --prefer-dist --optimize-autoloader --no-interaction
