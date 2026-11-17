@@ -68,7 +68,14 @@ class ArticleResource extends Resource
                 ->label('Status Tayang (Published)')
                 ->default(true),
             FileUpload::make('img')
-                ->image()->directory('articles')->label('Gambar')->required()->imagePreviewHeight('300')->columnSpan(2),
+                ->image()
+                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'image/*'])
+                ->helperText('Format: JPEG, PNG, WEBP, HEIC')
+                ->directory('articles')
+                ->label('Gambar')
+                ->required()
+                ->imagePreviewHeight('300')
+                ->columnSpan(2),
             RichEditor::make('text')->label('Isi Artikel')->required()->columnSpan(2),
         ]);
     }

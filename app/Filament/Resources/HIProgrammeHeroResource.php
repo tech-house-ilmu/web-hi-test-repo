@@ -62,10 +62,11 @@ class HIProgrammeHeroResource extends Resource
                         Forms\Components\FileUpload::make('image')
                             ->label('Poster Gambar Program')
                             ->image()
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'image/*'])
                             ->disk('public')
                             ->directory('programmes-hero')
                             ->visibility('public')
-                            ->helperText('Format yang didukung: JPG, PNG, WEBP. Kosongkan jika ingin memakai poster default.')
+                            ->helperText('Format yang didukung: JPEG, PNG, WEBP, HEIC. Kosongkan jika ingin memakai poster default.')
                             ->imagePreviewHeight('280')
                             ->columnSpanFull(),
 

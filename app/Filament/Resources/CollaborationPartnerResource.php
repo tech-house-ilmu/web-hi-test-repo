@@ -35,6 +35,8 @@ class CollaborationPartnerResource extends Resource
             Forms\Components\FileUpload::make('logo')
                 ->label('Logo Mitra')
                 ->image()
+                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'image/*'])
+                ->helperText('Format: JPEG, PNG, WEBP, HEIC')
                 ->directory('partners')
                 ->required(),
             Forms\Components\TextInput::make('url')

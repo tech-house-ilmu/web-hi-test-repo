@@ -56,6 +56,8 @@ class EventResource extends Resource
                     ->multiple()
                     ->maxFiles(3)
                     ->image()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'image/*'])
+                    ->helperText('Format: JPEG, PNG, WEBP, HEIC')
                     ->disk('public')// Simpan di disk publik
                     ->directory('event')
                     ->required(),

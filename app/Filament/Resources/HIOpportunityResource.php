@@ -60,6 +60,8 @@ class HIOpportunityResource extends Resource
                 Forms\Components\FileUpload::make('bg_poster_img')
                     ->label('Poster / Gambar')
                     ->image()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'image/*'])
+                    ->helperText('Format: JPEG, PNG, WEBP, HEIC')
                     ->directory('opportunities'),
                 Forms\Components\TextInput::make('sort_order')
                     ->label('Urutan Tampilan')

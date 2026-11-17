@@ -41,6 +41,8 @@ class ExpertResource extends Resource
                 FileUpload::make('image')
                     ->label('Gambar')
                     ->image()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'image/*'])
+                    ->helperText('Format: JPEG, PNG, WEBP, HEIC')
                     ->disk('public')
                     ->directory('experts')
                     ->required(),

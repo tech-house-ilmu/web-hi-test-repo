@@ -60,6 +60,8 @@ class HomeHeroResource extends Resource
                         Forms\Components\FileUpload::make('img')
                             ->label('Upload Gambar Banner')
                             ->image()
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'image/*'])
+                            ->helperText('Format: JPEG, PNG, WEBP, HEIC')
                             ->directory('homepage')
                             ->columnSpan(1),
                         Forms\Components\TextInput::make('alt')

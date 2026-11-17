@@ -32,6 +32,11 @@ class TestimoniResource extends Resource
             ->schema([
                 Forms\Components\FileUpload::make('testimoni_img')
                     ->label('Gambar Testimoni User')
+                    ->image()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'image/*'])
+                    ->helperText('Format: JPEG, PNG, WEBP, HEIC')
+                    ->disk('public')
+                    ->directory('testimonis')
                     ->required(),
                 Forms\Components\Textarea::make('testimoni_description')
                     ->label('Deskripsi Testimoni User')

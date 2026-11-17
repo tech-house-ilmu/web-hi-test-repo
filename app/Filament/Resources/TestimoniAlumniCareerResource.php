@@ -38,8 +38,9 @@ class TestimoniAlumniCareerResource extends Resource
                             ->disk('public') // TAMBAHAN: disk configuration
                             ->directory('testimoni-alumni')
                             ->visibility('public')
-                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg'])
-                            ->maxSize(2048)
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'image/*'])
+                            ->helperText('Format: JPEG, PNG, WEBP, HEIC (Maksimal 4MB)')
+                            ->maxSize(4096)
                             ->columnSpanFull(),
 
                         Forms\Components\TextInput::make('testimoni_alumni_name')

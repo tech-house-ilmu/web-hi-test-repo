@@ -52,11 +52,15 @@ class EventHistoryResource extends Resource
                     Forms\Components\FileUpload::make('poster')
                         ->label('Poster Utama')
                         ->image()
+                        ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'image/*'])
+                        ->helperText('Format: JPEG, PNG, WEBP, HEIC')
                         ->directory('event-history'),
                     Forms\Components\FileUpload::make('gallery')
                         ->label('Galeri Dokumentasi Foto Kegiatan')
                         ->multiple()
                         ->image()
+                        ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'image/*'])
+                        ->helperText('Format: JPEG, PNG, WEBP, HEIC')
                         ->directory('event-history')
                         ->columnSpanFull(),
                 ])->columns(2),

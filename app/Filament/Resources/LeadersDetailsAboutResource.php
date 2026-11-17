@@ -33,6 +33,8 @@ class LeadersDetailsAboutResource extends Resource
                 Forms\Components\FileUpload::make('leaders_details_img')
                     ->label('Foto / Avatar')
                     ->image()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'image/*'])
+                    ->helperText('Format: JPEG, PNG, WEBP, HEIC')
                     ->disk('public')
                     ->directory('leaders')
                     ->columnSpanFull()

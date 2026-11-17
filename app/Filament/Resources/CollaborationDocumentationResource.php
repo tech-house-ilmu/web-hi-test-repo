@@ -46,6 +46,8 @@ class CollaborationDocumentationResource extends Resource
             Forms\Components\FileUpload::make('image')
                 ->label('Upload Foto Kegiatan')
                 ->image()
+                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'image/*'])
+                ->helperText('Format: JPEG, PNG, WEBP, HEIC')
                 ->directory('collaboration-docs')
                 ->required()
                 ->columnSpanFull(),

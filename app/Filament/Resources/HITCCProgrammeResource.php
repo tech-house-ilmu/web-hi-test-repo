@@ -83,7 +83,8 @@ class HITCCProgrammeResource extends Resource
                                 ->maxSize(4096)
                                 ->imagePreviewHeight('300')
                                 ->preserveFilenames()
-                                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg']),
+                                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'image/*'])
+                                ->helperText('Format: JPEG, PNG, WEBP, HEIC (Maksimal 4MB)'),
                             FileUpload::make('bg_poster_img')
                                 ->label('Banner / Poster Program')
                                 ->directory(fn ($get) => match ($get('hitcc_category_id')) {
@@ -100,7 +101,8 @@ class HITCCProgrammeResource extends Resource
                                 ->maxSize(4096)
                                 ->imagePreviewHeight('300')
                                 ->preserveFilenames()
-                                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/jpg']),
+                                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif', 'image/*'])
+                                ->helperText('Format: JPEG, PNG, WEBP, HEIC (Maksimal 4MB)'),
 
                             RichEditor::make('registration_info')->label('Informasi Registrasi'),
                             DatePicker::make('registration_deadline')->label('Deadline'),
