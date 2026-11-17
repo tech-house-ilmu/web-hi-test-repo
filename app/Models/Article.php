@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Traits\ClearsAppCache;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
-    use HasFactory;
+    use HasFactory, ClearsAppCache;
 
     protected $fillable = [
         'title',
@@ -19,6 +20,15 @@ class Article extends Model
         'date',
         'slug',
         'category',
+        'sort_order',
+        'is_featured',
+        'is_published',
+    ];
+
+    protected $casts = [
+        'is_featured' => 'boolean',
+        'is_published' => 'boolean',
+        'sort_order' => 'integer',
     ];
 
     protected static function booted()

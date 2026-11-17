@@ -16,11 +16,15 @@ class TestimoniAlumniCareerResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
 
-    protected static ?string $navigationLabel = 'Testimoni Alumni';
+    protected static ?string $navigationGroup = 'CAREER';
+
+    protected static ?string $navigationLabel = 'Testimoni Alumni Career';
 
     protected static ?string $modelLabel = 'Testimoni Alumni';
 
-    protected static ?string $pluralModelLabel = 'Testimoni Alumni';
+    protected static ?string $pluralModelLabel = 'Testimoni Alumni Career';
+
+    protected static ?int $navigationSort = 4;
 
     public static function form(Form $form): Form
     {

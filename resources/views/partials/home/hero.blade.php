@@ -272,43 +272,49 @@
         <!-- Left Column: Copy & Action Button -->
         <div class="hi-hero-content" data-aos="fade-right">
             <h1 class="hi-hero-h1">
-                Learn, Grow, and Get<br>
-                Achievement Together
+                {!! nl2br(e($homeHero->headline ?? "Learn, Grow, and Get\nAchievement Together")) !!}
             </h1>
 
             <p class="hi-hero-p">
-                House Ilmu hadir sebagai teman yang menemani setiap proses belajar, berkembang, dan mempersiapkan masa depan.
+                {{ $homeHero->subtitle ?? 'House Ilmu hadir sebagai teman yang menemani setiap proses belajar, berkembang, dan mempersiapkan masa depan.' }}
             </p>
 
-            <a href="#our-programs" class="hi-hero-btn">
-                <span>Jelajahi Semua Program</span>
+            <a href="{{ $homeHero->cta_link ?? '#our-programs' }}" class="hi-hero-btn">
+                <span>{{ $homeHero->cta_text ?? 'Jelajahi Semua Program' }}</span>
                 <span class="arrow">↗</span>
             </a>
         </div>
+
+        @php
+            $heroSlides = [];
+            if (!empty($homeHero->slides)) {
+                foreach ($homeHero->slides as $s) {
+                    $img = $s['img'] ?? '';
+                    if ($img) {
+                        $src = str_starts_with($img, 'http') ? $img : (str_starts_with($img, 'img/') ? asset($img) : asset('storage/' . $img));
+                        $heroSlides[] = [
+                            'img' => $src,
+                            'alt' => $s['alt'] ?? 'House Ilmu Indonesia',
+                        ];
+                    }
+                }
+            }
+            if (empty($heroSlides)) {
+                $heroSlides = [
+                    ['img' => asset('img/homepage/home-hero-1.webp'), 'alt' => 'House Ilmu Indonesia community gathering'],
+                    ['img' => asset('img/homepage/home-hero-2.webp'), 'alt' => 'House Ilmu Indonesia learning session'],
+                    ['img' => asset('img/homepage/home-hero-3.webp'), 'alt' => 'House Ilmu Indonesia members together'],
+                    ['img' => asset('img/homepage/home-hero-4.webp'), 'alt' => 'House Ilmu Indonesia team in outdoor activity'],
+                ];
+            }
+        @endphp
 
         <!-- Right Column: Slide Figure Mockup -->
         <div class="hi-hero-figure-wrapper" data-aos="fade-left">
             <div x-data="{
                 activeSlide: 0,
                 timer: null,
-                slides: [
-                    {
-                        img: '{{ asset('img/homepage/home-hero-1.webp') }}',
-                        alt: 'House Ilmu Indonesia community gathering'
-                    },
-                    {
-                        img: '{{ asset('img/homepage/home-hero-2.webp') }}',
-                        alt: 'House Ilmu Indonesia learning session'
-                    },
-                    {
-                        img: '{{ asset('img/homepage/home-hero-3.webp') }}',
-                        alt: 'House Ilmu Indonesia members together'
-                    },
-                    {
-                        img: '{{ asset('img/homepage/home-hero-4.webp') }}',
-                        alt: 'House Ilmu Indonesia team in outdoor activity'
-                    }
-                ],
+                slides: {{ json_encode($heroSlides) }},
                 init() {
                     if (this.slides.length > 1) {
                         this.startAuto();

@@ -20,7 +20,17 @@ class ExpertResource extends Resource
 {
     protected static ?string $model = Expert::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
+
+    protected static ?string $navigationGroup = 'HOME';
+
+    protected static ?string $navigationLabel = 'Our Experts & Mentors';
+
+    protected static ?string $modelLabel = 'Expert / Mentor';
+
+    protected static ?string $pluralModelLabel = 'Experts & Mentors';
+
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {

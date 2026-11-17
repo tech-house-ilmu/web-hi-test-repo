@@ -16,13 +16,15 @@ class RecruitmentAnnouncementResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-megaphone';
 
+    protected static ?string $navigationGroup = 'CAREER';
+
     protected static ?string $navigationLabel = 'Pengumuman Rekrutmen';
 
     protected static ?string $modelLabel = 'Pengumuman Rekrutmen';
 
     protected static ?string $pluralModelLabel = 'Pengumuman Rekrutmen';
 
-    protected static ?int $navigationSort = 4;
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use App\Models\Expert;
 use App\Models\HITCCProgramme;
+use App\Models\HomeHero;
+use App\Models\HomeImpact;
 use App\Models\Testimoni;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
@@ -13,8 +15,16 @@ class HomeController extends Controller
 {
     public function index(): View
     {
+        $homeHero = Cache::remember('home_hero', 300, function () {
+            return HomeHero::where('is_active', true)->first();
+        });
+
         $events = Cache::remember('home_events', 300, function () {
-            return Event::where('is_active', true)->latest()->get();
+            return Event::where('is_active', true)
+                ->where('show_on_home', true)
+                ->orderBy('sort_order', 'asc')
+                ->latest()
+                ->get();
         });
 
         $experts = Cache::remember('home_experts', 300, function () {
@@ -39,7 +49,11 @@ class HomeController extends Controller
             return Testimoni::latest()->get();
         });
 
-        $impacts = config('homepage.impacts', []);
+        $impacts = Cache::remember('home_impacts', 300, function () {
+            $dbImpacts = HomeImpact::where('is_active', true)->orderBy('sort_order')->get();
+            return $dbImpacts->isNotEmpty() ? $dbImpacts->toArray() : config('homepage.impacts', []);
+        });
+
         $onlinePrograms = config('homepage.online_programs', []);
         $offlinePrograms = config('homepage.offline_programs', []);
         $partners = config('homepage.partners', []);
@@ -49,6 +63,7 @@ class HomeController extends Controller
         $testimonials = config('homepage.testimonials', []);
 
         return view('pages.index', compact(
+            'homeHero',
             'events',
             'experts',
             'programmes',

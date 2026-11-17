@@ -25,11 +25,15 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
+    protected static ?string $navigationGroup = 'SISTEM & PENGATURAN';
+
     protected static ?string $navigationLabel = 'Manajemen Akun';
 
     protected static ?string $modelLabel = 'Akun Admin';
 
     protected static ?string $pluralModelLabel = 'Manajemen Akun Admin';
+
+    protected static ?int $navigationSort = 1;
 
     public static function canViewAny(): bool
     {

@@ -8,8 +8,8 @@
     <!-- Hero (mengikuti desain Figma) -->
     <section class="hi-hero">
         <div class="hi-wrap">
-            <h1>Better Career for Better Future</h1>
-            <p class="hi-hero-sub">House Ilmu adalah sebuah platform yang bergerak di bidang career development dengan mengedepankan unsur sosial untuk memberikan impact bagi generasi muda.</p>
+            <h1>{{ $organization->hero_title ?? 'Better Career for Better Future' }}</h1>
+            <p class="hi-hero-sub">{{ $organization->hero_subtitle ?? 'House Ilmu adalah sebuah platform yang bergerak di bidang career development dengan mengedepankan unsur sosial untuk memberikan impact bagi generasi muda.' }}</p>
         </div>
     </section>
 
@@ -19,17 +19,21 @@
             <h2 class="hi-title">Our Vision &amp; Mission</h2>
             <div class="hi-vision">
                 <p class="hi-eyebrow">Visi Kami</p>
-                <h3>Menjadi kawan bagi generasi muda dalam pengembangan karir yang berfokus pada soft skill dan life skill.</h3>
+                <h3>{{ $organization->vision ?? 'Menjadi kawan bagi generasi muda dalam pengembangan karir yang berfokus pada soft skill dan life skill.' }}</h3>
             </div>
+            @php
+                $missions = !empty($organization->missions) ? $organization->missions : [
+                    'Memfasilitasi generasi muda untuk mengenali passion diri guna menentukan karir masa depan.',
+                    'Meningkatkan soft skill dan life skill generasi muda.',
+                ];
+            @endphp
             <div class="hi-mission-grid">
-                <div class="hi-mission">
-                    <span>01</span>
-                    <p>Memfasilitasi generasi muda untuk mengenali passion diri guna menentukan karir masa depan.</p>
-                </div>
-                <div class="hi-mission">
-                    <span>02</span>
-                    <p>Meningkatkan soft skill dan life skill generasi muda.</p>
-                </div>
+                @foreach($missions as $mIdx => $mText)
+                    <div class="hi-mission">
+                        <span>{{ sprintf('%02d', $mIdx + 1) }}</span>
+                        <p>{{ is_array($mText) ? ($mText['mission'] ?? '') : $mText }}</p>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>

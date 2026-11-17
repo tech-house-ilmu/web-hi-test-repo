@@ -25,6 +25,16 @@ class ArticleResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
+    protected static ?string $navigationGroup = 'ARTICLES';
+
+    protected static ?string $navigationLabel = 'Manajemen Artikel';
+
+    protected static ?string $modelLabel = 'Artikel';
+
+    protected static ?string $pluralModelLabel = 'Daftar Artikel';
+
+    protected static ?int $navigationSort = 1;
+
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -46,6 +56,17 @@ class ArticleResource extends Resource
                 ->unique(ignoreRecord: true)
                 ->helperText('Contoh: kamu-harus-tahu-5-fakta-unik'),
             DatePicker::make('date')->label('Tanggal')->required(),
+            TextInput::make('sort_order')
+                ->label('Urutan Tampilan')
+                ->numeric()
+                ->default(0)
+                ->helperText('Angka lebih kecil tampil lebih dulu.'),
+            Forms\Components\Toggle::make('is_featured')
+                ->label('Jadikan Artikel Utama / Sorotan (Featured)')
+                ->default(false),
+            Forms\Components\Toggle::make('is_published')
+                ->label('Status Tayang (Published)')
+                ->default(true),
             FileUpload::make('img')
                 ->image()->directory('articles')->label('Gambar')->required()->imagePreviewHeight('300')->columnSpan(2),
             RichEditor::make('text')->label('Isi Artikel')->required()->columnSpan(2),
@@ -59,12 +80,14 @@ class ArticleResource extends Resource
                 TextColumn::make('title')->searchable()->sortable()->limit(50),
                 TextColumn::make('author')->sortable(),
                 BadgeColumn::make('category')->badge()->sortable(),
+                Tables\Columns\TextInputColumn::make('sort_order')->label('Urutan')->sortable(),
+                Tables\Columns\ToggleColumn::make('is_featured')->label('Featured'),
+                Tables\Columns\ToggleColumn::make('is_published')->label('Tayang'),
 
-                Tables\Columns\TextColumn::make('created_at')
-                    ->label('Dibuat')
-                    ->dateTime('d/m/Y H:i')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('date')
+                    ->label('Tanggal')
+                    ->date('d/m/Y')
+                    ->sortable(),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('category')

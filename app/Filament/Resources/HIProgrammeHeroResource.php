@@ -22,9 +22,9 @@ class HIProgrammeHeroResource extends Resource
 
     protected static ?string $pluralModelLabel = 'Hero Program HI';
 
-    protected static ?string $navigationGroup = 'Program Management';
+    protected static ?string $navigationGroup = 'HI PROGRAMME';
 
-    protected static ?int $navigationSort = 2;
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {

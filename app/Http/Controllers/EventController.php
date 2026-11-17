@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EventHistory;
+use Illuminate\Support\Facades\Cache;
+
 class EventController extends Controller
 {
     private const EVENTS = [
@@ -34,16 +37,66 @@ class EventController extends Controller
         ],
     ];
 
+    protected function getAllEvents(): array
+    {
+        return Cache::remember('event_histories_all', 300, function () {
+            $dbEvents = EventHistory::where('is_published', true)->orderBy('sort_order', 'asc')->latest()->get();
+            if ($dbEvents->isEmpty()) {
+                return self::EVENTS;
+            }
+
+            return $dbEvents->map(function ($ev) {
+                $poster = $ev->poster;
+                if ($poster && !str_starts_with($poster, 'http') && !str_starts_with($poster, 'img/')) {
+                    $poster = 'storage/' . $poster;
+                }
+
+                $gallery = [];
+                if (!empty($ev->gallery)) {
+                    foreach ($ev->gallery as $g) {
+                        if ($g && !str_starts_with($g, 'http') && !str_starts_with($g, 'img/')) {
+                            $gallery[] = 'storage/' . $g;
+                        } else {
+                            $gallery[] = $g;
+                        }
+                    }
+                }
+
+                return [
+                    'slug' => $ev->slug,
+                    'title' => $ev->title,
+                    'category' => $ev->category,
+                    'excerpt' => $ev->excerpt,
+                    'poster' => $poster,
+                    'gallery' => $gallery,
+                    'description' => $ev->description,
+                    'speaker' => $ev->speaker,
+                    'profession' => $ev->profession,
+                    'date' => $ev->date,
+                    'time' => $ev->time,
+                    'location' => $ev->location,
+                    'collaborator' => $ev->collaborator,
+                    'goals' => $ev->goals ?? [],
+                    'agenda' => $ev->agenda,
+                    'outcomes' => $ev->outcomes,
+                    'conclusion' => $ev->conclusion,
+                    'closing' => $ev->closing,
+                ];
+            })->toArray();
+        });
+    }
+
     public function index()
     {
         return view('pages.event-history.index', [
-            'events' => self::EVENTS,
+            'events' => $this->getAllEvents(),
         ]);
     }
 
     public function show(string $slug)
     {
-        $event = collect(self::EVENTS)->firstWhere('slug', $slug);
+        $events = $this->getAllEvents();
+        $event = collect($events)->firstWhere('slug', $slug);
 
         abort_if($event === null, 404);
 

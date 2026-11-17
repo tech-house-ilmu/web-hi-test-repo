@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\ClearsAppCache;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class HIProgrammeHero extends Model
 {
-    use HasFactory;
+    use HasFactory, ClearsAppCache;
 
     protected $table = 'h_i_programme_heroes';
 

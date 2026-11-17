@@ -14,11 +14,15 @@ class LeadersDetailsAboutResource extends Resource
 {
     protected static ?string $model = LeadersDetailsAbout::class;
 
-    protected static ?string $navigationLabel = 'Employees / Tim';
+    protected static ?string $navigationGroup = 'ABOUT US';
 
-    protected static ?string $pluralLabel = 'Employees / Tim';
+    protected static ?string $navigationLabel = 'Our Team (Meet Our People)';
 
-    protected static ?string $modelLabel = 'Employee';
+    protected static ?string $pluralLabel = 'Anggota Tim (Our Team)';
+
+    protected static ?string $modelLabel = 'Anggota Tim';
+
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 

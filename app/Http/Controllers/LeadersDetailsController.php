@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AboutOrganization;
 use App\Models\LeadersDetailsAbout;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\View\View;
 
@@ -23,10 +25,14 @@ class LeadersDetailsController extends Controller
     public function index(): View
     {
         $leaders = $this->getLeadersQuery()->get();
+        $organization = Cache::remember('about_organization', 300, function () {
+            return AboutOrganization::first();
+        });
 
         return view('pages.about-us.about', [
             'leaders' => $leaders,
             'LeadersDetailsAbout' => $leaders,
+            'organization' => $organization,
         ]);
     }
 

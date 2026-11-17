@@ -52,12 +52,13 @@ class DeployController extends Controller
             $results['migrations_error'] = $e->getMessage();
         }
 
-        // 3. Run Seeders (Our Team Batch 6, Hero Slider, Articles)
+        // 3. Run Seeders (Our Team Batch 6, Hero Slider, Articles, CMS Content)
         try {
             Artisan::call('db:seed', ['--class' => 'Database\\Seeders\\LeadersDetailsAboutSeeder', '--force' => true]);
             Artisan::call('db:seed', ['--class' => 'Database\\Seeders\\HIProgrammeHeroSeeder', '--force' => true]);
             Artisan::call('db:seed', ['--class' => 'Database\\Seeders\\ArticleSeeder', '--force' => true]);
-            $results['seeders'] = 'LeadersDetailsAboutSeeder, HIProgrammeHeroSeeder & ArticleSeeder executed successfully.';
+            Artisan::call('db:seed', ['--class' => 'Database\\Seeders\\CmsContentSeeder', '--force' => true]);
+            $results['seeders'] = 'Seeders executed successfully (Our Team, Heroes, Articles, CMS Content).';
         } catch (\Throwable $e) {
             $results['seeders_error'] = $e->getMessage();
         }

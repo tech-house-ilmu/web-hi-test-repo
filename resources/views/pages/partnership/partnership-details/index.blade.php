@@ -6,32 +6,51 @@
 @section('hide_comments', true)
 
 @php
-    $partners = [
-        ['name' => 'Black Swan Community', 'file' => 'black-swan-community.jpg', 'alt' => 'Logo Black Swan Community'],
-        ['name' => 'Doteens', 'file' => 'doteens.png', 'alt' => 'Logo Doteens'],
-        ['name' => 'FYI Psikologi', 'file' => 'fyi-psikologi.jpg', 'alt' => 'Logo FYI Psikologi'],
-        ['name' => 'Gritty.', 'file' => 'gritty.jpg', 'alt' => 'Logo Gritty.'],
-        ['name' => 'ImproveHub', 'file' => 'improve-hub.png', 'alt' => 'Logo ImproveHub'],
-        ['name' => 'Kelas Kampus', 'file' => 'kelas-kampus.png', 'alt' => 'Logo Kelas Kampus'],
-        ['name' => 'Growth Education', 'file' => 'growth-education.png', 'alt' => 'Logo Growth Education'],
-        ['name' => 'GrowthHub', 'file' => 'growth-hub.png', 'alt' => 'Logo GrowthHub'],
-        ['name' => 'HCK', 'file' => 'hck.png', 'alt' => 'Logo HCK'],
-        ['name' => 'Ideal', 'file' => 'ideal.png', 'alt' => 'Logo Ideal'],
-        ['name' => 'Kejar Mimpi Jakarta', 'file' => 'kejar-mimpi-jakarta.png', 'alt' => 'Logo Kejar Mimpi Jakarta'],
-        ['name' => 'Mataharikita', 'file' => 'mataharikita.png', 'alt' => 'Logo Mataharikita'],
-        ['name' => 'Oh Be Shine', 'file' => 'oh-be-shine.png', 'alt' => 'Logo Oh Be Shine'],
-        ['name' => 'Ousean', 'file' => 'ousean.png', 'alt' => 'Logo Ousean'],
-        ['name' => 'Quria', 'file' => 'quria.jpg', 'alt' => 'Logo Quria'],
-        ['name' => 'Teman Ambiss', 'file' => 'teman-ambiss.png', 'alt' => 'Logo Teman Ambiss'],
-        ['name' => 'Young On Top (YOT)', 'file' => 'yot.png', 'alt' => 'Logo Young On Top'],
-        ['name' => 'Omah Jiwa', 'file' => 'omah-jiwa.png', 'alt' => 'Logo Omah Jiwa'],
-        ['name' => 'Cakap', 'file' => 'cakap.png', 'alt' => 'Logo Cakap'],
-        ['name' => 'Indorelawan', 'file' => 'indorelawan.png', 'alt' => 'Logo Indorelawan'],
-        ['name' => 'Pemimpin.id', 'file' => 'pemimpin-id.jpg', 'alt' => 'Logo Pemimpin.id'],
-        ['name' => 'Institut.id', 'file' => 'institut-id.png', 'alt' => 'Logo Institut.id'],
-        ['name' => 'Phillip Sekuritas', 'file' => 'phillip-sekuritas.png', 'alt' => 'Logo Phillip Sekuritas'],
-        ['name' => 'Girls Beyond', 'file' => 'girls-beyond.png', 'alt' => 'Logo Girls Beyond'],
-    ];
+    $collabType = \App\Models\CollaborationType::where('slug', 'community')->first();
+    $dbPartners = \App\Models\CollaborationPartner::where('is_active', true)->orderBy('sort_order')->get();
+    if ($dbPartners->isNotEmpty()) {
+        $partners = $dbPartners->map(fn($p) => [
+            'name' => $p->name,
+            'file' => $p->logo,
+            'alt' => 'Logo ' . $p->name,
+            'url' => $p->url,
+        ])->toArray();
+    } else {
+        $partners = [
+            ['name' => 'Black Swan Community', 'file' => 'black-swan-community.jpg', 'alt' => 'Logo Black Swan Community'],
+            ['name' => 'Doteens', 'file' => 'doteens.png', 'alt' => 'Logo Doteens'],
+            ['name' => 'FYI Psikologi', 'file' => 'fyi-psikologi.jpg', 'alt' => 'Logo FYI Psikologi'],
+            ['name' => 'Gritty.', 'file' => 'gritty.jpg', 'alt' => 'Logo Gritty.'],
+            ['name' => 'ImproveHub', 'file' => 'improve-hub.png', 'alt' => 'Logo ImproveHub'],
+            ['name' => 'Kelas Kampus', 'file' => 'kelas-kampus.png', 'alt' => 'Logo Kelas Kampus'],
+            ['name' => 'Growth Education', 'file' => 'growth-education.png', 'alt' => 'Logo Growth Education'],
+            ['name' => 'GrowthHub', 'file' => 'growth-hub.png', 'alt' => 'Logo GrowthHub'],
+            ['name' => 'HCK', 'file' => 'hck.png', 'alt' => 'Logo HCK'],
+            ['name' => 'Ideal', 'file' => 'ideal.png', 'alt' => 'Logo Ideal'],
+            ['name' => 'Kejar Mimpi Jakarta', 'file' => 'kejar-mimpi-jakarta.png', 'alt' => 'Logo Kejar Mimpi Jakarta'],
+            ['name' => 'Mataharikita', 'file' => 'mataharikita.png', 'alt' => 'Logo Mataharikita'],
+            ['name' => 'Oh Be Shine', 'file' => 'oh-be-shine.png', 'alt' => 'Logo Oh Be Shine'],
+            ['name' => 'Ousean', 'file' => 'ousean.png', 'alt' => 'Logo Ousean'],
+            ['name' => 'Quria', 'file' => 'quria.jpg', 'alt' => 'Logo Quria'],
+            ['name' => 'Teman Ambiss', 'file' => 'teman-ambiss.png', 'alt' => 'Logo Teman Ambiss'],
+            ['name' => 'Young On Top (YOT)', 'file' => 'yot.png', 'alt' => 'Logo Young On Top'],
+            ['name' => 'Omah Jiwa', 'file' => 'omah-jiwa.png', 'alt' => 'Logo Omah Jiwa'],
+            ['name' => 'Cakap', 'file' => 'cakap.png', 'alt' => 'Logo Cakap'],
+            ['name' => 'Indorelawan', 'file' => 'indorelawan.png', 'alt' => 'Logo Indorelawan'],
+            ['name' => 'Pemimpin.id', 'file' => 'pemimpin-id.jpg', 'alt' => 'Logo Pemimpin.id'],
+            ['name' => 'Institut.id', 'file' => 'institut-id.png', 'alt' => 'Logo Institut.id'],
+            ['name' => 'Phillip Sekuritas', 'file' => 'phillip-sekuritas.png', 'alt' => 'Logo Phillip Sekuritas'],
+            ['name' => 'Girls Beyond', 'file' => 'girls-beyond.png', 'alt' => 'Logo Girls Beyond'],
+        ];
+    }
+    $dbDocs = \App\Models\CollaborationDocumentation::where('is_active', true)
+        ->whereIn('collaboration_type', ['all', 'community'])
+        ->orderBy('sort_order')
+        ->get();
+    $collaborationDocs = $dbDocs->map(fn($d) => [
+        'img' => str_starts_with($d->image, 'http') ? $d->image : (str_starts_with($d->image, 'img/') ? asset($d->image) : asset('storage/' . $d->image)),
+        'alt' => $d->title ?? 'Dokumentasi Kolaborasi',
+    ])->toArray();
 @endphp
 
 @section('content')
@@ -241,7 +260,14 @@
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
                     @foreach ($partners as $partner)
                         <div class="bg-white rounded-xl shadow-xs p-3 aspect-[4/3] flex items-center justify-center border border-gray-100 hover:shadow-md hover:scale-105 transition-all duration-200">
-                            <img src="{{ asset('img/partners/' . $partner['file']) }}" 
+                            @php
+                                $logoSrc = str_starts_with($partner['file'], 'http') 
+                                    ? $partner['file'] 
+                                    : (str_starts_with($partner['file'], 'partners/') 
+                                        ? asset('storage/' . $partner['file']) 
+                                        : asset('img/partners/' . $partner['file']));
+                            @endphp
+                            <img src="{{ $logoSrc }}" 
                                  alt="{{ $partner['alt'] }}" 
                                  title="{{ $partner['name'] }}"
                                  loading="lazy"

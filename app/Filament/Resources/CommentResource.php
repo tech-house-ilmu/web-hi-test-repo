@@ -21,13 +21,15 @@ class CommentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-right';
 
-    protected static ?string $navigationLabel = 'Komentar';
+    protected static ?string $navigationGroup = 'SISTEM & PENGATURAN';
+
+    protected static ?string $navigationLabel = 'Moderasi Komentar';
 
     protected static ?string $modelLabel = 'Komentar';
 
-    protected static ?string $pluralModelLabel = 'Komentar';
+    protected static ?string $pluralModelLabel = 'Komentar Pengunjung';
 
-    protected static ?int $navigationSort = 10;
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {

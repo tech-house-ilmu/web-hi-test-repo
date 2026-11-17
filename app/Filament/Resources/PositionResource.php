@@ -17,11 +17,15 @@ class PositionResource extends Resource
 {
     protected static ?string $model = Position::class;
 
-    protected static ?string $navigationLabel = 'Career';
+    protected static ?string $navigationGroup = 'CAREER';
 
-    protected static ?string $label = 'Career';
+    protected static ?string $navigationLabel = 'Posisi Lowongan';
 
-    protected static ?string $pluralLabel = 'Careers';
+    protected static ?string $label = 'Posisi Lowongan';
+
+    protected static ?string $pluralLabel = 'Posisi Lowongan';
+
+    protected static ?int $navigationSort = 3;
 
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
 

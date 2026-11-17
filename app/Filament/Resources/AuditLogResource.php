@@ -25,11 +25,15 @@ class AuditLogResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
 
-    protected static ?string $navigationLabel = 'Audit Log & Riwayat';
+    protected static ?string $navigationGroup = 'SISTEM & PENGATURAN';
+
+    protected static ?string $navigationLabel = 'Audit Log & Riwayat Aktivitas';
 
     protected static ?string $modelLabel = 'Audit Log';
 
     protected static ?string $pluralModelLabel = 'Audit Log & Riwayat Aktivitas';
+
+    protected static ?int $navigationSort = 3;
 
     public static function canViewAny(): bool
     {

@@ -14,13 +14,17 @@ class TestimoniResource extends Resource
 {
     protected static ?string $model = Testimoni::class;
 
-    protected static ?string $navigationLabel = 'Testimoni User';
+    protected static ?string $navigationGroup = 'HOME';
+
+    protected static ?string $navigationLabel = 'What They Say / Testimoni';
 
     protected static ?string $pluralLabel = 'Testimoni User';
 
-    protected static ?string $modelLabel = 'Data';
+    protected static ?string $modelLabel = 'Testimoni';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?int $navigationSort = 4;
+
+    protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-bottom-center-text';
 
     public static function form(Form $form): Form
     {

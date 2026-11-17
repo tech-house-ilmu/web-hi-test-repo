@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Traits\ClearsAppCache;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class RecruitmentAnnouncement extends Model
 {
-    use HasFactory;
+    use HasFactory, ClearsAppCache;
 
     protected $fillable = [
         'status',

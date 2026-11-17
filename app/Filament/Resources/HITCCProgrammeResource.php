@@ -29,13 +29,17 @@ class HITCCProgrammeResource extends Resource
 {
     protected static ?string $model = HITCCProgramme::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
+    protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
 
-    protected static ?string $navigationLabel = 'HITCC';
+    protected static ?string $navigationGroup = 'HI PROGRAMME';
 
-    protected static ?string $pluralLabel = 'House Ilmu The Career Clubs';
+    protected static ?string $navigationLabel = 'Daftar Program & HITCC';
+
+    protected static ?string $pluralLabel = 'Program & HITCC';
 
     protected static ?string $modelLabel = 'Program';
+
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $slug = 'hitcc-programmes';
 

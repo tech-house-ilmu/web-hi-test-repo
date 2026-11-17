@@ -19,7 +19,17 @@ class EventResource extends Resource
 {
     protected static ?string $model = Event::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-calendar-days';
+
+    protected static ?string $navigationGroup = 'HI PROGRAMME';
+
+    protected static ?string $navigationLabel = 'Upcoming Event (Detail Event)';
+
+    protected static ?string $modelLabel = 'Event';
+
+    protected static ?string $pluralModelLabel = 'Upcoming Events';
+
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {
@@ -50,8 +60,17 @@ class EventResource extends Resource
                     ->directory('event')
                     ->required(),
 
+                TextInput::make('sort_order')
+                    ->label('Urutan / Prioritas Tampilan')
+                    ->numeric()
+                    ->default(0),
+
+                Toggle::make('show_on_home')
+                    ->label('Tampilkan di Halaman Utama (Home)?')
+                    ->default(true),
+
                 Toggle::make('is_active')
-                    ->label('Tampilkan Event Ini?')
+                    ->label('Status Aktif')
                     ->default(true),
             ]);
     }
