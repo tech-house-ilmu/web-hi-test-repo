@@ -92,6 +92,31 @@ class DeployController extends Controller
             $results['announcement_error'] = $e->getMessage();
         }
 
+        // 7. Sync static assets from public/ to root public_html for direct web server delivery
+        try {
+            $publicDir = public_path();
+            $rootDir = base_path();
+            if ($publicDir !== $rootDir) {
+                foreach (['build', 'css', 'img', 'js'] as $dir) {
+                    $src = $publicDir . DIRECTORY_SEPARATOR . $dir;
+                    $dst = $rootDir . DIRECTORY_SEPARATOR . $dir;
+                    if (\Illuminate\Support\Facades\File::isDirectory($src)) {
+                        \Illuminate\Support\Facades\File::copyDirectory($src, $dst);
+                    }
+                }
+                foreach (['favicon.ico', 'robots.txt'] as $file) {
+                    $src = $publicDir . DIRECTORY_SEPARATOR . $file;
+                    $dst = $rootDir . DIRECTORY_SEPARATOR . $file;
+                    if (\Illuminate\Support\Facades\File::exists($src)) {
+                        \Illuminate\Support\Facades\File::copy($src, $dst);
+                    }
+                }
+                $results['asset_sync'] = 'Assets copied from public/ to root public_html successfully.';
+            }
+        } catch (\Throwable $e) {
+            $results['asset_sync_error'] = $e->getMessage();
+        }
+
         return response()->json([
             'success' => true,
             'message' => 'Server deployment & cache clear finished successfully!',

@@ -4,3 +4,4 @@ deployment:
     - export DEPLOYPATH=/home/houseilm/public_html
     - /bin/mkdir -p $DEPLOYPATH
     - /bin/cp -R * $DEPLOYPATH
+    - /bin/cp -R public/* $DEPLOYPATH/
