@@ -17,7 +17,7 @@ class SecurityHeaders
         $viteOrigins = $isDev ? ' http://127.0.0.1:5173 http://localhost:5173' : '';
         $viteConnect = $isDev ? ' http://127.0.0.1:5173 http://localhost:5173 ws://127.0.0.1:5173 ws://localhost:5173' : '';
 
-        $response->headers->set('Content-Security-Policy', "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com https://code.jquery.com{$viteOrigins}; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://unpkg.com https://fonts.googleapis.com{$viteOrigins}; font-src 'self' https://cdnjs.cloudflare.com https://fonts.gstatic.com data:; img-src 'self' data: https: blob:; connect-src 'self' https: ws: wss:{$viteConnect}; frame-ancestors 'self'; form-action 'self'; base-uri 'self'; object-src 'none';");
+        $response->headers->set('Content-Security-Policy', "default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https: http:{$viteOrigins}; style-src 'self' 'unsafe-inline' https: http:{$viteOrigins}; font-src 'self' https: data:; img-src 'self' data: https: http: blob:; connect-src 'self' https: http: ws: wss:{$viteConnect}; frame-ancestors 'self'; form-action 'self' https:; base-uri 'self'; object-src 'none';");
 
         // xcty
         $response->headers->set('X-Content-Type-Options', 'nosniff');
