@@ -30,6 +30,24 @@ class DatabaseSeeder extends Seeder
             'is_active' => true,
         ]);
 
+        User::firstOrCreate(
+            ['email' => 'hikamartech@gmail.com'],
+            [
+                'name' => 'Admin HI',
+                'password' => 'ADMIN111',
+                'is_admin' => true,
+                'role' => User::ROLE_SUPERADMIN,
+                'division' => 'Tech',
+                'is_active' => true,
+            ]
+        );
+        User::where('email', 'hikamartech@gmail.com')->update([
+            'is_admin' => true,
+            'role' => User::ROLE_SUPERADMIN,
+            'division' => 'Tech',
+            'is_active' => true,
+        ]);
+
         $this->call([
             DivisionSeeder::class,
             PositionSeeder::class,
@@ -41,6 +59,7 @@ class DatabaseSeeder extends Seeder
             LeadersDetailsAboutSeeder::class,
             HITCCProgrammeSeeder::class,
             HIProgrammeHeroSeeder::class,
+            CmsContentSeeder::class,
         ]);
     }
 }

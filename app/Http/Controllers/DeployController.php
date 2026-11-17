@@ -4,17 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\File;
 use App\Models\RecruitmentAnnouncement;
 
 class DeployController extends Controller
 {
     /**
-     * Webhook / One-click deployment endpoint to pull latest code and clear caches.
-     * Can be accessed via GET or POST.
-     * Example: https://your-domain.com/deploy-update?token=hi-deploy-2026
+     * Webhook / One-click deployment endpoint to sync database, create admin, and clear caches.
+     * Can be accessed via GET or POST in browser:
+     * Example: https://houseilmuindonesia.biz.id/deploy-run?token=hi-deploy-2026
      */
     public function deploy(Request $request)
     {
+        @ini_set('display_errors', '0');
+        @ini_set('max_execution_time', '300');
+        @set_time_limit(300);
+
         $secretToken = env('DEPLOY_TOKEN', 'hi-deploy-2026');
         $providedToken = $request->query('token') ?? $request->header('X-Deploy-Token') ?? $request->input('token');
 
@@ -27,24 +34,7 @@ class DeployController extends Controller
 
         $results = [];
 
-        // 1. Git pull if exec is available
-        if (function_exists('exec')) {
-            $basePath = base_path();
-            $gitOutput = [];
-            $status = 0;
-            exec("cd {$basePath} && git pull origin main 2>&1", $gitOutput, $status);
-            $results['git_pull'] = [
-                'status_code' => $status,
-                'output' => implode("\n", $gitOutput),
-            ];
-        } else {
-            $results['git_pull'] = [
-                'status_code' => -1,
-                'output' => 'exec() function is disabled in php.ini. Git pull must be run via SSH or cPanel Git.',
-            ];
-        }
-
-        // 2. Run Database Migrations
+        // 1. Run Database Migrations
         try {
             Artisan::call('migrate', ['--force' => true]);
             $results['migrations'] = trim(Artisan::output()) ?: 'Migrations up to date.';
@@ -52,18 +42,85 @@ class DeployController extends Controller
             $results['migrations_error'] = $e->getMessage();
         }
 
-        // 3. Run Seeders (Our Team Batch 6, Hero Slider, Articles, CMS Content)
+        // 2. Run Seeders (Our Team Batch 6, Hero Slider, Articles, CMS Content)
         try {
-            Artisan::call('db:seed', ['--class' => 'Database\\Seeders\\LeadersDetailsAboutSeeder', '--force' => true]);
-            Artisan::call('db:seed', ['--class' => 'Database\\Seeders\\HIProgrammeHeroSeeder', '--force' => true]);
-            Artisan::call('db:seed', ['--class' => 'Database\\Seeders\\ArticleSeeder', '--force' => true]);
-            Artisan::call('db:seed', ['--class' => 'Database\\Seeders\\CmsContentSeeder', '--force' => true]);
+            if (class_exists('Database\\Seeders\\LeadersDetailsAboutSeeder')) {
+                Artisan::call('db:seed', ['--class' => 'Database\\Seeders\\LeadersDetailsAboutSeeder', '--force' => true]);
+            }
+            if (class_exists('Database\\Seeders\\HIProgrammeHeroSeeder')) {
+                Artisan::call('db:seed', ['--class' => 'Database\\Seeders\\HIProgrammeHeroSeeder', '--force' => true]);
+            }
+            if (class_exists('Database\\Seeders\\ArticleSeeder')) {
+                Artisan::call('db:seed', ['--class' => 'Database\\Seeders\\ArticleSeeder', '--force' => true]);
+            }
+            if (class_exists('Database\\Seeders\\CmsContentSeeder')) {
+                Artisan::call('db:seed', ['--class' => 'Database\\Seeders\\CmsContentSeeder', '--force' => true]);
+            }
             $results['seeders'] = 'Seeders executed successfully (Our Team, Heroes, Articles, CMS Content).';
         } catch (\Throwable $e) {
             $results['seeders_error'] = $e->getMessage();
         }
 
-        // 4. Ensure storage symlink exists
+        // 3. Ensure Admin Users exist and have correct credentials in DB
+        try {
+            $now = now();
+            DB::table('users')->updateOrInsert(
+                ['email' => 'hikamartech@gmail.com'],
+                [
+                    'name' => 'Admin HI',
+                    'password' => Hash::make('ADMIN111'),
+                    'is_admin' => 1,
+                    'role' => 'superadmin',
+                    'division' => 'Tech',
+                    'is_active' => 1,
+                    'email_verified_at' => $now,
+                    'updated_at' => $now,
+                ]
+            );
+
+            DB::table('users')->updateOrInsert(
+                ['email' => 'admin@mail.com'],
+                [
+                    'name' => 'Superadmin',
+                    'password' => Hash::make('tes123'),
+                    'is_admin' => 1,
+                    'role' => 'superadmin',
+                    'division' => 'Tech',
+                    'is_active' => 1,
+                    'email_verified_at' => $now,
+                    'updated_at' => $now,
+                ]
+            );
+
+            $results['admin_user'] = 'Admin accounts (hikamartech@gmail.com & admin@mail.com) verified and active.';
+        } catch (\Throwable $e) {
+            $results['admin_user_error'] = $e->getMessage();
+        }
+
+        // 4. Ensure Recruitment Announcement in DB exists
+        try {
+            if (class_exists('App\\Models\\RecruitmentAnnouncement')) {
+                $announcement = RecruitmentAnnouncement::first();
+                if (!$announcement) {
+                    RecruitmentAnnouncement::create([
+                        'status' => 'stay_tuned',
+                        'batch_label' => 'Batch 6',
+                        'stay_tuned_badge' => 'STAY TUNED',
+                        'stay_tuned_title' => 'Belum ada rekrutmen yang dibuka saat ini',
+                        'stay_tuned_description' => 'Informasi rekrutmen berikutnya akan diumumkan melalui kanal resmi House Ilmu Indonesia.',
+                        'stay_tuned_button_text' => 'Pantau Media Sosial',
+                        'stay_tuned_button_url' => 'https://www.instagram.com/houseilmu.id',
+                    ]);
+                    $results['announcement_status'] = 'Created initial stay_tuned announcement.';
+                } else {
+                    $results['announcement_status'] = 'Preserved existing announcement (status: ' . $announcement->status . ').';
+                }
+            }
+        } catch (\Throwable $e) {
+            $results['announcement_error'] = $e->getMessage();
+        }
+
+        // 5. Ensure storage symlink exists
         try {
             Artisan::call('storage:link');
             $results['storage_link'] = trim(Artisan::output()) ?: 'Storage linked.';
@@ -71,7 +128,7 @@ class DeployController extends Controller
             $results['storage_link_error'] = $e->getMessage();
         }
 
-        // 5. Clear Laravel caches
+        // 6. Clear Laravel caches
         try {
             Artisan::call('optimize:clear');
             $results['cache_cleared'] = true;
@@ -79,28 +136,7 @@ class DeployController extends Controller
             $results['cache_error'] = $e->getMessage();
         }
 
-        // 6. Ensure Recruitment Announcement in DB exists (preserve admin choice if already set)
-        try {
-            $announcement = RecruitmentAnnouncement::first();
-            if (!$announcement) {
-                RecruitmentAnnouncement::create([
-                    'status' => 'stay_tuned',
-                    'batch_label' => 'Batch 6',
-                    'stay_tuned_badge' => 'STAY TUNED',
-                    'stay_tuned_title' => 'Belum ada rekrutmen yang dibuka saat ini',
-                    'stay_tuned_description' => 'Informasi rekrutmen berikutnya akan diumumkan melalui kanal resmi House Ilmu Indonesia.',
-                    'stay_tuned_button_text' => 'Pantau Media Sosial',
-                    'stay_tuned_button_url' => 'https://www.instagram.com/houseilmu.id',
-                ]);
-                $results['announcement_status'] = 'Created initial stay_tuned announcement.';
-            } else {
-                $results['announcement_status'] = 'Preserved existing announcement (status: ' . $announcement->status . ').';
-            }
-        } catch (\Throwable $e) {
-            $results['announcement_error'] = $e->getMessage();
-        }
-
-        // 7. Sync static assets from public/ to root public_html for direct web server delivery
+        // 7. Sync static assets from public/ to root public_html if needed
         try {
             $publicDir = public_path();
             $rootDir = base_path();
@@ -108,71 +144,40 @@ class DeployController extends Controller
                 foreach (['build', 'css', 'img', 'js'] as $dir) {
                     $src = $publicDir . DIRECTORY_SEPARATOR . $dir;
                     $dst = $rootDir . DIRECTORY_SEPARATOR . $dir;
-                    if (\Illuminate\Support\Facades\File::isDirectory($src)) {
-                        \Illuminate\Support\Facades\File::copyDirectory($src, $dst);
+                    if (File::isDirectory($src)) {
+                        File::copyDirectory($src, $dst);
                     }
                 }
                 foreach (['favicon.ico', 'robots.txt'] as $file) {
                     $src = $publicDir . DIRECTORY_SEPARATOR . $file;
                     $dst = $rootDir . DIRECTORY_SEPARATOR . $file;
-                    if (\Illuminate\Support\Facades\File::exists($src)) {
-                        \Illuminate\Support\Facades\File::copy($src, $dst);
+                    if (File::exists($src)) {
+                        File::copy($src, $dst);
                     }
                 }
-                $results['asset_sync'] = 'Assets copied from public/ to root public_html successfully.';
             }
 
-            // Also ensure storage/team and storage/articles exist in base_path('storage')
+            // Mirror storage media
             $storagePublic = storage_path('app/public');
             $baseStorage = base_path('storage');
             foreach (['team', 'articles'] as $subDir) {
                 $src = $storagePublic . DIRECTORY_SEPARATOR . $subDir;
                 $dst = $baseStorage . DIRECTORY_SEPARATOR . $subDir;
-                if (\Illuminate\Support\Facades\File::isDirectory($src)) {
-                    \Illuminate\Support\Facades\File::copyDirectory($src, $dst);
+                if (File::isDirectory($src)) {
+                    File::copyDirectory($src, $dst);
                 }
             }
-            $results['storage_sync'] = 'Storage media (team & articles) mirrored to web storage successfully.';
+            $results['asset_sync'] = 'Assets copied from public/ to root public_html successfully.';
         } catch (\Throwable $e) {
             $results['asset_sync_error'] = $e->getMessage();
         }
 
-        // 8. Ensure Admin User exists and has correct credentials
-        try {
-            $customEmail = $request->input('email', 'hikamartech@gmail.com');
-            $customPassword = $request->input('password', 'ADMIN111');
-
-            $adminUser = \App\Models\User::firstOrNew(['email' => $customEmail]);
-            $adminUser->name = 'Admin HI';
-            $adminUser->password = $customPassword; // Automatically hashed via model cast
-            $adminUser->is_admin = true;
-            $adminUser->role = \App\Models\User::ROLE_SUPERADMIN;
-            $adminUser->division = 'Tech';
-            $adminUser->is_active = true;
-            $adminUser->save();
-
-            // Also ensure default fallback admin exists
-            $defaultAdmin = \App\Models\User::firstOrNew(['email' => 'admin@mail.com']);
-            if (!$defaultAdmin->exists) {
-                $defaultAdmin->name = 'Superadmin';
-                $defaultAdmin->password = 'tes123';
-                $defaultAdmin->is_admin = true;
-                $defaultAdmin->role = \App\Models\User::ROLE_SUPERADMIN;
-                $defaultAdmin->division = 'Tech';
-                $defaultAdmin->is_active = true;
-                $defaultAdmin->save();
-            }
-
-            $results['admin_user'] = "Admin user {$customEmail} verified and updated successfully.";
-        } catch (\Throwable $e) {
-            $results['admin_user_error'] = $e->getMessage();
-        }
-
         return response()->json([
             'success' => true,
-            'message' => 'Server deployment & cache clear finished successfully!',
+            'message' => 'Deployment & cache clear finished successfully!',
             'details' => $results,
-        ], 200, [], JSON_PRETTY_PRINT);
+        ], 200, [], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     }
 }
+
 
