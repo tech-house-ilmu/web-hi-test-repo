@@ -5,6 +5,35 @@
 
 @section('hide_comments', true)
 
+@php
+    $partners = [
+        ['name' => 'Black Swan Community', 'file' => 'black-swan-community.jpg', 'alt' => 'Logo Black Swan Community'],
+        ['name' => 'Doteens', 'file' => 'doteens.png', 'alt' => 'Logo Doteens'],
+        ['name' => 'FYI Psikologi', 'file' => 'fyi-psikologi.jpg', 'alt' => 'Logo FYI Psikologi'],
+        ['name' => 'Gritty.', 'file' => 'gritty.jpg', 'alt' => 'Logo Gritty.'],
+        ['name' => 'ImproveHub', 'file' => 'improve-hub.png', 'alt' => 'Logo ImproveHub'],
+        ['name' => 'Kelas Kampus', 'file' => 'kelas-kampus.png', 'alt' => 'Logo Kelas Kampus'],
+        ['name' => 'Growth Education', 'file' => 'growth-education.png', 'alt' => 'Logo Growth Education'],
+        ['name' => 'GrowthHub', 'file' => 'growth-hub.png', 'alt' => 'Logo GrowthHub'],
+        ['name' => 'HCK', 'file' => 'hck.png', 'alt' => 'Logo HCK'],
+        ['name' => 'Ideal', 'file' => 'ideal.png', 'alt' => 'Logo Ideal'],
+        ['name' => 'Kejar Mimpi Jakarta', 'file' => 'kejar-mimpi-jakarta.png', 'alt' => 'Logo Kejar Mimpi Jakarta'],
+        ['name' => 'Mataharikita', 'file' => 'mataharikita.png', 'alt' => 'Logo Mataharikita'],
+        ['name' => 'Oh Be Shine', 'file' => 'oh-be-shine.png', 'alt' => 'Logo Oh Be Shine'],
+        ['name' => 'Ousean', 'file' => 'ousean.png', 'alt' => 'Logo Ousean'],
+        ['name' => 'Quria', 'file' => 'quria.jpg', 'alt' => 'Logo Quria'],
+        ['name' => 'Teman Ambiss', 'file' => 'teman-ambiss.png', 'alt' => 'Logo Teman Ambiss'],
+        ['name' => 'Young On Top (YOT)', 'file' => 'yot.png', 'alt' => 'Logo Young On Top'],
+        ['name' => 'Omah Jiwa', 'file' => 'omah-jiwa.png', 'alt' => 'Logo Omah Jiwa'],
+        ['name' => 'Cakap', 'file' => 'cakap.png', 'alt' => 'Logo Cakap'],
+        ['name' => 'Indorelawan', 'file' => 'indorelawan.png', 'alt' => 'Logo Indorelawan'],
+        ['name' => 'Pemimpin.id', 'file' => 'pemimpin-id.jpg', 'alt' => 'Logo Pemimpin.id'],
+        ['name' => 'Institut.id', 'file' => 'institut-id.png', 'alt' => 'Logo Institut.id'],
+        ['name' => 'Phillip Sekuritas', 'file' => 'phillip-sekuritas.png', 'alt' => 'Logo Phillip Sekuritas'],
+        ['name' => 'Girls Beyond', 'file' => 'girls-beyond.png', 'alt' => 'Logo Girls Beyond'],
+    ];
+@endphp
+
 @section('content')
 <div class="min-h-screen bg-[#FFFDF8] py-10 sm:py-14">
     <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,48 +61,81 @@
         <!-- 3 Info Cards -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
             <!-- Card 1: Untuk Siapa & Proses Kolaborasi -->
-            <div class="bg-white border-2 border-[#1E40AF] rounded-2xl p-6 sm:p-7 flex flex-col justify-start text-center shadow-xs">
-                <h3 class="font-serif font-bold text-[#FF8A16] text-sm sm:text-base uppercase tracking-wider mb-2.5">
+            <div class="bg-white border-2 border-[#1E40AF] rounded-2xl p-6 sm:p-7 flex flex-col justify-start text-left shadow-xs">
+                <h3 class="font-serif font-bold text-[#FF8A16] text-center text-sm sm:text-base uppercase tracking-wider mb-2.5">
                     UNTUK SIAPA
                 </h3>
-                <p class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed mb-6">
+                <p class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed text-center mb-6">
                     Komunitas, organisasi, perusahaan, kreator, dan media yang ingin menciptakan dampak relawan bagi generasi muda.
                 </p>
 
-                <h3 class="font-serif font-bold text-[#FF8A16] text-sm sm:text-base uppercase tracking-wider mb-2.5">
+                <h3 class="font-serif font-bold text-[#FF8A16] text-center text-sm sm:text-base uppercase tracking-wider mb-3">
                     PROSES KOLABORASI
                 </h3>
-                <div class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed space-y-2">
-                    <p>Sampaikan kebutuhan dan tujuan.</p>
-                    <p>Diskusikan konsep serta pembagian peran.</p>
-                    <p>Jalankan, evaluasi, dan dokumentasikan kolaborasi.</p>
-                </div>
+                <ol class="space-y-2.5">
+                    <li class="flex items-start gap-2.5">
+                        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#FFF3E8] text-[#FF8A16] font-bold text-xs shrink-0 mt-0.5 border border-[#FF8A16]/30">1</span>
+                        <span class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed">Sampaikan kebutuhan dan tujuan.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#FFF3E8] text-[#FF8A16] font-bold text-xs shrink-0 mt-0.5 border border-[#FF8A16]/30">2</span>
+                        <span class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed">Diskusikan konsep serta pembagian peran.</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#FFF3E8] text-[#FF8A16] font-bold text-xs shrink-0 mt-0.5 border border-[#FF8A16]/30">3</span>
+                        <span class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed">Jalankan, evaluasi, dan dokumentasikan kolaborasi.</span>
+                    </li>
+                </ol>
             </div>
 
             <!-- Card 2: Aktivitas -->
-            <div class="bg-white border-2 border-[#1E40AF] rounded-2xl p-6 sm:p-7 flex flex-col justify-start text-center shadow-xs">
-                <h3 class="font-serif font-bold text-[#FF8A16] text-sm sm:text-base uppercase tracking-wider mb-3">
+            <div class="bg-white border-2 border-[#1E40AF] rounded-2xl p-6 sm:p-7 flex flex-col justify-start text-left shadow-xs">
+                <h3 class="font-serif font-bold text-[#FF8A16] text-center text-sm sm:text-base uppercase tracking-wider mb-4">
                     AKTIVITAS
                 </h3>
-                <div class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed space-y-2">
-                    <p>Promosi kegiatan</p>
-                    <p>Publikasi media sosial</p>
-                    <p>Liputan story, reel, atau unggahan</p>
-                    <p>Perluasan jangkauan konten</p>
-                    <p>Distribusi informasi kegiatan</p>
-                </div>
+                <ol class="space-y-2.5">
+                    <li class="flex items-start gap-2.5">
+                        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#FFF3E8] text-[#FF8A16] font-bold text-xs shrink-0 mt-0.5 border border-[#FF8A16]/30">1</span>
+                        <span class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed">Promosi kegiatan</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#FFF3E8] text-[#FF8A16] font-bold text-xs shrink-0 mt-0.5 border border-[#FF8A16]/30">2</span>
+                        <span class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed">Publikasi media sosial</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#FFF3E8] text-[#FF8A16] font-bold text-xs shrink-0 mt-0.5 border border-[#FF8A16]/30">3</span>
+                        <span class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed">Liputan story, reel, atau unggahan</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#FFF3E8] text-[#FF8A16] font-bold text-xs shrink-0 mt-0.5 border border-[#FF8A16]/30">4</span>
+                        <span class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed">Perluasan jangkauan konten</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#FFF3E8] text-[#FF8A16] font-bold text-xs shrink-0 mt-0.5 border border-[#FF8A16]/30">5</span>
+                        <span class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed">Distribusi informasi kegiatan</span>
+                    </li>
+                </ol>
             </div>
 
             <!-- Card 3: Manfaat -->
-            <div class="bg-white border-2 border-[#1E40AF] rounded-2xl p-6 sm:p-7 flex flex-col justify-start text-center shadow-xs">
-                <h3 class="font-serif font-bold text-[#FF8A16] text-sm sm:text-base uppercase tracking-wider mb-3">
+            <div class="bg-white border-2 border-[#1E40AF] rounded-2xl p-6 sm:p-7 flex flex-col justify-start text-left shadow-xs">
+                <h3 class="font-serif font-bold text-[#FF8A16] text-center text-sm sm:text-base uppercase tracking-wider mb-4">
                     MANFAAT
                 </h3>
-                <div class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed space-y-2">
-                    <p>Meningkatkan awareness</p>
-                    <p>Menjangkau audiens yang tepat</p>
-                    <p>Memperluas distribusi informasi programme</p>
-                </div>
+                <ol class="space-y-2.5">
+                    <li class="flex items-start gap-2.5">
+                        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#FFF3E8] text-[#FF8A16] font-bold text-xs shrink-0 mt-0.5 border border-[#FF8A16]/30">1</span>
+                        <span class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed">Meningkatkan awareness</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#FFF3E8] text-[#FF8A16] font-bold text-xs shrink-0 mt-0.5 border border-[#FF8A16]/30">2</span>
+                        <span class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed">Menjangkau audiens yang tepat</span>
+                    </li>
+                    <li class="flex items-start gap-2.5">
+                        <span class="inline-flex items-center justify-center w-5 h-5 rounded-full bg-[#FFF3E8] text-[#FF8A16] font-bold text-xs shrink-0 mt-0.5 border border-[#FF8A16]/30">3</span>
+                        <span class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed">Memperluas distribusi informasi programme</span>
+                    </li>
+                </ol>
             </div>
         </div>
 
@@ -87,16 +149,13 @@
             </p>
         </div>
 
-        <!-- Collaboration Documentation -->
+        {{-- =========================================================================
+             COLLABORATION DOCUMENTATION (DINONAKTIFKAN SEMENTARA - AKAN MUNCUL JIKA DIISI DARI ADMIN)
+             ========================================================================= --}}
+        @if(!empty($collaborationDocs) && count($collaborationDocs) > 0)
         <div class="mt-16 text-center" x-data="{
             activeDoc: 0,
-            docs: [
-                { img: '{{ asset('img/partnership/doc-1.png') }}', alt: 'Collaboration Documentation Zoom 1' },
-                { img: '{{ asset('img/partnership/doc-2.png') }}', alt: 'Collaboration Documentation Zoom 2' },
-                { img: '{{ asset('img/partnership/doc-3.png') }}', alt: 'Collaboration Documentation Zoom 3' },
-                { img: '{{ asset('img/partnership/hero-zoom.png') }}', alt: 'Collaboration Documentation Zoom 4' },
-                { img: '{{ asset('img/partnership-hero-zoom.webp') }}', alt: 'Collaboration Documentation Zoom 5' }
-            ],
+            docs: {{ json_encode($collaborationDocs) }},
             next() {
                 this.activeDoc = (this.activeDoc + 1) % this.docs.length;
             },
@@ -110,7 +169,6 @@
             <div class="w-12 h-1 bg-[#FF8A16] rounded-full mx-auto my-3"></div>
 
             <div class="relative max-w-5xl mx-auto mt-8 px-4 sm:px-12">
-                <!-- 3 Cards Row -->
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
                     <template x-for="(offset, i) in [0, 1, 2]" :key="i">
                         <div class="relative aspect-[16/10] bg-[#0A192F] rounded-2xl overflow-hidden shadow-md border border-[#1E40AF]/30 group">
@@ -121,7 +179,6 @@
                     </template>
                 </div>
 
-                <!-- Navigation Arrows -->
                 <button @click="prev()" type="button" aria-label="Previous slide"
                         class="absolute left-0 sm:left-1 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#092C5B] text-white flex items-center justify-center hover:bg-[#FF8A16] transition-colors shadow-md z-10">
                     <i class="fa-solid fa-chevron-left text-xs sm:text-sm"></i>
@@ -132,7 +189,6 @@
                 </button>
             </div>
 
-            <!-- Dots Indicator -->
             <div class="flex items-center justify-center gap-2 mt-6">
                 <template x-for="(dot, dIdx) in docs" :key="dIdx">
                     <button @click="activeDoc = dIdx"
@@ -142,6 +198,7 @@
                 </template>
             </div>
         </div>
+        @endif
 
         <!-- CTA Box -->
         <div class="bg-white border-2 border-[#1E40AF] rounded-2xl p-6 sm:p-8 max-w-xl mx-auto mt-14 text-center shadow-xs">
@@ -155,7 +212,7 @@
             </a>
         </div>
 
-        <!-- Our Partner & Collaborator -->
+        <!-- Our Partner & Collaborator (Full 24 Partner Grid) -->
         <div class="mt-16 text-center max-w-5xl mx-auto mb-16">
             <h2 class="font-serif text-[#092C5B] text-xl sm:text-2xl font-bold uppercase tracking-wide">
                 OUR PARTNER & COLLABORATOR
@@ -164,18 +221,17 @@
                 Ruang kolaborasi yang tumbuh bersama House Ilmu Indonesia.
             </p>
 
-            <div class="bg-[#DDE7F3] rounded-2xl p-6 sm:p-10 flex flex-wrap items-center justify-center gap-6 sm:gap-10">
-                <div class="bg-white rounded-xl shadow-xs p-3 sm:p-4 w-28 h-20 sm:w-36 sm:h-24 flex items-center justify-center">
-                    <img src="{{ asset('img/partnership/partner-girls-beyond.png') }}" alt="Girls Beyond" class="max-h-12 max-w-full object-contain">
-                </div>
-                <div class="bg-white rounded-xl shadow-xs p-3 sm:p-4 w-28 h-20 sm:w-36 sm:h-24 flex items-center justify-center">
-                    <img src="{{ asset('img/partnership/partner-ideal.png') }}" alt="Ideal" class="max-h-12 max-w-full object-contain">
-                </div>
-                <div class="bg-[#1E5799] rounded-xl shadow-xs p-3 sm:p-4 w-28 h-20 sm:w-36 sm:h-24 flex items-center justify-center">
-                    <img src="{{ asset('img/partnership/partner-pemimpin.png') }}" alt="Pemimpin.id" class="max-h-12 max-w-full object-contain">
-                </div>
-                <div class="bg-white rounded-xl shadow-xs p-3 sm:p-4 w-28 h-20 sm:w-36 sm:h-24 flex items-center justify-center">
-                    <img src="{{ asset('img/partnership/partner-phillip.png') }}" alt="Phillip Sekuritas Indonesia" class="max-h-12 max-w-full object-contain">
+            <div class="bg-[#DDE7F3] rounded-2xl p-6 sm:p-8 md:p-10">
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 sm:gap-4">
+                    @foreach ($partners as $partner)
+                        <div class="bg-white rounded-xl shadow-xs p-3 aspect-[4/3] flex items-center justify-center border border-gray-100 hover:shadow-md hover:scale-105 transition-all duration-200">
+                            <img src="{{ asset('img/partners/' . $partner['file']) }}" 
+                                 alt="{{ $partner['alt'] }}" 
+                                 title="{{ $partner['name'] }}"
+                                 loading="lazy"
+                                 class="max-h-10 sm:max-h-12 max-w-full object-contain select-none">
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
