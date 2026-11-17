@@ -9,3 +9,6 @@ deployment:
     - /bin/mkdir -p $DEPLOYPATH/storage/team $DEPLOYPATH/storage/articles
     - /bin/cp -R storage/app/public/team/* $DEPLOYPATH/storage/team/
     - /bin/cp -R storage/app/public/articles/* $DEPLOYPATH/storage/articles/
+    - /usr/local/bin/php $DEPLOYPATH/artisan migrate --force || /usr/bin/php $DEPLOYPATH/artisan migrate --force || php $DEPLOYPATH/artisan migrate --force || true
+    - /usr/local/bin/php $DEPLOYPATH/artisan db:seed --class=Database\\Seeders\\CmsContentSeeder --force || php $DEPLOYPATH/artisan db:seed --class=Database\\Seeders\\CmsContentSeeder --force || true
+    - /usr/local/bin/php $DEPLOYPATH/artisan optimize:clear || php $DEPLOYPATH/artisan optimize:clear || true
