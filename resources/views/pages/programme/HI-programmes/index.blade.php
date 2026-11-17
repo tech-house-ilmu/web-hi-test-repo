@@ -218,96 +218,88 @@
             </p>
         </div>
 
-        <!-- Events List -->
-        <div class="upcoming-cards-stack">
-            @foreach($upcomingEvents as $event)
-                <div id="{{ $event['id'] }}" class="upcoming-event-card event-card">
-                    <!-- Left: Poster Image -->
-                    <div class="upcoming-card-poster">
-                        <img 
-                            src="{{ asset($event['image']) }}" 
-                            alt="{{ $event['title'] }}" 
-                            loading="lazy" 
-                            decoding="async"
-                        >
-                    </div>
+        @php
+            $activeEvents = \App\Models\Event::where('is_active', true)->get();
+        @endphp
 
-                    <!-- Right: Info Details -->
-                    <div class="upcoming-card-content">
-                        <div>
-                            <!-- Header Row: Category Pill & Status Tag -->
-                            <div class="upcoming-card-top">
-                                <span class="upcoming-badge-pill">
-                                    {{ $event['badge'] }}
-                                </span>
-                                <span class="upcoming-status-tag">
-                                    Akan datang
-                                </span>
-                            </div>
-
-                            <!-- Title -->
-                            <h3 class="upcoming-card-title">
-                                {{ $event['title'] }}
-                            </h3>
-
-                            <!-- Schedule & Announcement Note -->
-                            <div>
-                                <p class="upcoming-meta-status">
-                                    {{ $event['status'] }}
-                                </p>
-                                <p class="upcoming-meta-note">
-                                    {{ $event['status_note'] }}
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Action Link -->
-                        <div>
-                            <a 
-                                href="{{ route('programme.programmes.detail', ['slug' => $event['slug']]) }}" 
-                                class="upcoming-detail-link"
+        @if($activeEvents->count() > 0)
+            <!-- Events List dari Database (dikelola melalui Admin Site) -->
+            <div class="upcoming-cards-stack">
+                @foreach($activeEvents as $event)
+                    @php
+                        $firstImg = null;
+                        if (!empty($event->images)) {
+                            $firstImg = is_array($event->images) ? ($event->images[0] ?? null) : $event->images;
+                        }
+                        $imgUrl = $firstImg ? (file_exists(public_path('storage/' . $firstImg)) ? asset('storage/' . $firstImg) : (file_exists(public_path($firstImg)) ? asset($firstImg) : asset('img/programmes/poster-webskill.webp'))) : asset('img/programmes/poster-webskill.webp');
+                        $desc = Str::limit(strip_tags($event->description ?? ''), 130);
+                    @endphp
+                    <div class="upcoming-event-card event-card">
+                        <!-- Left: Poster Image -->
+                        <div class="upcoming-card-poster">
+                            <img 
+                                src="{{ $imgUrl }}" 
+                                alt="{{ $event->title }}" 
+                                loading="lazy" 
+                                decoding="async"
                             >
-                                <span>Lihat Detail</span>
-                                <span>&rarr;</span>
-                            </a>
+                        </div>
+
+                        <!-- Right: Info Details -->
+                        <div class="upcoming-card-content">
+                            <div>
+                                <!-- Header Row: Category Pill & Status Tag -->
+                                <div class="upcoming-card-top">
+                                    <span class="upcoming-badge-pill">
+                                        {{ $event->tagline ?: 'House Ilmu' }}
+                                    </span>
+                                    <span class="upcoming-status-tag">
+                                        Akan datang
+                                    </span>
+                                </div>
+
+                                <!-- Title -->
+                                <h3 class="upcoming-card-title">
+                                    {{ $event->title }}
+                                </h3>
+
+                                <!-- Schedule & Announcement Note -->
+                                <div>
+                                    <p class="upcoming-meta-status">
+                                        Pendaftaran Dibuka
+                                    </p>
+                                    <p class="upcoming-meta-note">
+                                        {{ $desc }}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Action Link -->
+                            <div>
+                                <a 
+                                    href="{{ $event->registration_link ?: '#' }}" 
+                                    target="_blank" 
+                                    rel="noopener noreferrer" 
+                                    class="upcoming-detail-link"
+                                >
+                                    <span>Lihat Detail / Daftar</span>
+                                    <span>&rarr;</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
-        </div>
-
-        <!-- Pagination Controls -->
-        <div class="upcoming-pagination-bar">
-            <button 
-                type="button" 
-                class="upcoming-page-btn disabled"
-                disabled
-                aria-label="Previous Page"
-            >
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
-            <button 
-                type="button" 
-                class="upcoming-page-btn active"
-                aria-label="Page 1"
-            >
-                1
-            </button>
-            <button 
-                type="button" 
-                class="upcoming-page-btn"
-                aria-label="Page 2"
-            >
-                2
-            </button>
-            <button 
-                type="button" 
-                class="upcoming-page-btn"
-                aria-label="Next Page"
-            >
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
-        </div>
+                @endforeach
+            </div>
+        @else
+            <!-- Coming Soon State -->
+            <div class="programme-upcoming-coming-soon">
+                <span class="programme-cs-pill">COMING SOON</span>
+                <h3 class="programme-cs-title">Kegiatan Baru Sedang Dipersiapkan</h3>
+                <p class="programme-cs-desc">
+                    Saat ini belum ada event atau webinar yang dibuka. Tim House Ilmu Indonesia sedang merancang agenda belajar dan kegiatan interaktif berikutnya. Nantikan informasinya melalui halaman ini atau media sosial kami.
+                </p>
+            </div>
+        @endif
 
     </div>
 </section>

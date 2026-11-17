@@ -34,8 +34,10 @@ export function initCareerPage() {
     -------------------------------------- */
     const recruitmentTabs = document.querySelectorAll('.recruitment-tab');
     const recruitmentPanel = document.getElementById('recruitmentPanel');
+    const recruitmentActionBtn = document.getElementById('recruitmentActionBtn');
+    const tabsContainer = document.getElementById('recruitmentTabsContainer');
 
-    const recruitmentContent = {
+    let recruitmentContent = {
         open: {
             label: 'REGISTRATION OPEN',
             title: 'Pendaftaran rekrutmen sedang dibuka!',
@@ -53,6 +55,14 @@ export function initCareerPage() {
         }
     };
 
+    if (tabsContainer && tabsContainer.dataset.content) {
+        try {
+            recruitmentContent = JSON.parse(tabsContainer.dataset.content);
+        } catch (e) {
+            // fallback to default
+        }
+    }
+
     if (recruitmentTabs.length > 0 && recruitmentPanel) {
         recruitmentTabs.forEach(tab => {
             tab.addEventListener('click', function () {
@@ -65,6 +75,11 @@ export function initCareerPage() {
                     <h3>${content.title}</h3>
                     <p>${content.description}</p>
                 `;
+
+                if (recruitmentActionBtn && content.btn_text && content.btn_url) {
+                    recruitmentActionBtn.innerHTML = `<span>${content.btn_text}</span> <span>→</span>`;
+                    recruitmentActionBtn.href = content.btn_url;
+                }
             });
         });
     }

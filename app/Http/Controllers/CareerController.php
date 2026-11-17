@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Division;
 use App\Models\Position;
+use App\Models\RecruitmentAnnouncement;
 use App\Models\TestimoniAlumniCareer;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
@@ -20,7 +21,9 @@ class CareerController extends Controller
             return Division::with(['positions' => fn($q) => $q->where('is_visible', true)])->get();
         });
 
-        return view('pages.career.career', compact('testimoniAlumni', 'divisions'));
+        $announcement = RecruitmentAnnouncement::first();
+
+        return view('pages.career.career', compact('testimoniAlumni', 'divisions', 'announcement'));
     }
 
     public function announcement(): View

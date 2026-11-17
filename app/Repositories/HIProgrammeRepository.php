@@ -9,6 +9,38 @@ class HIProgrammeRepository
      */
     public static function getHeroItems(): array
     {
+        try {
+            if (\Illuminate\Support\Facades\Schema::hasTable('h_i_programme_heroes')) {
+                $dbItems = \App\Models\HIProgrammeHero::where('is_active', true)
+                    ->orderBy('sort_order')
+                    ->get();
+
+                if ($dbItems->count() > 0) {
+                    return $dbItems->map(function ($item) {
+                        $img = $item->image;
+                        if ($img) {
+                            if (!str_starts_with($img, 'http') && !str_starts_with($img, 'img/') && !str_starts_with($img, 'storage/')) {
+                                $img = 'storage/' . $img;
+                            }
+                        } else {
+                            $img = 'img/programmes/poster-webskill.webp';
+                        }
+
+                        return [
+                            'id' => \Illuminate\Support\Str::slug($item->title),
+                            'title' => $item->title,
+                            'type' => $item->type,
+                            'badge' => $item->badge ?: $item->title,
+                            'image' => $img,
+                            'desc' => $item->desc ?? '',
+                        ];
+                    })->toArray();
+                }
+            }
+        } catch (\Throwable $e) {
+            // fallback to default array
+        }
+
         return [
             [
                 'id' => 'chill-ups',
@@ -51,7 +83,7 @@ class HIProgrammeRepository
                 'desc' => 'Sesi offline yang menemani peserta mempersiapkan diri untuk apply job melalui coaching dan praktik bersama.',
             ],
             [
-                'id' => 'main-ke-kantor',
+                'id' => '#main-ke-kantor',
                 'title' => '#MainkeKantor',
                 'type' => 'Program Luring',
                 'badge' => '#MainkeKantor',

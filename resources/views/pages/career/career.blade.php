@@ -123,16 +123,23 @@
                 <div class="alumni-grid" id="alumniGrid">
                     @if(isset($testimoniAlumni) && $testimoniAlumni->count() > 0)
                         @foreach($testimoniAlumni as $alumni)
-                            <article class="alumni-card" data-photo="{{ $alumni->testimoni_alumni_img ? Storage::url($alumni->testimoni_alumni_img) : '' }}">
-                                <div class="alumni-photo">
-                                    @if($alumni->testimoni_alumni_img)
-                                        <img src="{{ Storage::url($alumni->testimoni_alumni_img) }}" alt="{{ $alumni->testimoni_alumni_name }}">
-                                    @else
-                                        ▧ <small>FOTO ALUMNI</small>
-                                    @endif
+                            @php
+                                $photoUrl = $alumni->testimoni_alumni_img ? Storage::url($alumni->testimoni_alumni_img) : '';
+                            @endphp
+                            <article class="alumni-card" data-photo="{{ $photoUrl }}">
+                                <div class="alumni-card-header">
+                                    <span class="quote-mark">“</span>
+                                    <div class="alumni-avatar-wrap">
+                                        @if($photoUrl)
+                                            <img src="{{ $photoUrl }}" alt="{{ $alumni->testimoni_alumni_name }}" class="alumni-avatar-img">
+                                        @else
+                                            <div class="alumni-avatar-placeholder">
+                                                <i class="fa-solid fa-user"></i>
+                                            </div>
+                                        @endif
+                                    </div>
                                 </div>
                                 <div class="alumni-content">
-                                    <span class="quote-mark">“</span>
                                     <p>{{ Str::limit($alumni->testimoni_alumni_description, 130) }}</p>
                                     <strong>{{ $alumni->testimoni_alumni_name }}</strong>
                                     <span>{{ $alumni->testimoni_alumni_position }}</span>
@@ -142,11 +149,15 @@
                         @endforeach
                     @else
                         <article class="alumni-card">
-                            <div class="alumni-photo">
-                                ▧ <small>FOTO ALUMNI</small>
+                            <div class="alumni-card-header">
+                                <span class="quote-mark">“</span>
+                                <div class="alumni-avatar-wrap">
+                                    <div class="alumni-avatar-placeholder">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+                                </div>
                             </div>
                             <div class="alumni-content">
-                                <span class="quote-mark">“</span>
                                 <p>
                                     House Ilmu bukan cuma tempat untuk belajar, tapi juga tempat
                                     untuk bertemu orang-orang hebat, menemukan kesempatan baru,
@@ -159,11 +170,15 @@
                         </article>
 
                         <article class="alumni-card">
-                            <div class="alumni-photo">
-                                ▧ <small>FOTO ALUMNI</small>
+                            <div class="alumni-card-header">
+                                <span class="quote-mark">“</span>
+                                <div class="alumni-avatar-wrap">
+                                    <div class="alumni-avatar-placeholder">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+                                </div>
                             </div>
                             <div class="alumni-content">
-                                <span class="quote-mark">“</span>
                                 <p>
                                     Di HI saya mendapatkan pengalaman, teman, dan pengetahuan baru.
                                     Saya juga bisa menerapkan pengetahuan yang saya miliki untuk
@@ -176,11 +191,15 @@
                         </article>
 
                         <article class="alumni-card">
-                            <div class="alumni-photo">
-                                ▧ <small>FOTO ALUMNI</small>
+                            <div class="alumni-card-header">
+                                <span class="quote-mark">“</span>
+                                <div class="alumni-avatar-wrap">
+                                    <div class="alumni-avatar-placeholder">
+                                        <i class="fa-solid fa-user"></i>
+                                    </div>
+                                </div>
                             </div>
                             <div class="alumni-content">
-                                <span class="quote-mark">“</span>
                                 <p>
                                     Pengalamannya terasa berdampak karena saya belajar tentang
                                     team building, manajemen, dan pola pikir kepemimpinan.
@@ -255,41 +274,79 @@
     </section>
 
     <!-- RECRUITMENT ANNOUNCEMENT -->
+    @php
+        $statusMap = [
+            'dibuka' => 'open',
+            'open' => 'open',
+            'stay_tuned' => 'soon',
+            'soon' => 'soon',
+            'selesai' => 'closed',
+            'closed' => 'closed',
+        ];
+        $currentDbStatus = $announcement->status ?? 'stay_tuned';
+        $activeTabKey = $statusMap[$currentDbStatus] ?? 'soon';
+
+        $recruitmentData = [
+            'open' => [
+                'label' => ($announcement->open_badge ?? '') ?: 'PENDAFTARAN DIBUKA',
+                'title' => ($announcement->open_title ?? '') ?: 'Pendaftaran rekrutmen sedang dibuka!',
+                'description' => ($announcement->open_description ?? '') ?: 'Pilih posisi yang sesuai dengan minat dan kemampuanmu. Baca detail persyaratan sebelum melakukan pendaftaran.',
+                'btn_text' => ($announcement->open_button_text ?? '') ?: 'Jelajahi Lowongan',
+                'btn_url' => ($announcement->open_button_url ?? '') ?: '#career-opportunities',
+            ],
+            'soon' => [
+                'label' => ($announcement->stay_tuned_badge ?? '') ?: 'STAY TUNED',
+                'title' => ($announcement->stay_tuned_title ?? '') ?: 'Belum ada rekrutmen yang dibuka saat ini',
+                'description' => ($announcement->stay_tuned_description ?? '') ?: 'Informasi rekrutmen berikutnya akan diumumkan melalui kanal resmi House Ilmu Indonesia.',
+                'btn_text' => ($announcement->stay_tuned_button_text ?? '') ?: 'Pantau Media Sosial',
+                'btn_url' => ($announcement->stay_tuned_button_url ?? '') ?: 'https://www.instagram.com/houseilmu.id',
+            ],
+            'closed' => [
+                'label' => ($announcement->closed_badge ?? '') ?: 'REKRUTMEN SELESAI',
+                'title' => ($announcement->closed_title ?? '') ?: 'Rekrutmen telah selesai',
+                'description' => ($announcement->closed_description ?? '') ?: 'Terima kasih kepada seluruh pendaftar yang telah berpartisipasi dalam proses rekrutmen House Ilmu Indonesia.',
+                'btn_text' => ($announcement->closed_button_text ?? '') ?: 'Cek Hasil Seleksi',
+                'btn_url' => ($announcement->closed_button_url ?? '') ?: route('career.announcement'),
+            ],
+        ];
+
+        $currentData = $recruitmentData[$activeTabKey];
+    @endphp
+
     <section class="career-recruitment" id="recruitment">
         <div class="career-container">
             <div class="career-heading">
                 <h2>RECRUITMENT ANNOUNCEMENT</h2>
                 <span class="heading-line"></span>
                 <p>
-                    Pilih status untuk melihat tampilan informasi rekrutmen yang sesuai.
+                    Informasi resmi pendaftaran dan tahapan seleksi rekrutmen House Ilmu Indonesia.
                 </p>
             </div>
 
-            <div class="recruitment-tabs">
-                <button type="button" class="recruitment-tab" data-status="open">
+            <div class="recruitment-tabs" id="recruitmentTabsContainer" data-content="{{ json_encode($recruitmentData) }}">
+                <button type="button" class="recruitment-tab {{ $activeTabKey === 'open' ? 'active' : '' }}" data-status="open">
                     Pendaftaran Dibuka
                 </button>
 
-                <button type="button" class="recruitment-tab active" data-status="soon">
+                <button type="button" class="recruitment-tab {{ $activeTabKey === 'soon' ? 'active' : '' }}" data-status="soon">
                     Stay Tuned
                 </button>
 
-                <button type="button" class="recruitment-tab" data-status="closed">
+                <button type="button" class="recruitment-tab {{ $activeTabKey === 'closed' ? 'active' : '' }}" data-status="closed">
                     Rekrutmen Selesai
                 </button>
             </div>
 
             <div class="recruitment-panel" id="recruitmentPanel">
-                <span class="recruitment-label">STAY TUNED</span>
-                <h3>Belum ada rekrutmen yang dibuka saat ini</h3>
-                <p>
-                    Informasi rekrutmen berikutnya akan diumumkan melalui kanal resmi House Ilmu Indonesia.
-                </p>
+                <span class="recruitment-label">{{ $currentData['label'] }}</span>
+                <h3>{{ $currentData['title'] }}</h3>
+                <p>{{ $currentData['description'] }}</p>
             </div>
 
-            <div class="text-center mt-6">
-                <a href="{{ route('career.announcement') }}" class="career-btn-outline inline-block">
-                    Halaman Detail Pengumuman →
+            <div class="text-center mt-6" id="recruitmentActionWrap">
+                <a href="{{ $currentData['btn_url'] }}" id="recruitmentActionBtn" class="career-btn-outline inline-block" {{ str_starts_with($currentData['btn_url'], 'http') ? 'target="_blank" rel="noopener noreferrer"' : '' }}>
+                    <span>{{ $currentData['btn_text'] }}</span>
+                    <span>→</span>
                 </a>
             </div>
         </div>

@@ -25,21 +25,30 @@
         <div class="stories-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px;">
             @if(isset($testimoniAlumni) && $testimoniAlumni->count() > 0)
                 @foreach($testimoniAlumni as $alumni)
-                    <article class="story-card" style="background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 5px 18px rgba(16,45,92,.08);">
-                        <div class="story-image" style="width: 100%; height: 220px; background: #e9edf2; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                            @if($alumni->testimoni_alumni_img)
-                                <img src="{{ Storage::url($alumni->testimoni_alumni_img) }}" alt="{{ $alumni->testimoni_alumni_name }}" style="width: 100%; height: 100%; object-fit: cover;">
-                            @else
-                                <span style="color: #77869a; font-size: 12px; font-weight: 800; letter-spacing: 1px;">FOTO ALUMNI</span>
-                            @endif
-                        </div>
-                        <div class="story-content" style="padding: 24px;">
-                            <span class="quote-mark" style="color: #ff8517; font-size: 28px; font-weight: 900; line-height: 1;">“</span>
-                            <h2 style="font-size: 20px; font-weight: 800; color: #102d5c; margin: 12px 0 6px;">{{ $alumni->testimoni_alumni_name }}</h2>
-                            <div class="story-role" style="color: #8191a8; font-size: 13px; font-weight: 600; margin-bottom: 12px;">{{ $alumni->testimoni_alumni_position }}</div>
+                    @php
+                        $photoUrl = $alumni->testimoni_alumni_img ? Storage::url($alumni->testimoni_alumni_img) : '';
+                    @endphp
+                    <article class="story-card" style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 5px 18px rgba(16,45,92,.08); padding: 26px 24px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px;">
+                                <span class="quote-mark" style="color: #ff8517; font-size: 36px; font-weight: 900; line-height: 1;">“</span>
+                                <div style="width: 58px; height: 58px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 2px solid #FF8A18; box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: center; background: #F8FAFC;">
+                                    @if($photoUrl)
+                                        <img src="{{ $photoUrl }}" alt="{{ $alumni->testimoni_alumni_name }}" style="width: 100%; height: 100%; object-fit: cover;">
+                                    @else
+                                        <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #EEF4FF 0%, #DCE8F8 100%); color: #205EB6; font-size: 22px;">
+                                            <i class="fa-solid fa-user"></i>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                            <h2 style="font-size: 19px; font-weight: 800; color: #102d5c; margin: 0 0 4px;">{{ $alumni->testimoni_alumni_name }}</h2>
+                            <div class="story-role" style="color: #8191a8; font-size: 13px; font-weight: 600; margin-bottom: 14px;">{{ $alumni->testimoni_alumni_position }}</div>
                             <p style="color: #556882; font-size: 14px; line-height: 1.8; margin-bottom: 16px;">
                                 {{ $alumni->testimoni_alumni_description }}
                             </p>
+                        </div>
+                        <div>
                             <button type="button" class="open-alumni-modal" style="background: none; border: none; padding: 0; color: #245fb5; font-weight: 800; font-size: 13px; cursor: pointer;">
                                 Selengkapnya →
                             </button>
@@ -84,20 +93,27 @@
                 @endphp
 
                 @foreach($defaultStories as $story)
-                    <article class="story-card" style="background: #fff; border-radius: 14px; overflow: hidden; box-shadow: 0 5px 18px rgba(16,45,92,.08);">
-                        <div class="story-image" style="width: 100%; height: 200px; background: #e9edf2; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-                            <span style="color: #77869a; font-size: 12px; font-weight: 800; letter-spacing: 1px;">FOTO ALUMNI</span>
-                        </div>
-                        <div class="story-content" style="padding: 24px;">
-                            <span class="quote-mark" style="color: #ff8517; font-size: 28px; font-weight: 900; line-height: 1;">“</span>
-                            <h2 style="font-size: 20px; font-weight: 800; color: #102d5c; margin: 12px 0 6px;">{{ $story['name'] }}</h2>
-                            <div class="story-role" style="color: #8191a8; font-size: 13px; font-weight: 600; margin-bottom: 12px;">{{ $story['role'] }}</div>
+                    <article class="story-card" style="background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 5px 18px rgba(16,45,92,.08); padding: 26px 24px; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px;">
+                                <span class="quote-mark" style="color: #ff8517; font-size: 36px; font-weight: 900; line-height: 1;">“</span>
+                                <div style="width: 58px; height: 58px; border-radius: 50%; overflow: hidden; flex-shrink: 0; border: 2px solid #FF8A18; box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #EEF4FF 0%, #DCE8F8 100%); color: #205EB6; font-size: 22px;">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+                            </div>
+                            <h2 style="font-size: 19px; font-weight: 800; color: #102d5c; margin: 0 0 4px;">{{ $story['name'] }}</h2>
+                            <div class="story-role" style="color: #8191a8; font-size: 13px; font-weight: 600; margin-bottom: 14px;">{{ $story['role'] }}</div>
                             <p style="color: #556882; font-size: 14px; line-height: 1.8; margin-bottom: 16px;">
                                 {{ $story['story'] }}
                             </p>
+                        </div>
+                        <div>
                             <button type="button" class="open-alumni-modal" style="background: none; border: none; padding: 0; color: #245fb5; font-weight: 800; font-size: 13px; cursor: pointer;">
                                 Selengkapnya →
                             </button>
+                        </div>
+                    </article>
+                @endforeach
                         </div>
                     </article>
                 @endforeach

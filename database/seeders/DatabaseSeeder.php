@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
             ArticleSeeder::class,
             LeadersDetailsAboutSeeder::class,
             HITCCProgrammeSeeder::class,
+            HIProgrammeHeroSeeder::class,
         ]);
     }
 }

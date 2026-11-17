@@ -98,31 +98,19 @@
                 <p class="opportunity-empty-desc">Coba ubah kata kunci pencarian atau pilih kategori yang lain.</p>
             </div>
         @else
-            <!-- Coming Soon State (Akan tampil otomatis saat diinput melalui Admin Site) -->
+            <!-- Coming Soon State -->
             <div class="opportunity-coming-soon-card">
-                <div class="opportunity-coming-soon-badge-wrap">
-                    <span class="opportunity-coming-soon-badge">
-                        <span class="pulse-dot"></span>
-                        COMING SOON
-                    </span>
-                </div>
-
-                <div class="opportunity-coming-soon-icon-wrap">
-                    <i class="fa-solid fa-rocket" aria-hidden="true"></i>
-                </div>
+                <span class="opportunity-coming-soon-badge">
+                    COMING SOON
+                </span>
 
                 <h3 class="opportunity-coming-soon-title">
-                    Peluang Baru Sedang Dipersiapkan!
+                    Peluang Belum Tersedia
                 </h3>
 
                 <p class="opportunity-coming-soon-desc">
-                    Saat ini belum ada peluang magang, relawan, beasiswa, pertukaran pelajar, atau kompetisi aktif yang dibuka. Tim House Ilmu Indonesia sedang mengkurasi program-program berdampak terbaik untuk generasi muda. Pantau terus halaman ini!
+                    Saat ini belum ada peluang aktif yang dibuka. Tim House Ilmu Indonesia sedang menyiapkan program terbaik untukmu. Nantikan pembukaan pendaftaran melalui halaman ini.
                 </p>
-
-                <div class="opportunity-coming-soon-footnote">
-                    <i class="fa-solid fa-circle-info mr-1 text-[#FF8A18]"></i>
-                    <span>Peluang baru akan langsung dipublikasikan melalui Admin Site segera setelah pendaftaran resmi dibuka.</span>
-                </div>
             </div>
         @endif
     @endforelse
@@ -141,71 +129,45 @@
     background: #FFFFFF;
     border: 1px solid #E2E8F0;
     border-radius: 16px;
-    padding: 56px 28px;
+    padding: 48px 24px;
     text-align: center;
-    box-shadow: 0 6px 24px rgba(10, 42, 89, 0.05);
+    box-shadow: 0 4px 16px rgba(10, 42, 89, 0.03);
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 10px;
     margin: 16px 0;
 }
 
-.opportunity-coming-soon-badge-wrap {
-    margin-bottom: 20px;
-}
-
 .opportunity-coming-soon-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+    display: inline-block;
     background-color: #FFF3E6;
     color: #FF8A18;
     font-family: 'Poppins', sans-serif;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.08em;
-    padding: 6px 14px;
+    padding: 5px 14px;
     border-radius: 9999px;
     border: 1px solid #FFE4C7;
+    text-transform: uppercase;
 }
 
-.opportunity-coming-soon-badge .pulse-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #FF8A18;
-    border-radius: 50%;
-    display: inline-block;
-    box-shadow: 0 0 0 0 rgba(255, 138, 24, 0.7);
-    animation: oppPulseRing 1.8s infinite;
+.opportunity-coming-soon-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #0A2A59;
+    margin: 4px 0 0;
 }
 
-@keyframes oppPulseRing {
-    0% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 rgba(255, 138, 24, 0.7);
-    }
-    70% {
-        transform: scale(1);
-        box-shadow: 0 0 0 6px rgba(255, 138, 24, 0);
-    }
-    100% {
-        transform: scale(0.95);
-        box-shadow: 0 0 0 0 rgba(255, 138, 24, 0);
-    }
-}
-
-.opportunity-coming-soon-icon-wrap {
-    width: 68px;
-    height: 68px;
-    border-radius: 50%;
-    background-color: #205EB6;
-    color: #FFFFFF;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
-    margin-bottom: 22px;
-    box-shadow: 0 6px 18px rgba(32, 94, 182, 0.25);
+.opportunity-coming-soon-desc {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #64748B;
+    max-width: 520px;
+    margin: 0 auto;
 }
 
 .opportunity-coming-soon-title {
