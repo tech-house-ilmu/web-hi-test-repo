@@ -213,9 +213,6 @@
                 UPCOMING EVENT
             </h2>
             <div class="programme-title-accent"></div>
-            <p class="programme-section-subtitle">
-                Pantau agenda belajar dan ruang kolaborasi terbaru dari House Ilmu Indonesia.
-            </p>
         </div>
 
         @php
@@ -293,10 +290,9 @@
         @else
             <!-- Coming Soon State -->
             <div class="programme-upcoming-coming-soon">
-                <span class="programme-cs-pill">COMING SOON</span>
-                <h3 class="programme-cs-title">Kegiatan Baru Sedang Dipersiapkan</h3>
+                <h3 class="programme-cs-title">COMING SOON</h3>
                 <p class="programme-cs-desc">
-                    Saat ini belum ada event atau webinar yang dibuka. Tim House Ilmu Indonesia sedang merancang agenda belajar dan kegiatan interaktif berikutnya. Nantikan informasinya melalui halaman ini atau media sosial kami.
+                     Tim House Ilmu Indonesia sedang merancang agenda belajar dan kegiatan interaktif berikutnya. Nantikan informasinya melalui halaman ini atau media sosial kami.
                 </p>
             </div>
         @endif

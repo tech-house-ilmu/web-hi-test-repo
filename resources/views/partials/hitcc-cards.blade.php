@@ -100,16 +100,13 @@
         @else
             <!-- Coming Soon State -->
             <div class="opportunity-coming-soon-card">
-                <span class="opportunity-coming-soon-badge">
-                    COMING SOON
-                </span>
-
+                
                 <h3 class="opportunity-coming-soon-title">
-                    Peluang Belum Tersedia
+                    COMING SOON
                 </h3>
 
                 <p class="opportunity-coming-soon-desc">
-                    Saat ini belum ada peluang aktif yang dibuka. Tim House Ilmu Indonesia sedang menyiapkan program terbaik untukmu. Nantikan pembukaan pendaftaran melalui halaman ini.
+                    Tim House Ilmu Indonesia sedang menyiapkan program terbaik untukmu. Nantikan pembukaan pendaftaran melalui halaman ini.
                 </p>
             </div>
         @endif

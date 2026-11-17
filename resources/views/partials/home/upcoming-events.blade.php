@@ -7,9 +7,7 @@
                 UPCOMING EVENT
             </h2>
             <div class="upcoming-events-divider"></div>
-            <p class="upcoming-events-subtitle">
-                Pantau agenda belajar dan ruang kolaborasi terbaru dari House Ilmu Indonesia.
-            </p>
+
         </div>
 
         @php
