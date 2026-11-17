@@ -1,32 +1,189 @@
 @extends('layout.app')
 
-@section('title', 'Partnership | House Ilmu Indonesia')
+@section('title', 'Community Collaboration | House Ilmu Indonesia')
+@section('meta_description', 'Community Collaboration bersama House Ilmu Indonesia. Kolaborasi pendidikan, pengembangan pemuda, karier, teknologi, dan dampak sosial.')
+
+@section('hide_comments', true)
 
 @section('content')
-    <!-- Start partnership section -->
-    <section class="partnership-details max-w-4xl mx-auto px-4 my-12">
-        <a href="../#partnership-list" class="inline-flex items-center text-primary_HI font-semibold hover:underline mb-4"><i class="fa-solid fa-chevron-left mr-2"></i>Kembali</a>
-        <div class="partnership-details-desc flex flex-col">
-            <h1 class="my-4 font-bold text-3xl md:text-4xl text-left md:text-center" style="color: #FF731D;">Partnership</h1>
-            <h4 class="my-3 font-bold text-xl" style="color: #174EA6">Persyaratan</h4>
-            <ol class="list-decimal list-inside space-y-3 text-gray-700">
-                <li><span class="font-semibold text-gray-900">Kesesuaian Misi dan Visi:</span> <br>
-                    Kami mencari mitra yang memiliki misi dan visi yang sejalan dengan nilai-nilai organisasi kami.</li>
-                <li><span class="font-semibold text-gray-900">Komitmen:</span> <br>
-                    Kami mengharapkan komitmen penuh dari mitra dalam menjalankan setiap bentuk kolaborasi.</li>
-                <li><span class="font-semibold text-gray-900">Transparansi:</span> <br>
-                    Keterbukaan dalam komunikasi dan laporan kinerja adalah hal yang kami utamakan.</li>
-            </ol>
-            <h4 class="my-3 font-bold text-xl" style="color: #174EA6">Link Form</h4>
-            <p class="text-gray-700 leading-relaxed">Untuk memulai proses kolaborasi, silakan mengisi form berikut ini dengan lengkap : <a
-                    href="https://bit.ly/PartnershipHouseilmu" target="_blank" class="text-primary_HI font-semibold underline">bit.ly/PartnershipHouseilmu</a>
-                <br><br>
-                Terima kasih atas minat Anda untuk berkolaborasi dengan kami. Kami berharap dapat menjalin kemitraan
-                yang saling menguntungkan dan memberikan dampak positif bagi kedua belah pihak. Jika Anda memiliki
-                pertanyaan lebih lanjut, jangan ragu untuk menghubungi kami.</p>
-            <h4 class="my-3 font-bold text-xl" style="color: #174EA6">Hubungi Kami</h4>
-            <p class="text-gray-700 font-medium">CP: +6285779170428 (Fia)</p>
+<div class="min-h-screen bg-[#FFFDF8] py-10 sm:py-14">
+    <div class="max-w-[1240px] mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Back Link -->
+        <div class="mb-6">
+            <a href="{{ route('partnership.index') }}#partnership-list" 
+               class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#092C5B] hover:text-[#FF8A16] transition-colors">
+                <span class="text-base leading-none">&larr;</span>
+                <span>Kembali ke Kolaborasi Komunitas</span>
+            </a>
         </div>
-    </section>
-    <!-- End partnership section -->
+
+        <!-- Header Section -->
+        <div class="text-center max-w-3xl mx-auto mb-10">
+            <h1 class="font-serif text-[#FF8A16] text-2xl sm:text-3xl lg:text-4xl font-bold uppercase tracking-wide">
+                COMMUNITY COLLABORATION
+            </h1>
+            <div class="w-12 h-1 bg-[#FF8A16] rounded-full mx-auto my-3"></div>
+            <p class="font-sans text-xs sm:text-sm md:text-[15px] text-[#334155] leading-relaxed mt-4">
+                Community Collaboration adalah kolaborasi antara House Ilmu Indonesia dan komunitas atau organisasi yang memiliki tujuan serupa dalam pendidikan, pengembangan pemuda, pengembangan karier, teknologi, entrepreneurship, atau dampak sosial.
+            </p>
+        </div>
+
+        <!-- 3 Info Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <!-- Card 1: Untuk Siapa & Proses Kolaborasi -->
+            <div class="bg-white border-2 border-[#1E40AF] rounded-2xl p-6 sm:p-7 flex flex-col justify-start text-center shadow-xs">
+                <h3 class="font-serif font-bold text-[#FF8A16] text-sm sm:text-base uppercase tracking-wider mb-2.5">
+                    UNTUK SIAPA
+                </h3>
+                <p class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed mb-6">
+                    Komunitas, organisasi, perusahaan, kreator, dan media yang ingin menciptakan dampak relawan bagi generasi muda.
+                </p>
+
+                <h3 class="font-serif font-bold text-[#FF8A16] text-sm sm:text-base uppercase tracking-wider mb-2.5">
+                    PROSES KOLABORASI
+                </h3>
+                <div class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed space-y-2">
+                    <p>Sampaikan kebutuhan dan tujuan.</p>
+                    <p>Diskusikan konsep serta pembagian peran.</p>
+                    <p>Jalankan, evaluasi, dan dokumentasikan kolaborasi.</p>
+                </div>
+            </div>
+
+            <!-- Card 2: Aktivitas -->
+            <div class="bg-white border-2 border-[#1E40AF] rounded-2xl p-6 sm:p-7 flex flex-col justify-start text-center shadow-xs">
+                <h3 class="font-serif font-bold text-[#FF8A16] text-sm sm:text-base uppercase tracking-wider mb-3">
+                    AKTIVITAS
+                </h3>
+                <div class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed space-y-2">
+                    <p>Program bersama</p>
+                    <p>Berbagi pengetahuan</p>
+                    <p>Pertukaran komunitas</p>
+                    <p>Promosi silang</p>
+                    <p>Kampanye bersama</p>
+                    <p>Kegiatan edukatif</p>
+                    <p>Inisiatif pengembangan komunitas</p>
+                </div>
+            </div>
+
+            <!-- Card 3: Manfaat -->
+            <div class="bg-white border-2 border-[#1E40AF] rounded-2xl p-6 sm:p-7 flex flex-col justify-start text-center shadow-xs">
+                <h3 class="font-serif font-bold text-[#FF8A16] text-sm sm:text-base uppercase tracking-wider mb-3">
+                    MANFAAT
+                </h3>
+                <div class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed space-y-2">
+                    <p>Memperluas jangkauan</p>
+                    <p>Berbagi pengetahuan dan sumber daya</p>
+                    <p>Menghubungkan komunitas</p>
+                    <p>Menciptakan programme bermakna</p>
+                    <p>Meningkatkan dampak bagi anak muda</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contoh Kolaborasi Box -->
+        <div class="bg-white border-2 border-[#1E40AF] rounded-2xl p-6 sm:p-7 max-w-5xl mx-auto mt-6 shadow-xs text-left">
+            <h4 class="font-sans font-bold text-[#092C5B] text-xs sm:text-sm uppercase tracking-wider mb-2">
+                CONTOH KOLABORASI
+            </h4>
+            <p class="font-sans text-xs sm:text-[13px] text-[#475569] leading-relaxed">
+                Sesi pengembangan karier bersama, kampanye edukasi lintas kanal, atau kegiatan komunitas yang mempertemukan peserta dengan praktisi.
+            </p>
+        </div>
+
+        <!-- Collaboration Documentation -->
+        <div class="mt-16 text-center" x-data="{
+            activeDoc: 0,
+            docs: [
+                { img: '{{ asset('img/partnership/doc-1.png') }}', alt: 'Collaboration Documentation Zoom 1' },
+                { img: '{{ asset('img/partnership/doc-2.png') }}', alt: 'Collaboration Documentation Zoom 2' },
+                { img: '{{ asset('img/partnership/doc-3.png') }}', alt: 'Collaboration Documentation Zoom 3' },
+                { img: '{{ asset('img/partnership/hero-zoom.png') }}', alt: 'Collaboration Documentation Zoom 4' },
+                { img: '{{ asset('img/partnership-hero-zoom.webp') }}', alt: 'Collaboration Documentation Zoom 5' }
+            ],
+            next() {
+                this.activeDoc = (this.activeDoc + 1) % this.docs.length;
+            },
+            prev() {
+                this.activeDoc = (this.activeDoc - 1 + this.docs.length) % this.docs.length;
+            }
+        }">
+            <h2 class="font-serif text-[#FF8A16] text-2xl sm:text-3xl font-bold uppercase tracking-wide">
+                COLLABORATION DOCUMENTATION
+            </h2>
+            <div class="w-12 h-1 bg-[#FF8A16] rounded-full mx-auto my-3"></div>
+
+            <div class="relative max-w-5xl mx-auto mt-8 px-4 sm:px-12">
+                <!-- 3 Cards Row -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <template x-for="(offset, i) in [0, 1, 2]" :key="i">
+                        <div class="relative aspect-[16/10] bg-[#0A192F] rounded-2xl overflow-hidden shadow-md border border-[#1E40AF]/30 group">
+                            <img :src="docs[(activeDoc + offset) % docs.length].img"
+                                 :alt="docs[(activeDoc + offset) % docs.length].alt"
+                                 class="w-full h-full object-cover select-none transition-transform duration-300 group-hover:scale-105" />
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Navigation Arrows -->
+                <button @click="prev()" type="button" aria-label="Previous slide"
+                        class="absolute left-0 sm:left-1 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#092C5B] text-white flex items-center justify-center hover:bg-[#FF8A16] transition-colors shadow-md z-10">
+                    <i class="fa-solid fa-chevron-left text-xs sm:text-sm"></i>
+                </button>
+                <button @click="next()" type="button" aria-label="Next slide"
+                        class="absolute right-0 sm:right-1 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#092C5B] text-white flex items-center justify-center hover:bg-[#FF8A16] transition-colors shadow-md z-10">
+                    <i class="fa-solid fa-chevron-right text-xs sm:text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Dots Indicator -->
+            <div class="flex items-center justify-center gap-2 mt-6">
+                <template x-for="(dot, dIdx) in docs" :key="dIdx">
+                    <button @click="activeDoc = dIdx"
+                            :class="activeDoc === dIdx ? 'w-8 bg-[#FF8A16]' : 'w-2.5 bg-gray-300 hover:bg-gray-400'"
+                            class="h-2.5 rounded-full transition-all duration-200"
+                            :aria-label="'Go to slide ' + (dIdx + 1)"></button>
+                </template>
+            </div>
+        </div>
+
+        <!-- CTA Box -->
+        <div class="bg-white border-2 border-[#1E40AF] rounded-2xl p-6 sm:p-8 max-w-xl mx-auto mt-14 text-center shadow-xs">
+            <h3 class="font-serif font-bold text-[#FF8A16] text-base sm:text-lg uppercase tracking-wider mb-4">
+                MARI MENCIPTAKAN DAMPAK BERMAKNA BERSAMA
+            </h3>
+            <a href="https://bit.ly/PartnershipHouseilmu" target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-2 bg-[#FF8A16] hover:bg-[#E67808] text-white text-xs sm:text-sm font-semibold px-6 py-2.5 rounded-lg shadow-sm transition-all duration-200">
+                <span>Mari Berkolaborasi</span>
+                <span>&#x2197;</span>
+            </a>
+        </div>
+
+        <!-- Our Partner & Collaborator -->
+        <div class="mt-16 text-center max-w-5xl mx-auto mb-16">
+            <h2 class="font-serif text-[#092C5B] text-xl sm:text-2xl font-bold uppercase tracking-wide">
+                OUR PARTNER & COLLABORATOR
+            </h2>
+            <p class="font-sans text-xs sm:text-sm text-[#5A6A80] mt-2 mb-8">
+                Ruang kolaborasi yang tumbuh bersama House Ilmu Indonesia.
+            </p>
+
+            <div class="bg-[#DDE7F3] rounded-2xl p-6 sm:p-10 flex flex-wrap items-center justify-center gap-6 sm:gap-10">
+                <div class="bg-white rounded-xl shadow-xs p-3 sm:p-4 w-28 h-20 sm:w-36 sm:h-24 flex items-center justify-center">
+                    <img src="{{ asset('img/partnership/partner-girls-beyond.png') }}" alt="Girls Beyond" class="max-h-12 max-w-full object-contain">
+                </div>
+                <div class="bg-white rounded-xl shadow-xs p-3 sm:p-4 w-28 h-20 sm:w-36 sm:h-24 flex items-center justify-center">
+                    <img src="{{ asset('img/partnership/partner-ideal.png') }}" alt="Ideal" class="max-h-12 max-w-full object-contain">
+                </div>
+                <div class="bg-[#1E5799] rounded-xl shadow-xs p-3 sm:p-4 w-28 h-20 sm:w-36 sm:h-24 flex items-center justify-center">
+                    <img src="{{ asset('img/partnership/partner-pemimpin.png') }}" alt="Pemimpin.id" class="max-h-12 max-w-full object-contain">
+                </div>
+                <div class="bg-white rounded-xl shadow-xs p-3 sm:p-4 w-28 h-20 sm:w-36 sm:h-24 flex items-center justify-center">
+                    <img src="{{ asset('img/partnership/partner-phillip.png') }}" alt="Phillip Sekuritas Indonesia" class="max-h-12 max-w-full object-contain">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
 @endsection
