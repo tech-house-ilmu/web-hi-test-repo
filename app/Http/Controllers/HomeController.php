@@ -15,44 +15,58 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        $homeHero = Cache::remember('home_hero', 300, function () {
-            return HomeHero::where('is_active', true)->first();
-        });
+        $homeHero = rescue(function () {
+            return Cache::remember('home_hero', 300, function () {
+                return HomeHero::where('is_active', true)->first();
+            });
+        }, null, false);
 
-        $events = Cache::remember('home_events', 300, function () {
-            return Event::where('is_active', true)
-                ->where('show_on_home', true)
-                ->orderBy('sort_order', 'asc')
-                ->latest()
-                ->get();
-        });
+        $events = rescue(function () {
+            return Cache::remember('home_events', 300, function () {
+                return Event::where('is_active', true)
+                    ->where('show_on_home', true)
+                    ->orderBy('sort_order', 'asc')
+                    ->latest()
+                    ->get();
+            });
+        }, function () {
+            return rescue(fn () => Event::where('is_active', true)->latest()->get(), collect(), false);
+        }, false);
 
-        $experts = Cache::remember('home_experts', 300, function () {
-            return Expert::where('is_active', true)->get();
-        });
+        $experts = rescue(function () {
+            return Cache::remember('home_experts', 300, function () {
+                return Expert::where('is_active', true)->get();
+            });
+        }, collect(), false);
 
-        $programmes = Cache::remember('home_programmes', 300, function () {
-            return HITCCProgramme::with([
-                'internship',
-                'volunteer',
-                'scholarship',
-                'exchange',
-                'competition',
-                'category',
-            ])
-                ->orderBy('sort_order')
-                ->take(7)
-                ->get();
-        });
+        $programmes = rescue(function () {
+            return Cache::remember('home_programmes', 300, function () {
+                return HITCCProgramme::with([
+                    'internship',
+                    'volunteer',
+                    'scholarship',
+                    'exchange',
+                    'competition',
+                    'category',
+                ])
+                    ->orderBy('sort_order')
+                    ->take(7)
+                    ->get();
+            });
+        }, collect(), false);
 
-        $testimonis = Cache::remember('home_testimonis', 300, function () {
-            return Testimoni::latest()->get();
-        });
+        $testimonis = rescue(function () {
+            return Cache::remember('home_testimonis', 300, function () {
+                return Testimoni::latest()->get();
+            });
+        }, collect(), false);
 
-        $impacts = Cache::remember('home_impacts', 300, function () {
-            $dbImpacts = HomeImpact::where('is_active', true)->orderBy('sort_order')->get();
-            return $dbImpacts->isNotEmpty() ? $dbImpacts->toArray() : config('homepage.impacts', []);
-        });
+        $impacts = rescue(function () {
+            return Cache::remember('home_impacts', 300, function () {
+                $dbImpacts = HomeImpact::where('is_active', true)->orderBy('sort_order')->get();
+                return $dbImpacts->isNotEmpty() ? $dbImpacts->toArray() : config('homepage.impacts', []);
+            });
+        }, config('homepage.impacts', []), false);
 
         $onlinePrograms = config('homepage.online_programs', []);
         $offlinePrograms = config('homepage.offline_programs', []);

@@ -12,14 +12,22 @@ class ArticlePageController extends Controller
      */
     public function index(): View
     {
-        $featuredArticle = Article::where('is_published', true)
-            ->where('is_featured', true)
-            ->first() ?? Article::where('is_published', true)->orderBy('sort_order', 'asc')->orderBy('date', 'desc')->first();
+        $featuredArticle = rescue(function () {
+            return Article::where('is_published', true)
+                ->where('is_featured', true)
+                ->first() ?? Article::where('is_published', true)->orderBy('sort_order', 'asc')->orderBy('date', 'desc')->first();
+        }, function () {
+            return rescue(fn () => Article::orderBy('date', 'desc')->first(), null, false);
+        }, false);
 
-        $articles = Article::where('is_published', true)
-            ->orderBy('sort_order', 'asc')
-            ->orderBy('date', 'desc')
-            ->paginate(9);
+        $articles = rescue(function () {
+            return Article::where('is_published', true)
+                ->orderBy('sort_order', 'asc')
+                ->orderBy('date', 'desc')
+                ->paginate(9);
+        }, function () {
+            return rescue(fn () => Article::orderBy('date', 'desc')->paginate(9), Article::paginate(9), false);
+        }, false);
 
         return view('pages.article.index', compact('articles', 'featuredArticle'));
     }

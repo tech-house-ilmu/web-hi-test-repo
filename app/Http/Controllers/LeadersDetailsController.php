@@ -24,10 +24,12 @@ class LeadersDetailsController extends Controller
      */
     public function index(): View
     {
-        $leaders = $this->getLeadersQuery()->get();
-        $organization = Cache::remember('about_organization', 300, function () {
-            return AboutOrganization::first();
-        });
+        $leaders = rescue(fn () => $this->getLeadersQuery()->get(), collect(), false);
+        $organization = rescue(function () {
+            return Cache::remember('about_organization', 300, function () {
+                return AboutOrganization::first();
+            });
+        }, null, false);
 
         return view('pages.about-us.about', [
             'leaders' => $leaders,
@@ -41,7 +43,7 @@ class LeadersDetailsController extends Controller
      */
     public function ourTeam(): View
     {
-        $leaders = $this->getLeadersQuery()->get();
+        $leaders = rescue(fn () => $this->getLeadersQuery()->get(), collect(), false);
 
         return view('pages.about-us.our-team', [
             'leaders' => $leaders,

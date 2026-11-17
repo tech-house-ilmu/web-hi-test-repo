@@ -6,8 +6,8 @@
 @section('hide_comments', true)
 
 @php
-    $collabType = \App\Models\CollaborationType::where('slug', 'community')->first();
-    $dbPartners = \App\Models\CollaborationPartner::where('is_active', true)->orderBy('sort_order')->get();
+    $collabType = rescue(fn() => \App\Models\CollaborationType::where('slug', 'community')->first(), null, false);
+    $dbPartners = rescue(fn() => \App\Models\CollaborationPartner::where('is_active', true)->orderBy('sort_order')->get(), collect(), false);
     if ($dbPartners->isNotEmpty()) {
         $partners = $dbPartners->map(fn($p) => [
             'name' => $p->name,
@@ -43,14 +43,14 @@
             ['name' => 'Girls Beyond', 'file' => 'girls-beyond.png', 'alt' => 'Logo Girls Beyond'],
         ];
     }
-    $dbDocs = \App\Models\CollaborationDocumentation::where('is_active', true)
+    $dbDocs = rescue(fn() => \App\Models\CollaborationDocumentation::where('is_active', true)
         ->whereIn('collaboration_type', ['all', 'community'])
         ->orderBy('sort_order')
-        ->get();
-    $collaborationDocs = $dbDocs->map(fn($d) => [
+        ->get(), collect(), false);
+    $collaborationDocs = $dbDocs ? $dbDocs->map(fn($d) => [
         'img' => str_starts_with($d->image, 'http') ? $d->image : (str_starts_with($d->image, 'img/') ? asset($d->image) : asset('storage/' . $d->image)),
         'alt' => $d->title ?? 'Dokumentasi Kolaborasi',
-    ])->toArray();
+    ])->toArray() : [];
 @endphp
 
 @section('content')
