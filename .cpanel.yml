@@ -1,6 +1,6 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/houseilm/web-hi
+    - export DEPLOYPATH=/home/houseilm/public_html
     - /bin/mkdir -p $DEPLOYPATH
     - /bin/cp -R * $DEPLOYPATH

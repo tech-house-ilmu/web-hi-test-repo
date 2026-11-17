@@ -44,28 +44,52 @@ class DeployController extends Controller
             ];
         }
 
-        // 2. Clear Laravel caches
+        // 2. Run Database Migrations
         try {
-            Artisan::call('view:clear');
-            Artisan::call('route:clear');
-            Artisan::call('config:clear');
-            Artisan::call('cache:clear');
+            Artisan::call('migrate', ['--force' => true]);
+            $results['migrations'] = trim(Artisan::output()) ?: 'Migrations up to date.';
+        } catch (\Throwable $e) {
+            $results['migrations_error'] = $e->getMessage();
+        }
+
+        // 3. Run Seeders (Our Team Batch 6 & Hero Slider)
+        try {
+            Artisan::call('db:seed', ['--class' => 'Database\\Seeders\\LeadersDetailsAboutSeeder', '--force' => true]);
+            Artisan::call('db:seed', ['--class' => 'Database\\Seeders\\HIProgrammeHeroSeeder', '--force' => true]);
+            $results['seeders'] = 'LeadersDetailsAboutSeeder & HIProgrammeHeroSeeder executed successfully.';
+        } catch (\Throwable $e) {
+            $results['seeders_error'] = $e->getMessage();
+        }
+
+        // 4. Ensure storage symlink exists
+        try {
+            Artisan::call('storage:link');
+            $results['storage_link'] = trim(Artisan::output()) ?: 'Storage linked.';
+        } catch (\Throwable $e) {
+            $results['storage_link_error'] = $e->getMessage();
+        }
+
+        // 5. Clear Laravel caches
+        try {
+            Artisan::call('optimize:clear');
             $results['cache_cleared'] = true;
         } catch (\Throwable $e) {
             $results['cache_error'] = $e->getMessage();
         }
 
-        // 3. Update Recruitment Announcement in DB if needed
+        // 6. Update Recruitment Announcement in DB to stay_tuned
         try {
             $announcement = RecruitmentAnnouncement::first();
             if ($announcement) {
-                $announcement->divisions = RecruitmentAnnouncement::defaultDivisions();
-                $announcement->announcement_date = '14 Oktober 2026';
+                $announcement->status = 'stay_tuned';
+                $announcement->stay_tuned_badge = 'STAY TUNED';
+                $announcement->stay_tuned_title = 'Belum ada rekrutmen yang dibuka saat ini';
+                $announcement->stay_tuned_description = 'Informasi rekrutmen berikutnya akan diumumkan melalui kanal resmi House Ilmu Indonesia.';
                 $announcement->save();
-                $results['announcement_database_updated'] = true;
+                $results['announcement_status'] = 'Set to stay_tuned successfully.';
             }
         } catch (\Throwable $e) {
-            $results['announcement_database_error'] = $e->getMessage();
+            $results['announcement_error'] = $e->getMessage();
         }
 
         return response()->json([
