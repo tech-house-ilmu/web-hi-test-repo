@@ -13,18 +13,33 @@ class ArticlePageController extends Controller
     public function index(): View
     {
         $featuredArticle = rescue(function () {
-            return Article::where('is_published', true)
-                ->where('is_featured', true)
-                ->first() ?? Article::where('is_published', true)->orderBy('sort_order', 'asc')->orderBy('date', 'desc')->first();
+            $featured = Article::where(function ($q) {
+                $q->where('is_published', true)->orWhereNull('is_published');
+            })
+            ->where('is_featured', true)
+            ->first();
+
+            if ($featured) {
+                return $featured;
+            }
+
+            return Article::where(function ($q) {
+                $q->where('is_published', true)->orWhereNull('is_published');
+            })
+            ->orderBy('sort_order', 'asc')
+            ->orderBy('date', 'desc')
+            ->first();
         }, function () {
             return rescue(fn () => Article::orderBy('date', 'desc')->first(), null, false);
         }, false);
 
         $articles = rescue(function () {
-            return Article::where('is_published', true)
-                ->orderBy('sort_order', 'asc')
-                ->orderBy('date', 'desc')
-                ->paginate(9);
+            return Article::where(function ($q) {
+                $q->where('is_published', true)->orWhereNull('is_published');
+            })
+            ->orderBy('sort_order', 'asc')
+            ->orderBy('date', 'desc')
+            ->paginate(9);
         }, function () {
             return rescue(fn () => Article::orderBy('date', 'desc')->paginate(9), Article::paginate(9), false);
         }, false);

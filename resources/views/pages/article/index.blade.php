@@ -138,16 +138,15 @@
             $featured = $featuredArticle ?? ($articles->first() ?? null);
         @endphp
 
-        <!-- Section Header: FEATURED ARTICLES -->
-        <div class="featured-articles-header">
-            <h2 class="featured-articles-title">
-                FEATURED ARTICLES
-            </h2>
-            <div class="featured-articles-divider"></div>
-        </div>
-
         <!-- Featured Article Big Card (2 Kolom: Gambar Kiri, Konten Kanan) -->
         @if($featured)
+            <!-- Section Header: FEATURED ARTICLES -->
+            <div class="featured-articles-header">
+                <h2 class="featured-articles-title">
+                    FEATURED ARTICLES
+                </h2>
+                <div class="featured-articles-divider"></div>
+            </div>
             @php
                 $fTitle = $featured->title ?? 'Panduan Lengkap Menembus Magang Idaman di Perusahaan Top Tier untuk Fresh Graduate 2025';
                 $fCatSlug = $normalizeCat($featured->category ?? 'education', $fTitle);

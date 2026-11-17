@@ -9,6 +9,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -61,10 +62,10 @@ class ArticleResource extends Resource
                 ->numeric()
                 ->default(0)
                 ->helperText('Angka lebih kecil tampil lebih dulu.'),
-            Forms\Components\Toggle::make('is_featured')
+            Toggle::make('is_featured')
                 ->label('Jadikan Artikel Utama / Sorotan (Featured)')
                 ->default(false),
-            Forms\Components\Toggle::make('is_published')
+            Toggle::make('is_published')
                 ->label('Status Tayang (Published)')
                 ->default(true),
             FileUpload::make('img')
@@ -88,7 +89,14 @@ class ArticleResource extends Resource
                 TextColumn::make('author')->sortable(),
                 BadgeColumn::make('category')->badge()->sortable(),
                 Tables\Columns\TextInputColumn::make('sort_order')->label('Urutan')->sortable(),
-                Tables\Columns\ToggleColumn::make('is_featured')->label('Featured'),
+                Tables\Columns\ToggleColumn::make('is_featured')
+                    ->label('Featured')
+                    ->afterStateUpdated(function ($record, $state) {
+                        if ($state) {
+                            // Nonaktifkan featured pada artikel lain agar hanya 1 artikel utama
+                            Article::where('id', '!=', $record->id)->where('is_featured', true)->update(['is_featured' => false]);
+                        }
+                    }),
                 Tables\Columns\ToggleColumn::make('is_published')->label('Tayang'),
 
                 Tables\Columns\TextColumn::make('date')

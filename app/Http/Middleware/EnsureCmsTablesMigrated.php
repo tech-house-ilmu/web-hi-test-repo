@@ -54,6 +54,19 @@ class EnsureCmsTablesMigrated
                         }
                     }
 
+                    // Backfill nulls for articles and events so queries never fail
+                    if (Schema::hasTable('articles') && Schema::hasColumn('articles', 'is_published')) {
+                        \Illuminate\Support\Facades\DB::table('articles')
+                            ->whereNull('is_published')
+                            ->update(['is_published' => 1]);
+                        \Illuminate\Support\Facades\DB::table('articles')
+                            ->whereNull('is_featured')
+                            ->update(['is_featured' => 0]);
+                        \Illuminate\Support\Facades\DB::table('articles')
+                            ->whereNull('sort_order')
+                            ->update(['sort_order' => 0]);
+                    }
+
                     Cache::forever('cms_tables_migrated_v1', true);
                 }
             } catch (\Throwable $e) {
