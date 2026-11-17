@@ -140,7 +140,7 @@
         </div>
 
         <!-- Contoh Kolaborasi Box -->
-        <div class="bg-white border-2 border-[#1E40AF] rounded-2xl p-6 sm:p-7 max-w-5xl mx-auto mt-6 shadow-xs text-left">
+        <div class="bg-white border-2 border-[#1E40AF] rounded-2xl p-6 sm:p-7 max-w-5xl mx-auto mt-6 mb-16 sm:mb-20 shadow-xs text-left" style="margin-bottom: 4rem;">
             <h4 class="font-sans font-bold text-[#092C5B] text-xs sm:text-sm uppercase tracking-wider mb-2">
                 CONTOH KOLABORASI
             </h4>
@@ -201,19 +201,19 @@
         @endif
 
         <!-- CTA Box -->
-        <div class="bg-white border-2 border-[#1E40AF] rounded-2xl p-6 sm:p-8 max-w-xl mx-auto mt-14 text-center shadow-xs">
-            <h3 class="font-serif font-bold text-[#FF8A16] text-base sm:text-lg uppercase tracking-wider mb-4">
+        <div class="bg-white border-2 border-[#1E40AF] rounded-2xl p-8 sm:p-10 max-w-xl mx-auto my-16 sm:my-20 text-center shadow-xs" style="margin-top: 4rem; margin-bottom: 5rem; padding: 2.5rem 2rem;">
+            <h3 class="font-serif font-bold text-[#FF8A16] text-base sm:text-xl uppercase tracking-wider mb-5">
                 MARI MENCIPTAKAN DAMPAK BERMAKNA BERSAMA
             </h3>
             <a href="https://bit.ly/PartnershipHouseilmu" target="_blank" rel="noopener noreferrer"
-               class="inline-flex items-center gap-2 bg-[#FF8A16] hover:bg-[#E67808] text-white text-xs sm:text-sm font-semibold px-6 py-2.5 rounded-lg shadow-sm transition-all duration-200">
+               class="inline-flex items-center gap-2 bg-[#FF8A16] hover:bg-[#E67808] text-white text-xs sm:text-sm font-semibold px-8 py-3 rounded-xl shadow-sm transition-all duration-200">
                 <span>Mari Berkolaborasi</span>
-                <span>&#x2197;</span>
+                <i class="fa-solid fa-arrow-trend-up text-xs"></i>
             </a>
         </div>
 
         <!-- Our Partner & Collaborator (Full 24 Partner Grid) -->
-        <div class="mt-16 text-center max-w-5xl mx-auto mb-16">
+        <div class="mt-20 text-center max-w-5xl mx-auto mb-16" style="margin-top: 5rem;">
             <h2 class="font-serif text-[#092C5B] text-xl sm:text-2xl font-bold uppercase tracking-wide">
                 OUR PARTNER & COLLABORATOR
             </h2>

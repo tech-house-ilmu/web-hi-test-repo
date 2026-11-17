@@ -78,16 +78,22 @@ class DeployController extends Controller
             $results['cache_error'] = $e->getMessage();
         }
 
-        // 6. Update Recruitment Announcement in DB to stay_tuned
+        // 6. Ensure Recruitment Announcement in DB exists (preserve admin choice if already set)
         try {
             $announcement = RecruitmentAnnouncement::first();
-            if ($announcement) {
-                $announcement->status = 'stay_tuned';
-                $announcement->stay_tuned_badge = 'STAY TUNED';
-                $announcement->stay_tuned_title = 'Belum ada rekrutmen yang dibuka saat ini';
-                $announcement->stay_tuned_description = 'Informasi rekrutmen berikutnya akan diumumkan melalui kanal resmi House Ilmu Indonesia.';
-                $announcement->save();
-                $results['announcement_status'] = 'Set to stay_tuned successfully.';
+            if (!$announcement) {
+                RecruitmentAnnouncement::create([
+                    'status' => 'stay_tuned',
+                    'batch_label' => 'Batch 6',
+                    'stay_tuned_badge' => 'STAY TUNED',
+                    'stay_tuned_title' => 'Belum ada rekrutmen yang dibuka saat ini',
+                    'stay_tuned_description' => 'Informasi rekrutmen berikutnya akan diumumkan melalui kanal resmi House Ilmu Indonesia.',
+                    'stay_tuned_button_text' => 'Pantau Media Sosial',
+                    'stay_tuned_button_url' => 'https://www.instagram.com/houseilmu.id',
+                ]);
+                $results['announcement_status'] = 'Created initial stay_tuned announcement.';
+            } else {
+                $results['announcement_status'] = 'Preserved existing announcement (status: ' . $announcement->status . ').';
             }
         } catch (\Throwable $e) {
             $results['announcement_error'] = $e->getMessage();

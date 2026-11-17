@@ -323,20 +323,6 @@
                 </p>
             </div>
 
-            <div class="recruitment-tabs" id="recruitmentTabsContainer" data-content="{{ json_encode($recruitmentData) }}">
-                <button type="button" class="recruitment-tab {{ $activeTabKey === 'open' ? 'active' : '' }}" data-status="open">
-                    Pendaftaran Dibuka
-                </button>
-
-                <button type="button" class="recruitment-tab {{ $activeTabKey === 'soon' ? 'active' : '' }}" data-status="soon">
-                    Stay Tuned
-                </button>
-
-                <button type="button" class="recruitment-tab {{ $activeTabKey === 'closed' ? 'active' : '' }}" data-status="closed">
-                    Rekrutmen Selesai
-                </button>
-            </div>
-
             <div class="recruitment-panel" id="recruitmentPanel">
                 <span class="recruitment-label">{{ $currentData['label'] }}</span>
                 <h3>{{ $currentData['title'] }}</h3>
