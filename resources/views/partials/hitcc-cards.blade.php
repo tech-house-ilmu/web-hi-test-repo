@@ -1,96 +1,214 @@
-<div class="cards-container container-xxl d-flex flex-wrap my-4 gap-3 justify-content-center align-items-start">
+@php
+    $categoryLabels = [
+        'internship' => 'Magang',
+        'volunteer' => 'Relawan',
+        'scholarship' => 'Beasiswa',
+        'exchange' => 'Pertukaran',
+        'competition' => 'Kompetisi',
+    ];
+@endphp
+
+<!-- Header Row: Title & Results Count -->
+<div class="opportunities-grid-header">
+    <h2 class="opportunities-section-title">
+        Jelajahi Peluang
+    </h2>
+    <span class="opportunities-results-count" id="results-count">
+        @if($opportunities->total() > 0)
+            {{ $opportunities->total() }} hasil
+        @else
+            Coming Soon
+        @endif
+    </span>
+</div>
+
+<!-- Opportunity Cards Grid -->
+<div class="opportunities-cards-grid">
     @forelse($opportunities as $opp)
-    <div class="card-box px-4 px-md-0">
-        <a href="{{ route('programme.hi.show', ['category' => $opp->category->slug, 'slug' => $opp->slug]) }}" class="card-custom d-flex align-items-center" style="height: 300px;">
-            <img src="{{ $opp->bg_poster_img ? Storage::url($opp->bg_poster_img) : asset('img/homepage/img-opp/default.png') }}" style="background: cover/center no-repeat; width: 100%; height: 100%;" alt="{{ $opp->title }}">
-            <div class="card-overlay"></div>
-            <div class="card-body small-text">
-                <div class="card-title d-flex align-items-center gap-2">
-                    <img src="{{ $opp->logo_company_img ? Storage::url($opp->logo_company_img) : asset('img/logo.png') }}" class="logo col-3" alt="Logo">
-                    <div class="col-9 d-flex flex-column gap-2 text-primary_HI">
-                        <h1 style="font-size: clamp(0.8rem, 1vw, 0.9rem);">{{ $opp->title_program }}</h1>
-                        <h5 style="font-size: clamp(0.8rem, 1vw, 0.8rem);">{{ $opp->company_name }}</h5>
+        @php
+            $catSlug = strtolower(is_object($opp->category ?? null) ? $opp->category->slug : ($opp->category_slug ?? ''));
+            $badgeName = $categoryLabels[$catSlug] ?? (is_object($opp->category ?? null) ? $opp->category->name : ($opp->category_name ?? 'Peluang'));
+            $descText = $opp->company_desc ?? ($opp->registration_info ?? 'Temukan peluang terbaik bersama House Ilmu Indonesia.');
+            $hasPoster = !empty($opp->bg_poster_img) && (file_exists(public_path($opp->bg_poster_img)) || Storage::disk('public')->exists($opp->bg_poster_img));
+            $posterUrl = $hasPoster ? (file_exists(public_path($opp->bg_poster_img)) ? asset($opp->bg_poster_img) : Storage::url($opp->bg_poster_img)) : null;
+            $detailUrl = route('programme.hi.show', ['category' => $catSlug ?: 'internship', 'slug' => $opp->slug]);
+        @endphp
+
+        <div class="opportunity-card-item">
+            <!-- Top: Image / Placeholder Area -->
+            <div class="opportunity-poster-box">
+                @if($hasPoster)
+                    <img 
+                        src="{{ $posterUrl }}" 
+                        alt="{{ $opp->title_program }}" 
+                        class="opportunity-poster-img" 
+                        loading="lazy" 
+                        decoding="async"
+                    >
+                @else
+                    <div class="opportunity-placeholder-content">
+                        <svg class="opportunity-placeholder-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <rect width="18" height="18" x="3" y="3" rx="2" ry="2"/>
+                            <circle cx="9" cy="9" r="2"/>
+                            <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>
+                        </svg>
+                        <span class="opportunity-placeholder-label">GAMBAR KESEMPATAN</span>
                     </div>
+                @endif
+            </div>
+
+            <!-- Bottom: Content Body -->
+            <div class="opportunity-card-body">
+                <div class="opportunity-card-top-content">
+                    <!-- Category Badge -->
+                    <span class="opportunity-category-badge">
+                        {{ $badgeName }}
+                    </span>
+
+                    <!-- Title -->
+                    <h3 class="opportunity-card-title">
+                        {{ $opp->title_program }}
+                    </h3>
+
+                    <!-- Description -->
+                    <p class="opportunity-card-desc">
+                        {{ $descText }}
+                    </p>
                 </div>
 
-                {{-- Card details sesuai kategori --}}
-                <div class="card-details mt-3 d-flex flex-row align-items-center gap-2">
-                    <div class="card-icon col-3 d-flex flex-column align-items-center justify-content-start gap-3">
-                        @switch($opp->category->slug)
-                            @case('internship')
-                                <i class="fa-solid fa-user text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-blue-900"></i>
-                                <i class="fa-solid fa-briefcase text-transparent bg-clip-text bg-gradient-to-b from-[#4B2A14] to-[#D29B6D]"></i>
-                                <i class="fa-solid fa-clock text-transparent bg-clip-text bg-gradient-to-tr from-orange-400 to-yellow-500"></i>
-                                @break
-                            @case('scholarship')
-                                <i class="fa-solid fa-money-bill-wave text-transparent bg-clip-text bg-gradient-to-r from-green-800 to-green-700"></i>
-                                <i class="fa-solid fa-graduation-cap text-transparent bg-clip-text bg-gradient-to-b from-black to-red-700"></i>
-                                <i class="fa-solid fa-clock text-transparent bg-clip-text bg-gradient-to-tr from-orange-400 to-yellow-500"></i>
-                                @break
-                            @case('competition')
-                                <i class="fa-solid fa-user text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-blue-900"></i>
-                                <i class="fa-solid fa-award text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-700"></i>
-                                <i class="fa-solid fa-clock text-transparent bg-clip-text bg-gradient-to-tr from-orange-400 to-yellow-500"></i>
-                                @break
-                            @case('volunteer')
-                                <i class="fa-solid fa-money-bill-wave text-transparent bg-clip-text bg-gradient-to-r from-green-800 to-green-700"></i>
-                                <i class="fa-solid fa-handshake-angle text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-pink-500"></i>
-                                <i class="fa-solid fa-clock text-transparent bg-clip-text bg-gradient-to-tr from-orange-400 to-yellow-500"></i>
-                                @break
-                            @case('exchange')
-                                <i class="fa-solid fa-money-bill-wave text-transparent bg-clip-text bg-gradient-to-r from-green-800 to-green-700"></i>
-                                <i class="fa-solid fa-user-graduate text-transparent bg-clip-text bg-gradient-to-b from-black to-yellow-500"></i>
-                                <i class="fa-solid fa-clock text-transparent bg-clip-text bg-gradient-to-tr from-orange-400 to-yellow-500"></i>
-                                @break
-                            @default
-                                <i class="fa-solid fa-money-bill-wave text-transparent bg-clip-text bg-gradient-to-r from-green-800 to-green-700"></i>
-                                <i class="fa-solid fa-user text-transparent bg-clip-text bg-gradient-to-r from-blue-800 to-blue-900"></i>
-                                <i class="fa-solid fa-clock text-transparent bg-clip-text bg-gradient-to-tr from-orange-400 to-yellow-500"></i>
-                        @endswitch
-                    </div>
-
-                    <div class="card-info col-9 d-flex flex-column align-items-start gap-2 text-primary_HI">
-                        @switch($opp->category->slug)
-                            @case('internship')
-                                <p>Internship</p>
-                                <p>{{ $opp->internship->hitcc_internship_position ?? '-' }}</p>
-                                <p>{{ \Carbon\Carbon::parse($opp->registration_deadline)->format('d M Y') }}</p>
-                                @break
-                            @case('scholarship')
-                                <p>{{ $opp->scholarship->hitcc_scholarship_scholar_type ?? '-' }}</p>
-                                <p>Beasiswa</p>
-                                <p>{{ \Carbon\Carbon::parse($opp->registration_deadline)->format('d M Y') }}</p>
-                                @break
-                            @case('competition')
-                                <p>{{ $opp->competition->hitcc_competition_category ?? '-' }}</p>
-                                <p>{{ $opp->competition->hitcc_competition_competition_type ?? '-' }}</p>
-                                <p>{{ \Carbon\Carbon::parse($opp->registration_deadline)->format('d M Y') }}</p>
-                                @break
-                            @case('volunteer')
-                                <p>{{ $opp->volunteer->hitcc_volunteer_type ?? '-' }}</p>
-                                <p>{{ $opp->volunteer->hitcc_volunteer_volunteer_type ?? '-' }}</p>
-                                <p>{{ \Carbon\Carbon::parse($opp->registration_deadline)->format('d M Y') }}</p>
-                                @break
-                            @case('exchange')
-                                <p>{{ $opp->exchange->hitcc_exchange_type ?? '-' }}</p>
-                                <p>{{ $opp->exchange->hitcc_exchange_exchange_type ?? '-' }}</p>
-                                <p>{{ \Carbon\Carbon::parse($opp->registration_deadline)->format('d M Y') }}</p>
-                                @break
-                            @default
-                                <p>-</p>
-                                <p>-</p>
-                                <p>-</p>
-                        @endswitch
-                    </div>
+                <!-- Action Button -->
+                <div class="opportunity-card-action">
+                    <a 
+                        href="{{ $detailUrl }}" 
+                        class="opportunity-action-btn"
+                    >
+                        <span>Lihat Selengkapnya</span>
+                        <span class="opportunity-btn-arrow">&#8599;</span>
+                    </a>
                 </div>
             </div>
-        </a>
-    </div>
+        </div>
     @empty
-        <p class="text-center text-muted">Belum ada program untuk kategori ini.</p>
+        @if(request('search') || (request('category') && request('category') !== 'all'))
+            <div class="opportunity-empty-state">
+                <div class="opportunity-empty-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </div>
+                <h4 class="opportunity-empty-title">Peluang tidak ditemukan</h4>
+                <p class="opportunity-empty-desc">Coba ubah kata kunci pencarian atau pilih kategori yang lain.</p>
+            </div>
+        @else
+            <!-- Coming Soon State -->
+            <div class="opportunity-coming-soon-card">
+                
+                <h3 class="opportunity-coming-soon-title">
+                    COMING SOON
+                </h3>
+
+                <p class="opportunity-coming-soon-desc">
+                    Tim House Ilmu Indonesia sedang menyiapkan program terbaik untukmu. Nantikan pembukaan pendaftaran melalui halaman ini.
+                </p>
+            </div>
+        @endif
     @endforelse
 </div>
 
-<div class="d-flex justify-content-center mt-4">
-    {{ $opportunities->links() }}
-</div>
+<!-- Pagination if needed -->
+@if($opportunities->hasPages())
+    <div class="opportunity-pagination-wrap">
+        {{ $opportunities->links('partials.pagination') }}
+    </div>
+@endif
+
+<style>
+.opportunity-coming-soon-card {
+    grid-column: 1 / -1;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    padding: 48px 24px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(10, 42, 89, 0.03);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 16px 0;
+}
+
+.opportunity-coming-soon-badge {
+    display: inline-block;
+    background-color: #FFF3E6;
+    color: #FF8A18;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 5px 14px;
+    border-radius: 9999px;
+    border: 1px solid #FFE4C7;
+    text-transform: uppercase;
+}
+
+.opportunity-coming-soon-title {
+    font-family: 'Libre Baskerville', Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #0A2A59;
+    margin: 4px 0 0;
+}
+
+.opportunity-coming-soon-desc {
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #64748B;
+    max-width: 520px;
+    margin: 0 auto;
+}
+
+.opportunity-coming-soon-title {
+    font-family: 'Libre Baskerville', Georgia, serif !important;
+    font-weight: 700 !important;
+    font-size: 22px !important;
+    line-height: 30px !important;
+    color: #0A2B56 !important;
+    margin: 0 0 14px 0;
+    max-width: 540px;
+}
+
+.opportunity-coming-soon-desc {
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 13.5px !important;
+    line-height: 22px !important;
+    color: #5E708A !important;
+    margin: 0 0 24px 0;
+    max-width: 580px;
+}
+
+.opportunity-coming-soon-footnote {
+    display: inline-flex;
+    align-items: center;
+    background-color: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif !important;
+    font-size: 12px !important;
+    color: #64748B !important;
+}
+
+@media (max-width: 639px) {
+    .opportunity-coming-soon-card {
+        padding: 36px 18px;
+    }
+    .opportunity-coming-soon-title {
+        font-size: 19px !important;
+        line-height: 26px !important;
+    }
+    .opportunity-coming-soon-desc {
+        font-size: 12.5px !important;
+        line-height: 20px !important;
+    }
+}
+</style>

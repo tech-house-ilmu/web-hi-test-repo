@@ -66,7 +66,31 @@ http://127.0.0.1:8000/admin
 ```
 Login dengan akun admin yang sudah dibuat sebelumnya.
 
+# 
+
+Jika login admin gagal atau kredensial tidak valid coba jalankan
+```
+php artisan db:seed
+```
+
+Jika admin panel mengalami Internal server error pastikan extension `intl` aktif.
+Pada linux untuk mengaktikan extension intl yaitu dengan mengedit file pada
+```
+/etc/php/php.ini
+```
+
+cari `;extension=intl` lalu hilangkan `;`
 ---
+
+## Deployment cPanel
+
+Repository ini menyediakan `.cpanel.yml` untuk menyalin source ke `$HOME/web-hi`
+dan menjalankan `composer install` saat deployment. Konfigurasikan document root
+domain ke `$HOME/web-hi/public`, siapkan file `.env` di `$HOME/web-hi`, dan
+pastikan PHP CLI memenuhi versi pada `composer.json` serta `composer` dan
+`/usr/bin/rsync` tersedia di hosting.
+
+
 
 ## 📚 **Referensi**
 - Dokumentasi Filament: [https://filamentphp.com/docs](https://filamentphp.com/docs)  

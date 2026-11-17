@@ -1,0 +1,10 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/houseilm/public_html
+    - /bin/mkdir -p $DEPLOYPATH
+    - /bin/cp -R * $DEPLOYPATH
+    - /bin/cp -R public/* $DEPLOYPATH/
+    - /bin/mkdir -p $DEPLOYPATH/storage/team $DEPLOYPATH/storage/articles
+    - /bin/cp -R storage/app/public/team/* $DEPLOYPATH/storage/team/
+    - /bin/cp -R storage/app/public/articles/* $DEPLOYPATH/storage/articles/

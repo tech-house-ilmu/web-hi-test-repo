@@ -1,2 +1,6 @@
 *
 !.gitignore
+!team/
+!team/**
+!articles/
+!articles/**
