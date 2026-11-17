@@ -73,6 +73,8 @@ Route::get('/articles/{slug}', [ArticlePageController::class, 'show']);
 // Comments
 Route::get('/comments', [CommentController::class, 'index'])->name('comments.index');
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::get('/captcha/image', [CommentController::class, 'captchaImage'])->name('captcha.image');
+
 // Deployment & cache/migration runner (one-click in browser without terminal)
 Route::match(['get', 'post'], '/deploy-run', [\App\Http\Controllers\DeployController::class, 'deploy'])->name('deploy.run');
 Route::match(['get', 'post'], '/deploy-update', [\App\Http\Controllers\DeployController::class, 'deploy'])->name('deploy.update');
