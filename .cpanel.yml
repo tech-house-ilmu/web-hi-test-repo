@@ -3,4 +3,4 @@ deployment:
   tasks:
     - export DEPLOYPATH=/home/houseilm/web-hi
     - /bin/mkdir -p $DEPLOYPATH
-    - /bin/rsync -av --exclude='.git' --exclude='node_modules' --exclude='.env' ./ $DEPLOYPATH
+    - /bin/cp -R * $DEPLOYPATH
